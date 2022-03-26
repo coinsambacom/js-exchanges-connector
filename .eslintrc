@@ -40,7 +40,6 @@
     "ignorePatterns": [
         "/lib/",
         "/typings/",
-        "/docs/",
         "/test/"
     ],
     "reportUnusedDisableDirectives": true

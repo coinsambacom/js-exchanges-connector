@@ -18,14 +18,13 @@
   ],
   "scripts": {
     "prepare": "npm run --silent build",
-    "build": "tsc --build docs/examples",
-    "build:docs": "typedoc src/index.ts",
+    "build": "tsc",
     "pretest": "npm run build",
     "test": "ava test/*",
     "lint": "eslint .",
     "checks": "npm test && npm run lint",
     "refresh": "npm run clean && npm ci",
-    "clean": "git clean -fX .eslintcache docs/build/ lib/ typings/"
+    "clean": "git clean -fX .eslintcache lib/ typings/"
   },
   "type": "commonjs",
   "engines": {
