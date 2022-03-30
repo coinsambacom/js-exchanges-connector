@@ -29,8 +29,8 @@ export class kfex<T> extends Exchange<T> {
 
     return res.map(({ parName, last, quoteVolume, ask, bid }) => ({
       exchangeId: this.id,
-      base: parName.split("_")[0],
-      quote: parName.split("_")[1],
+      base: parName.split("_")[0] as string,
+      quote: parName.split("_")[1] as string,
       last: Number(last),
       ask: Number(ask),
       bid: Number(bid),

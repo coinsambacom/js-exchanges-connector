@@ -2,7 +2,40 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+
+interface IKrakenBaseRes {
+  error: [];
+}
+
+interface IKrakenTicker {
+  a: [string, string, string];
+  b: [string, string, string];
+  c: [string, string];
+  v: [string, string];
+  p: [string, string];
+  t: [number, number];
+  l: [string, string];
+  h: [string, string];
+  o: string;
+}
+
+interface IKrakenTickerRes extends IKrakenBaseRes {
+  result: {
+    [key: string]: IKrakenTicker;
+  };
+}
+
+type IKrakenOrderbookOrder = [string, string, number];
+
+interface IKrakenOrderbook {
+  asks: IKrakenOrderbookOrder[];
+  bids: IKrakenOrderbookOrder[];
+}
+
+interface IKrakenBookRes {
+  result: { [key: string]: IKrakenOrderbook };
+}
 
 export class kraken<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -16,34 +49,41 @@ export class kraken<T> extends Exchange<T> {
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     if (base == "BTC") base = "XBT";
-    let res = await this.fetch(this.baseUrl + "/Ticker?pair=" + base + quote);
+    const { result: res } = await this.fetch<IKrakenTickerRes>(
+      this.baseUrl + "/Ticker?pair=" + base + quote,
+    );
 
-    res = res.result[Object.keys(res.result)[0]];
+    const ticker = res[Object.keys(res)[0] as string] as IKrakenTicker;
+
     return {
       exchangeId: this.id,
       base,
       quote,
-      last: res.c[0],
-      ask: res.a[0],
-      bid: res.b[0],
-      vol: res.v[1],
+      last: Number(ticker.c[0]),
+      ask: Number(ticker.a[0]),
+      bid: Number(ticker.b[0]),
+      vol: Number(ticker.v[1]),
+    };
+  }
+
+  private parseOrder([price, amount]: IKrakenOrderbookOrder): IOrderbookOrder {
+    return {
+      price: Number(price),
+      amount: Number(amount),
     };
   }
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
     if (base == "BTC") base = "XBT";
-    let res = await this.fetch(this.baseUrl + "/Depth?pair=" + base + quote);
+    const { result: res } = await this.fetch<IKrakenBookRes>(
+      this.baseUrl + "/Depth?pair=" + base + quote,
+    );
 
-    res = res.result[Object.keys(res.result)[0]];
+    const book = res[Object.keys(res)[0] as string] as IKrakenOrderbook;
+
     return {
-      asks: (res.asks || []).map((order: any[]) => ({
-        price: order[0],
-        amount: order[1],
-      })),
-      bids: (res.bids || []).map((order: any[]) => ({
-        price: order[0],
-        amount: order[1],
-      })),
+      asks: book.asks.map(this.parseOrder),
+      bids: book.bids.map(this.parseOrder),
     };
   }
 }

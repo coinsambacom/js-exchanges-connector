@@ -24,8 +24,8 @@ export class gateio<T> extends Exchange<T> {
       const ticker = res[pair];
       tickers.push({
         exchangeId: this.id,
-        base: pair.split("_")[0].toUpperCase() as string,
-        quote: pair.split("_")[1].toUpperCase() as string,
+        base: (pair.split("_")[0] as string).toUpperCase(),
+        quote: (pair.split("_")[1] as string).toUpperCase(),
         last: ticker.last,
         ask: ticker.lowestAsk,
         bid: ticker.quoteVolume,
