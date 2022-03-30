@@ -49,5 +49,6 @@ export { satoshitango } from "./connectors/satoshitango";
 export { stonoex } from "./connectors/stonoex";
 export { tauros } from "./connectors/tauros";
 export { upcambio } from "./connectors/upcambio";
-export { walltime } from "./connectors/walltime";
 export { youbtrade } from "./connectors/youbtrade";
+
+export { Fetcher } from "./utils/Fetcher";

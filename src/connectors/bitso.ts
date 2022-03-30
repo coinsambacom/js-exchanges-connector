@@ -4,7 +4,7 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-class bitso<T> extends Exchange<T> {
+export class bitso<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitso",
@@ -55,5 +55,3 @@ class bitso<T> extends Exchange<T> {
     };
   }
 }
-
-export default bitso;
