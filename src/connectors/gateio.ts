@@ -2,9 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
-export class gateio<T> extends Exchange<T> {
+export class gateio<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "gateio",

@@ -3,7 +3,7 @@ import {
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
 
-export class ftx<T> extends Exchange<T> {
+export class ftx<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "ftx",

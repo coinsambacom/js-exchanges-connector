@@ -1,7 +1,7 @@
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 import { Exchange } from "./exchange";
 
-export class peatio<T> extends Exchange<T> {
+export class peatio<T> extends Exchange<T> implements IExchangeBase {
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const res = await this.fetch(
       this.baseUrl + "/tickers/" + base.toLowerCase() + quote.toLowerCase(),

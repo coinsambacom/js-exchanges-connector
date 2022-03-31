@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
 interface IBudaTickerRes {
   ticker: {
@@ -20,7 +20,7 @@ interface IBudaOrderbookRes {
   };
 }
 
-export class buda<T> extends Exchange<T> {
+export class buda<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "buda",
@@ -32,9 +32,8 @@ export class buda<T> extends Exchange<T> {
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const { ticker } = await this.fetch<IBudaTickerRes>(
-      `${
-        this.baseUrl
-      }/markets/${base.toLowerCase()}-${quote.toLowerCase()}/ticker`,
+      `${this.baseUrl}/
+      s/${base.toLowerCase()}-${quote.toLowerCase()}/ticker`,
     );
 
     return {

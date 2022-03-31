@@ -3,7 +3,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface IPagCriptoOTCTickerRes {
@@ -24,7 +24,7 @@ interface IPagCriptoOTCTickerRes {
 
 const isNumber = (value: any) => !Number.isNaN(Number(value));
 
-export class pagcripto_otc<T> extends Exchange<T> {
+export class pagcripto_otc<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto_otc",

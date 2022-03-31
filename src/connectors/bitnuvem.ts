@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
 interface IIBitnuvemOrderbookRes {
   asks: [number, number][];
@@ -18,7 +18,7 @@ interface IBitnuvemTickerRes {
   };
 }
 
-export class bitnuvem<T> extends Exchange<T> {
+export class bitnuvem<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitnuvem",

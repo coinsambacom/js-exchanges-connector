@@ -15,7 +15,7 @@ interface IBiscointTickerRes {
   };
 }
 
-export class biscoint<T> extends Exchange<T> {
+export class biscoint<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "biscoint",

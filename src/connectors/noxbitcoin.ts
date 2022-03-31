@@ -4,7 +4,7 @@ import {
 } from "../interfaces/exchange";
 import { ITicker } from "../types/common";
 
-export class noxbitcoin<T> extends Exchange<T> {
+export class noxbitcoin<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "noxbitcoin",

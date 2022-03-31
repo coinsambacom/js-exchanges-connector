@@ -5,7 +5,7 @@ import {
 import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
-export class pagcripto<T> extends Exchange<T> {
+export class pagcripto<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto",

@@ -17,3 +17,9 @@ export interface IOrderbook {
   asks: IOrderbookOrder[];
   bids: IOrderbookOrder[];
 }
+
+export interface IExchangeBase {
+  getAllTickers?: (quote: string) => Promise<ITicker[]>;
+  getTicker?: (base: string, quote: string) => Promise<ITicker>;
+  getBook: (base: string, quote: string) => Promise<IOrderbook>;
+}

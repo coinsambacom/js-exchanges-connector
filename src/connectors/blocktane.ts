@@ -4,7 +4,7 @@ import {
 } from "../interfaces/exchange";
 import { ITicker } from "../types/common";
 
-export class blocktane<T> extends Exchange<T> {
+export class blocktane<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "blocktane",

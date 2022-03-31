@@ -3,7 +3,7 @@ import {
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
 
-export class bitcointoyou<T> extends Exchange<T> {
+export class bitcointoyou<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitcointoyou",

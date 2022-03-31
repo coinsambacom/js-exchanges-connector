@@ -13,7 +13,7 @@ interface IDecryptoOrderbookRes {
   bids: IDecryptoOrderbookOrder[];
 }
 
-export class decrypto<T> extends Exchange<T> {
+export class decrypto<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "decrypto",

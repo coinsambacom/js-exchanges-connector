@@ -4,7 +4,7 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 
-export class profitfy<T> extends Exchange<T> {
+export class profitfy<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "profitfy",

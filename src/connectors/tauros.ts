@@ -2,10 +2,10 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
-export class tauros<T> extends Exchange<T> {
+export class tauros<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "tauros",

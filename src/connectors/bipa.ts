@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
 interface IBipaTickerRes {
   data: {
@@ -11,7 +11,7 @@ interface IBipaTickerRes {
   };
 }
 
-export class bipa<T> extends Exchange<T> {
+export class bipa<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bipa",

@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
 interface IBitblueTickerRes {
   stats: {
@@ -25,7 +25,7 @@ interface IBitblueOrderbookRes {
   };
 }
 
-export class bitblue<T> extends Exchange<T> {
+export class bitblue<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitblue",

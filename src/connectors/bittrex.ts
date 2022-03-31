@@ -2,9 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
-export class bittrex<T> extends Exchange<T> {
+export class bittrex<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bittrex",
@@ -30,7 +30,7 @@ export class bittrex<T> extends Exchange<T> {
       }) => {
         return {
           exchangeId: this.id,
-          base: t.MarketName.split("-")[1],
+          base: t.Name.split("-")[1],
           quote: t.MarketName.split("-")[0],
           last: t.Last,
           ask: t.Ask,

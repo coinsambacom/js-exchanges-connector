@@ -2,9 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
 
-export class bitpreco<T> extends Exchange<T> {
+export class bitpreco<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitpreco",
@@ -25,7 +25,7 @@ export class bitpreco<T> extends Exchange<T> {
         const ticker = res[pair];
         tickers.push({
           exchangeId: this.id,
-          base: ticker.market.split("-")[0],
+          base: ticker.split("-")[0],
           quote: ticker.market.split("-")[1],
           last: ticker.last,
           ask: ticker.sell,

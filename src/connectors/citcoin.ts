@@ -3,7 +3,7 @@ import {
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
 
-export class citcoin<T> extends Exchange<T> {
+export class citcoin<T> extends Exchange<T> implements ExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "citcoin",
