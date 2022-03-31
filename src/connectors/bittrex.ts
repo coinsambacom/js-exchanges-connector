@@ -30,7 +30,7 @@ export class bittrex<T> extends Exchange<T> implements IExchangeBase {
       }) => {
         return {
           exchangeId: this.id,
-          base: t.Name.split("-")[1],
+          base: t.MarketName.split("-")[1],
           quote: t.MarketName.split("-")[0],
           last: t.Last,
           ask: t.Ask,

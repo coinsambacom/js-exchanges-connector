@@ -2,8 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
+import { IExchangeBase, ITicker } from "../types/common";
 
-export class bitcointoyou<T> extends Exchange<T> implements ExchangeBase {
+export class bitcointoyou<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitcointoyou",
@@ -13,12 +14,15 @@ export class bitcointoyou<T> extends Exchange<T> implements ExchangeBase {
     });
   }
 
-  async getTicker(base: any, quote: string) {
+  async getTicker(base: string, quote: string): Promise<ITicker> {
     if (quote === "BRL") quote = "BRLC";
     let res = await this.fetch(`${this.baseUrl}/ticker?pair=${base}_${quote}`);
 
     res = res.summary;
     return {
+      exchangeId: this.id,
+      base,
+      quote,
       last: res.last,
       ask: res.last,
       bid: res.last,

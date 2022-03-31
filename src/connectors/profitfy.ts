@@ -2,9 +2,14 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+import {
+  IExchangeBase,
+  IOrderbook,
+  IOrderbookOrder,
+  ITicker,
+} from "../types/common";
 
-export class profitfy<T> extends Exchange<T> implements ExchangeBase {
+export class profitfy<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "profitfy",

@@ -3,7 +3,12 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, IOrderbookOrder } from "../types/common";
+import {
+  IExchangeBase,
+  IOrderbook,
+  IOrderbookOrder,
+  ITicker,
+} from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface IBiscointTickerRes {
@@ -15,7 +20,7 @@ interface IBiscointTickerRes {
   };
 }
 
-export class biscoint<T> extends Exchange<T> implements ExchangeBase {
+export class biscoint<T> extends Exchange<T> implements IExchangeBase {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "biscoint",
@@ -25,12 +30,19 @@ export class biscoint<T> extends Exchange<T> implements ExchangeBase {
     });
   }
 
-  async getTicker(base: string, quote: string, amount = 10000) {
+  async getTicker(
+    base: string,
+    quote: string,
+    amount = 10000,
+  ): Promise<ITicker> {
     const { data: res } = await this.fetch<IBiscointTickerRes>(
       `${this.baseUrl}/ticker?base=${base}&quote=${quote}&amount=${amount}`,
     );
 
     return {
+      exchangeId: this.id,
+      base,
+      quote,
       last: res.last,
       ask: res.ask,
       bid: res.bid,
