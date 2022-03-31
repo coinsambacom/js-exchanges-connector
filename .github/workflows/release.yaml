@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # - run : npm ci --ignore-scripts
+      - name: Install packages
+        run: yarn
       - name: Publish to npm
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
