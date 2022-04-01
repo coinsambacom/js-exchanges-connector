@@ -1,4 +1,4 @@
-import { IExchangeBase, IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 
 interface IBinanceExchangeInfoRes {
@@ -26,7 +26,7 @@ interface IBinanceOrderbook {
   bids: IBinanceOrder[];
 }
 
-export class bnb<T> extends Exchange<T> implements IExchangeBase {
+export class bnb<T> extends Exchange<T> {
   constructor(args: IExchangeBaseConstructorArgs<T>) {
     super({ ...args, ...{ allTickersAllQuotes: true } });
   }

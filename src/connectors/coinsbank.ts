@@ -2,9 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 
-export class coinsbank<T> extends Exchange<T> implements IExchangeBase {
+export class coinsbank<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "coinsbank",

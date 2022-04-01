@@ -2,15 +2,10 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import {
-  IExchangeBase,
-  IOrderbook,
-  IOrderbookOrder,
-  ITicker,
-} from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
-export class pagcripto<T> extends Exchange<T> implements IExchangeBase {
+export class pagcripto<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto",

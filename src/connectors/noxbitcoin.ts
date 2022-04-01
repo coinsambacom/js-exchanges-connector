@@ -2,9 +2,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IExchangeBase, ITicker } from "../types/common";
+import { ITicker } from "../types/common";
 
-export class noxbitcoin<T> extends Exchange<T> implements IExchangeBase {
+export class noxbitcoin<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "noxbitcoin",

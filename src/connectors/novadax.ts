@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 
 interface INovaDAXBaseApiResponse {
   code: string;
@@ -41,7 +41,7 @@ interface INovaDAXOrderbookRes extends INovaDAXBaseApiResponse {
   };
 }
 
-export class novadax<T> extends Exchange<T> implements IExchangeBase {
+export class novadax<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "novadax",

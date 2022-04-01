@@ -2,12 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import {
-  IExchangeBase,
-  IOrderbook,
-  IOrderbookOrder,
-  ITicker,
-} from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 
 interface IKrakenBaseRes {
   error: [];
@@ -42,7 +37,7 @@ interface IKrakenBookRes {
   result: { [key: string]: IKrakenOrderbook };
 }
 
-export class kraken<T> extends Exchange<T> implements IExchangeBase {
+export class kraken<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "kraken",

@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 
 interface IMercadoBitcoinTickerRes {
   ticker: {
@@ -24,7 +24,7 @@ interface IMercadoBitcoinOrderbookRes {
   bids: IMercadoBitcoinOrderbookOrder[];
 }
 
-export class mercadobitcoin<T> extends Exchange<T> implements IExchangeBase {
+export class mercadobitcoin<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "mercadobitcoin",

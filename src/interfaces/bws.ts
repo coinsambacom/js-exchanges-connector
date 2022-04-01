@@ -1,4 +1,4 @@
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 
 interface IBwsTickerRes {
@@ -20,7 +20,7 @@ interface IBwsOrderbookRes {
   sell: IBwsOrder[];
 }
 
-export class bws<T> extends Exchange<T> implements IExchangeBase {
+export class bws<T> extends Exchange<T> {
   constructor(args: IExchangeBaseConstructorArgs<T>) {
     super({ ...args, ...{ allTickersAllQuotes: true } });
   }

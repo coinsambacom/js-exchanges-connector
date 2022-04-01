@@ -1,14 +1,9 @@
-import {
-  IExchangeBase,
-  IOrderbook,
-  IOrderbookOrder,
-  ITicker,
-} from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 import { Exchange } from "./exchange";
 
 type IAlphapointOrderbookRes = number[][];
 
-export class alphapoint<T> extends Exchange<T> implements IExchangeBase {
+export class alphapoint<T> extends Exchange<T> {
   public baseUrl: any;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

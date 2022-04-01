@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IExchangeBase, IOrderbook } from "../types/common";
+import { IOrderbook } from "../types/common";
 
 interface IDecryptoOrderbookOrder {
   precio: number;
@@ -13,7 +13,7 @@ interface IDecryptoOrderbookRes {
   bids: IDecryptoOrderbookOrder[];
 }
 
-export class decrypto<T> extends Exchange<T> implements IExchangeBase {
+export class decrypto<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "decrypto",

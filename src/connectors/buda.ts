@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 
 interface IBudaTickerRes {
   ticker: {
@@ -20,7 +20,7 @@ interface IBudaOrderbookRes {
   };
 }
 
-export class buda<T> extends Exchange<T> implements IExchangeBase {
+export class buda<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "buda",

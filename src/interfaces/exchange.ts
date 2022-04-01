@@ -1,4 +1,5 @@
 import Bottleneck from "bottleneck";
+import { IExchangeBase } from "../types/common";
 import { Fetcher } from "../utils/Fetcher";
 
 export interface IExchangeImplementationConstructorArgs<T = any> {
@@ -27,7 +28,7 @@ export interface IExchangeBaseConstructorArgs<T> {
   limiter?: Bottleneck;
 }
 
-export class Exchange<T> {
+export class Exchange<T> implements IExchangeBase<T> {
   public id!: string;
   public baseUrl!: string;
   public limiter!: Bottleneck;

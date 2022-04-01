@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker, IExchangeBase } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
 
 interface IBitcoinTradeTickerRes {
   data: {
@@ -25,7 +25,7 @@ interface IBitcoinTradeOrderBookRes {
   };
 }
 
-export class bitcointrade<T> extends Exchange<T> implements IExchangeBase {
+export class bitcointrade<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitcointrade",

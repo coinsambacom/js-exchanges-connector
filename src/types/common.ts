@@ -1,3 +1,5 @@
+import Bottleneck from "bottleneck";
+
 export interface ITicker {
   exchangeId: string;
   base: string;
@@ -18,7 +20,13 @@ export interface IOrderbook {
   bids: IOrderbookOrder[];
 }
 
-export interface IExchangeBase {
+export interface IExchangeBase<T> {
+  id: string;
+  baseUrl: string;
+  limiter: Bottleneck;
+  allTickersAllQuotes?: boolean;
+  opts?: T;
+
   getAllTickers?: (quote: string) => Promise<ITicker[]>;
   getTicker?: (base: string, quote: string) => Promise<ITicker>;
   getBook?: (base: string, quote: string) => Promise<IOrderbook>;
