@@ -39,14 +39,20 @@ export class pagcripto<T> extends Exchange<T> {
     res = res.data;
 
     return {
-      asks: (res.asks || []).map((o: IOrderbookOrder) => ({
-        price: Number(o.price),
-        amount: Number(o.amount),
-      })),
-      bids: (res.bids || []).map((o: IOrderbookOrder) => ({
-        price: Number(o.price),
-        amount: Number(o.amount),
-      })),
+      asks:
+        typeof res?.asks?.map === "function"
+          ? res.asks.map((o: IOrderbookOrder) => ({
+              price: Number(o.price),
+              amount: Number(o.amount),
+            }))
+          : [],
+      bids:
+        typeof res?.bids?.map === "function"
+          ? res.bids.map((o: IOrderbookOrder) => ({
+              price: Number(o.price),
+              amount: Number(o.amount),
+            }))
+          : [],
     };
   }
 }

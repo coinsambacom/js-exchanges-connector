@@ -8,7 +8,7 @@ export class alphapoint<T> extends Exchange<T> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   normalizeAsset(asset: string | number): string | number {
-    throw new Error("this method musb be overrided");
+    throw new Error("this method must be overrided");
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
