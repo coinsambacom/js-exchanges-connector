@@ -5,7 +5,7 @@ export class binance_us<T> extends bnb<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "binance",
-      baseUrl: "https://api.binance.com/api/v3",
+      baseUrl: "https://api.binance.us/api/v3",
       opts: args?.opts,
       limiter: args?.limiter,
     });
