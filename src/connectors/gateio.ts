@@ -11,12 +11,10 @@ export class gateio<T> extends Exchange<T> {
       baseUrl: "https://data.gateio.la/api2/1",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     const res = await this.fetch(`${this.baseUrl}/tickers`);
 
     const tickers: ITicker[] = [];

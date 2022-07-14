@@ -11,12 +11,10 @@ export class poloniex<T> extends Exchange<T> {
       baseUrl: "https://poloniex.com/public",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     const res = await this.fetch(this.baseUrl + "?command=returnTicker");
 
     const tickers: ITicker[] = [];

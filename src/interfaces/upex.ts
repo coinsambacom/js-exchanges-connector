@@ -2,7 +2,7 @@ import { IOrderbook, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { Exchange } from "./exchange";
 
-class upex<T> extends Exchange<T> {
+export class upex<T> extends Exchange<T> {
   async getTicker(base: string, quote: string): Promise<ITicker> {
     let res = await this.fetch(`${this.baseUrl}/Info/topbar_info`);
 
@@ -38,5 +38,3 @@ class upex<T> extends Exchange<T> {
     };
   }
 }
-
-export default upex;

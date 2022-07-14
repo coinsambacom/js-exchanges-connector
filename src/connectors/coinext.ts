@@ -34,7 +34,7 @@ export class coinext<T> extends alphapoint<T> {
     return asset;
   }
 
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const res = await this.fetch(this.tickerUrl);
 
     const tickers: ITicker[] = [];

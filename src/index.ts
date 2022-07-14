@@ -50,5 +50,6 @@ export { stonoex } from "./connectors/stonoex";
 export { tauros } from "./connectors/tauros";
 export { upcambio } from "./connectors/upcambio";
 export { youbtrade } from "./connectors/youbtrade";
+export { kucoin } from "./connectors/kucoin";
 
 export { Fetcher } from "./utils/Fetcher";

@@ -1,5 +1,5 @@
 import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
-import upex from "../interfaces/upex";
+import { upex } from "../interfaces/upex";
 
 export class makesexchange<T> extends upex<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

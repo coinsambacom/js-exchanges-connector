@@ -36,7 +36,7 @@ export class satoshitango<T> extends Exchange<T> {
     return 20;
   }
 
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const res = await this.fetch<ISatoshiTangoTickerRes>(
       `${this.baseUrl}/ticker/${quote}`,
     );
@@ -61,7 +61,7 @@ export class satoshitango<T> extends Exchange<T> {
   }
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    const tickers = await this.getAllTickers(quote);
+    const tickers = await this.getAllTickersByQuote(quote);
 
     const filtered = tickers.find((e) => e.base === base);
 

@@ -16,11 +16,6 @@ export interface IExchangeBaseConstructorArgs<T> {
    * this exchange base URL
    */
   baseUrl: string;
-  /**
-   * if this exchange getAllTickers returns
-   * all available quotes
-   */
-  allTickersAllQuotes?: boolean;
   opts?: T;
   /**
    * bottleneck rate limit
@@ -29,10 +24,10 @@ export interface IExchangeBaseConstructorArgs<T> {
 }
 
 export class Exchange<T> implements IExchangeBase<T> {
+  [x: string]: any;
   public id!: string;
   public baseUrl!: string;
   public limiter!: Bottleneck;
-  public allTickersAllQuotes?: boolean;
   public opts?: any;
 
   constructor(args: IExchangeBaseConstructorArgs<T>) {
@@ -49,5 +44,13 @@ export class Exchange<T> implements IExchangeBase<T> {
 
   public fetch<T = any>(url: string) {
     return this.limiter.schedule<T>(() => Fetcher.get<T>(url, this.opts));
+  }
+
+  public get hasAllTickers(): boolean {
+    return typeof this.getAllTickers === "function";
+  }
+
+  public get hasAllTickersByQuote(): boolean {
+    return typeof this.getAllTickersByQuote === "function";
   }
 }

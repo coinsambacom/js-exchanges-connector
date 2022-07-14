@@ -51,12 +51,10 @@ export class kucoin<T> extends Exchange<T> {
       baseUrl: "https://api.kucoin.com/api",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     const { data: res } = await this.fetch<IKucoinTickersRes>(
       `${this.baseUrl}/v1/market/allTickers`,
     );

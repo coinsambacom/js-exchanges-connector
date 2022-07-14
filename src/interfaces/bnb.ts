@@ -28,7 +28,7 @@ interface IBinanceOrderbook {
 
 export class bnb<T> extends Exchange<T> {
   constructor(args: IExchangeBaseConstructorArgs<T>) {
-    super({ ...args, ...{ allTickersAllQuotes: true } });
+    super({ ...args });
   }
 
   async getAllTickers(): Promise<ITicker[]> {

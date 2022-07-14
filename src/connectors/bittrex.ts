@@ -11,12 +11,10 @@ export class bittrex<T> extends Exchange<T> {
       baseUrl: "https://api.bittrex.com/api/v1.1",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     let res = await this.fetch(this.baseUrl + "/public/getmarketsummaries");
 
     res = res.result;

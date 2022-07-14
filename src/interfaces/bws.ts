@@ -22,10 +22,10 @@ interface IBwsOrderbookRes {
 
 export class bws<T> extends Exchange<T> {
   constructor(args: IExchangeBaseConstructorArgs<T>) {
-    super({ ...args, ...{ allTickersAllQuotes: true } });
+    super({ ...args });
   }
 
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const res = await this.fetch<{ result: IBwsTickerRes[] }>(
       `${this.baseUrl}/getmarketsummaries?basemarket=${quote}`,
     );

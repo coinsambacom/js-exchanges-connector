@@ -48,12 +48,10 @@ export class novadax<T> extends Exchange<T> {
       baseUrl: "https://api.novadax.com",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     const { data: res } = await this.fetch<INovaDAXTickersRes>(
       `${this.baseUrl}/v1/market/tickers`,
     );

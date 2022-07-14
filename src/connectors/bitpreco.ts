@@ -14,7 +14,7 @@ export class bitpreco<T> extends Exchange<T> {
     });
   }
 
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const res = await this.fetch(
       `${this.baseUrl}/all-${quote.toLowerCase()}/ticker`,
     );

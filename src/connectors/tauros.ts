@@ -12,12 +12,10 @@ export class tauros<T> extends Exchange<T> {
       baseUrl: "https://api.tauros.io/api",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickers(): Promise<ITicker[]> {
     let res = await this.fetch(this.baseUrl + "/v2/trading/tickers/");
     if (!res || !res.success) return res;
     res = res.payload;

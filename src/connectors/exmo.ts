@@ -11,12 +11,10 @@ export class exmo<T> extends Exchange<T> {
       baseUrl: "https://api.exmo.com/v1.1",
       opts: args?.opts,
       limiter: args?.limiter,
-      allTickersAllQuotes: true,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getAllTickers(quote: any) {
+  async getAllTickers(): Promise<ITicker[]> {
     const res = await this.fetch(`${this.baseUrl}/ticker`);
 
     const tickers: ITicker[] = [];

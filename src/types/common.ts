@@ -24,10 +24,19 @@ export interface IExchangeBase<T> {
   id: string;
   baseUrl: string;
   limiter: Bottleneck;
-  allTickersAllQuotes?: boolean;
   opts?: T;
 
-  getAllTickers?: (quote: string) => Promise<ITicker[]>;
+  /**
+   * true if this exchange implements all tickers by specified quote
+   */
+  hasAllTickersByQuote: boolean;
+  /**
+   * true if this exchange implements all tickers with all available quotes
+   */
+  hasAllTickers: boolean;
+
+  getAllTickers?: () => Promise<ITicker[]>;
+  getAllTickersByQuote?: (quote: string) => Promise<ITicker[]>;
   getTicker?: (base: string, quote: string) => Promise<ITicker>;
   getBook?: (base: string, quote: string) => Promise<IOrderbook>;
 }

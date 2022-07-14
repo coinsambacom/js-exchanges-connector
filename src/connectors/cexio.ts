@@ -14,7 +14,7 @@ export class cexio<T> extends Exchange<T> {
     });
   }
 
-  async getAllTickers(quote: string): Promise<ITicker[]> {
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     let res = await this.fetch(this.baseUrl + "/tickers/" + quote);
 
     res = res.data;
