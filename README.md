@@ -157,7 +157,7 @@ binance.getAllTickers().them(tickers => console.log(tickers));
 | novadax        | 1         | 1             |                      | 1       |
 | noxbitcoin     | 1         |               |                      |         |
 | pagcripto_otc  | 1         |               |                      | 1       |
-| pagcripto      | 1         |               |                      | 1       |
+| pagcripto      | 1         |               | 1                    | 1       |
 | poloniex       | 1         | 1             |                      | 1       |
 | satoshitango   |           |               | 1                    | 1       |
 | stonoex        | 1         |               | 1                    | 1       |
