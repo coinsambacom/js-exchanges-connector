@@ -27,7 +27,7 @@ interface IPagCriptoOrderbookOrder {
 }
 
 interface IPagcriptoTickersRes extends IPagCriptoBaseRes {
-  data: IPagCriptoTicker[];
+  data: { [pair: string]: IPagCriptoTicker };
 }
 
 interface IPagcriptoTickerRes extends IPagCriptoBaseRes {
@@ -52,21 +52,32 @@ export class pagcripto<T> extends Exchange<T> {
     });
   }
 
-  // async getAllTickers(quote: string): Promise<ITicker> {
-  //   const { data: res } = await this.fetch<IPagcriptoTickersRes>(
-  //     this.baseUrl + "/tickers",
-  //   );
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
+    const { data: res } = await this.fetch<IPagcriptoTickersRes>(
+      this.baseUrl + "/tickers",
+    );
 
-  //   return res.map((t) => ({
-  //     exchangeId: this.id,
-  //     base: t.symbol.split("-")[0] as string,
-  //     quote: t.symbol.split("-")[1] as string,
-  //     last: Number(t.last),
-  //     ask: Number(t.sell),
-  //     bid: Number(t.buy),
-  //     vol: Number(t.vol),
-  //   }));
-  // }
+    const tickers: ITicker[] = [];
+
+    for (const pair in res) {
+      if (pair.endsWith(quote)) {
+        const ticker = res[pair];
+        if (ticker) {
+          tickers.push({
+            exchangeId: this.id,
+            base: pair.replace(quote, ""),
+            quote,
+            last: Number(ticker.last),
+            ask: Number(ticker.sell),
+            bid: Number(ticker.buy),
+            vol: Number(ticker.volume),
+          });
+        }
+      }
+    }
+
+    return tickers;
+  }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const { data: res } = await this.fetch<IPagcriptoTickerRes>(
