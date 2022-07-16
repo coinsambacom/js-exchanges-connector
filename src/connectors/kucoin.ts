@@ -32,7 +32,7 @@ interface IKucoinTickerRes extends KucoinBaseRes {
 }
 
 interface IKucoinTickersRes extends KucoinBaseRes {
-  data: IKucoinTicker[];
+  data: { time: number; ticker: IKucoinTicker[] };
 }
 
 type IKucoinOrderbookOrder = [string, string];
@@ -59,7 +59,7 @@ export class kucoin<T> extends Exchange<T> {
       `${this.baseUrl}/v1/market/allTickers`,
     );
 
-    return res.map((t) => ({
+    return res.ticker.map((t) => ({
       exchangeId: this.id,
       base: t.symbol.split("-")[0] as string,
       quote: t.symbol.split("-")[1] as string,
