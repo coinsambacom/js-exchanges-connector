@@ -4,6 +4,20 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
+interface IBitcoinTradeTickersRes {
+  data: {
+    pair: string;
+    high: number;
+    low: number;
+    volume: number;
+    trades_quantity: number;
+    last: number;
+    buy: number;
+    sell: number;
+    date: string;
+  }[];
+}
+
 interface IBitcoinTradeTickerRes {
   data: {
     last: number;
@@ -33,6 +47,33 @@ export class bitcointrade<T> extends Exchange<T> {
       opts: args?.opts,
       limiter: args?.limiter,
     });
+  }
+
+  async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
+    const { data: res } = await this.fetch<IBitcoinTradeTickersRes>(
+      `${this.baseUrl}/ticker`,
+    );
+
+    const tickers: ITicker[] = [];
+
+    for (const pair in res) {
+      if (pair.endsWith(quote)) {
+        const ticker = res[pair];
+        if (ticker) {
+          tickers.push({
+            exchangeId: this.id,
+            base: pair.replace(quote, ""),
+            quote,
+            last: ticker.last,
+            ask: ticker.sell,
+            bid: ticker.buy,
+            vol: ticker.volume,
+          });
+        }
+      }
+    }
+
+    return tickers;
   }
 
   async getTicker(base: any, quote: string): Promise<ITicker> {
