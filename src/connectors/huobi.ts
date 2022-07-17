@@ -113,7 +113,7 @@ export class huobi<T> extends Exchange<T> {
     const { tick: res } = await this.fetch<IHuobiOrderbookRes>(
       `${
         this.baseUrl
-      }/market/depth?symbol=${base.toLowerCase()}${quote.toLowerCase()}`,
+      }/market/depth?symbol=${base.toLowerCase()}${quote.toLowerCase()}&type=step0`,
     );
 
     return {
