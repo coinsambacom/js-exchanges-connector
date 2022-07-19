@@ -132,24 +132,24 @@ binance.getAllTickers().them(tickers => console.log(tickers));
 | bleutrade 🇧🇷      | 1         |               | 1                    | 1       |
 | blocktane 🇧🇷      | 1         |               |                      |         |
 | brasilbitcoin 🇧🇷  | 1         |               |                      | 1       |
-| buda              | 1         |               |                      | 1       |
+| buda 🇨🇴🇵🇪🇦🇷🇨🇱     | 1         |               |                      | 1       |
 | bullgain 🇧🇷       | 1         |               | 1                    | 1       |
-| cexio             | 1         |               | 1                    | 1       |
+| cexio 🌐          | 1         |               | 1                    | 1       |
 | citcoin 🇧🇷        | 1         |               |                      | 1       |
 | coinbase_pro      | 1         |               |                      | 1       |
 | coinbene 🌐       | 1         |               |                      | 1       |
 | coinext 🇧🇷        | 1         |               | 1                    | 1       |
-| coinsbank         | 1         |               |                      | 1       |
+| coinsbank 🌐      | 1         |               |                      | 1       |
 | comprarbitcoin 🇧🇷 | 1         |               | 1                    | 1       |
 | cryptomarket 🇦🇷   | 1         |               |                      | 1       |
 | decrypto 🇦🇷       |           |               |                      | 1       |
-| exmo              | 1         | 1             |                      | 1       |
+| exmo 🌐           | 1         | 1             |                      | 1       |
 | flowbtc 🇧🇷        | 1         |               | 1                    | 1       |
 | foxbit 🇧🇷         | 1         |               | 1                    | 1       |
 | ftx 🌐            | 1         |               |                      | 1       |
 | gateio 🌐         | 1         | 1             |                      | 1       |
-| isbit             | 1         |               |                      | 1       |
-| kraken            | 1         |               |                      | 1       |
+| isbit 🇲🇽          | 1         |               |                      | 1       |
+| kraken 🌐         | 1         |               |                      | 1       |
 | kucoin 🌐         | 1         | 1             |                      | 1       |
 | liqi 🇧🇷           | 1         | 1             |                      | 1       |
 | makesexchange 🇧🇷  | 1         |               |                      | 1       |
@@ -161,7 +161,7 @@ binance.getAllTickers().them(tickers => console.log(tickers));
 | poloniex 🌐       | 1         | 1             |                      | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
 | stonoex 🇧🇷        | 1         |               | 1                    | 1       |
-| tauros            |           | 1             |                      | 1       |
+| tauros 🇲🇽         |           | 1             |                      | 1       |
 | upcambio 🇧🇷       | 1         |               |                      | 1       |
 
 ## Known Whitelabel Platforms
