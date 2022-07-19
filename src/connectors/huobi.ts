@@ -76,7 +76,7 @@ export class huobi<T> extends Exchange<T> {
           last: t.close,
           ask: t.ask,
           bid: t.bid,
-          vol: t.vol,
+          vol: t.amount,
         });
       }
     }
@@ -98,7 +98,7 @@ export class huobi<T> extends Exchange<T> {
       last: res.close,
       ask: res.ask[0],
       bid: res.bid[0],
-      vol: res.vol,
+      vol: res.amount,
     };
   }
 
