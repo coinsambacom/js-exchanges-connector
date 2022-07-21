@@ -25,8 +25,8 @@ export class bitpreco<T> extends Exchange<T> {
         const ticker = res[pair];
         tickers.push({
           exchangeId: this.id,
-          base: ticker.split("-")[0],
-          quote: ticker.market.split("-")[1],
+          base: ticker.market.split("-")[0],
+          quote,
           last: ticker.last,
           ask: ticker.sell,
           bid: ticker.buy,

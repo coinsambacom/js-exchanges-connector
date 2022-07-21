@@ -2,7 +2,12 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+
+interface IBitsoOrderbookOrder {
+  price: string;
+  amount: string;
+}
 
 export class bitso<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -34,6 +39,13 @@ export class bitso<T> extends Exchange<T> {
     };
   }
 
+  private parseOrder({ price, amount }: IBitsoOrderbookOrder): IOrderbookOrder {
+    return {
+      price: Number(price),
+      amount: Number(amount),
+    };
+  }
+
   async getBook(base: string, quote: string): Promise<IOrderbook> {
     let res = await this.fetch(
       `${
@@ -44,14 +56,8 @@ export class bitso<T> extends Exchange<T> {
     res = res.payload;
 
     return {
-      asks: res.asks.map(({ price, amount }) => ({
-        price: Number(price),
-        amount: Number(amount),
-      })),
-      bids: res.bids.map(({ price, amount }) => ({
-        price: Number(price),
-        amount: Number(amount),
-      })),
+      asks: res.asks.map(this.parseOrder),
+      bids: res.bids.map(this.parseOrder),
     };
   }
 }
