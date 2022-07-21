@@ -5,15 +5,19 @@ import {
 import { IOrderbook, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
+interface ISatoshiTangoTicker {
+  ask: number;
+  bid: number;
+  volume: number;
+}
+
 interface ISatoshiTangoTickerRes {
   data: {
-    [key: string]: {
-      ask: number;
-      bid: number;
-      volume: number;
+    ticker: {
+      [key: string]: ISatoshiTangoTicker;
     };
+    code: string;
   };
-  code: string;
 }
 
 export class satoshitango<T> extends Exchange<T> {
@@ -37,16 +41,15 @@ export class satoshitango<T> extends Exchange<T> {
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
-    const res = await this.fetch<ISatoshiTangoTickerRes>(
+    const { data: res } = await this.fetch<ISatoshiTangoTickerRes>(
       `${this.baseUrl}/ticker/${quote}`,
     );
+
     if (res.code !== "success")
       throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR);
 
-    return Object.keys(res.data).map((base) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const { ask, bid, volume } = res.data.ticker[base];
+    return Object.keys(res.ticker).map((base) => {
+      const { ask, bid, volume } = res.ticker[base] as ISatoshiTangoTicker;
 
       return {
         exchangeId: this.id,
