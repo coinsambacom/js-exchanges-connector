@@ -2,8 +2,25 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
+
+interface ITaurosOrderbookOrder {
+  amount: number;
+  value: number;
+  price: string;
+  created_at: string;
+  id: number;
+}
+
+interface ITaurosOrderbookRes {
+  success: boolean;
+  msg: any;
+  payload: {
+    bids: ITaurosOrderbookOrder[];
+    asks: ITaurosOrderbookOrder[];
+  };
+}
 
 export class tauros<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -39,23 +56,29 @@ export class tauros<T> extends Exchange<T> {
     );
   }
 
+  private parseOrder({
+    amount,
+    price,
+  }: ITaurosOrderbookOrder): IOrderbookOrder {
+    return {
+      amount,
+      price: Number(price),
+    };
+  }
+
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    let res = await this.fetch(
-      `${this.baseUrl}/v1/trading/orders/?market=${base}-${quote}`,
+    const res = await this.fetch<ITaurosOrderbookRes>(
+      `${this.baseUrl}/v2/trading/${base}-${quote}/orders/?market=`,
     );
-    if (!res || !res.data)
-      throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR);
-    res = res.data;
+    if (!res.success) {
+      throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR, res.msg);
+    }
+
+    const book = res.payload;
 
     return {
-      asks: res.asks.map(({ price, amount }) => ({
-        price: price,
-        amount: amount,
-      })),
-      bids: res.bids.map(({ price, amount }) => ({
-        price: price,
-        amount: amount,
-      })),
+      asks: book.asks.map(this.parseOrder),
+      bids: book.bids.map(this.parseOrder),
     };
   }
 }
