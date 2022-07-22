@@ -1,12 +1,27 @@
 import { IOrderbook, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
+import { isNumber } from "../utils/isNumber";
 import { Exchange } from "./exchange";
+
+interface IUpexTickerRes {
+  DATA: {
+    orderMarketSellPrice: number;
+    orderMarketBuyPrice: number;
+    minPrice24H: number;
+    maxPrice24H: number;
+    lastPrice: number;
+    dollar: number;
+    btcUsd: number;
+    volume24H?: any;
+    variation24H: number;
+  };
+}
 
 export class upex<T> extends Exchange<T> {
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    let res = await this.fetch(`${this.baseUrl}/Info/topbar_info`);
-
-    res = res.DATA;
+    const { DATA: res } = await this.fetch<IUpexTickerRes>(
+      `${this.baseUrl}/Info/topbar_info`,
+    );
 
     if (!res) {
       throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR, "invalid data");
@@ -19,7 +34,7 @@ export class upex<T> extends Exchange<T> {
       last: res.lastPrice,
       ask: res.orderMarketBuyPrice,
       bid: res.orderMarketSellPrice,
-      vol: res.volume24H,
+      vol: isNumber(res.volume24H) ? res.volume24H : 0,
     };
   }
 

@@ -5,6 +5,7 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
+import { isNumber } from "../utils/isNumber";
 
 interface IPagCriptoOTCTickerRes {
   otc_ticker: {
@@ -21,8 +22,6 @@ interface IPagCriptoOTCTickerRes {
     t: string;
   };
 }
-
-const isNumber = (value: any) => !Number.isNaN(Number(value));
 
 export class pagcripto_otc<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
