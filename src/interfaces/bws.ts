@@ -42,7 +42,7 @@ export class bws<T> extends Exchange<T> {
       `${this.baseUrl}/getmarketsummaries`,
     );
 
-    return res.result.map(this.parseTicker);
+    return res.result.map((t) => this.parseTicker(t));
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
@@ -50,7 +50,7 @@ export class bws<T> extends Exchange<T> {
       `${this.baseUrl}/getmarketsummaries?basemarket=${quote}`,
     );
 
-    return res.result.map(this.parseTicker);
+    return res.result.map((t) => this.parseTicker(t));
   }
 
   async getTicker(base: any, quote: string): Promise<ITicker> {
