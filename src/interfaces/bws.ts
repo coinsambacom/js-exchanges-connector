@@ -25,22 +25,32 @@ export class bws<T> extends Exchange<T> {
     super({ ...args });
   }
 
+  private parseTicker(t: IBwsTickerRes): ITicker {
+    return {
+      exchangeId: this.id,
+      base: t.MarketAsset,
+      quote: t.BaseAsset,
+      last: Number(t.Last),
+      ask: Number(t.Ask),
+      bid: Number(t.Bid),
+      vol: Number(t.Volume),
+    };
+  }
+
+  async getAllTickers(): Promise<ITicker[]> {
+    const res = await this.fetch<{ result: IBwsTickerRes[] }>(
+      `${this.baseUrl}/getmarketsummaries`,
+    );
+
+    return res.result.map(this.parseTicker);
+  }
+
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const res = await this.fetch<{ result: IBwsTickerRes[] }>(
       `${this.baseUrl}/getmarketsummaries?basemarket=${quote}`,
     );
 
-    return res.result.map((t) => {
-      return {
-        exchangeId: this.id,
-        base: t.MarketAsset,
-        quote: t.BaseAsset,
-        last: Number(t.Last),
-        ask: Number(t.Ask),
-        bid: Number(t.Bid),
-        vol: Number(t.Volume),
-      };
-    });
+    return res.result.map(this.parseTicker);
   }
 
   async getTicker(base: any, quote: string): Promise<ITicker> {
