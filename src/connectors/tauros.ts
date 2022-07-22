@@ -68,7 +68,7 @@ export class tauros<T> extends Exchange<T> {
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
     const res = await this.fetch<ITaurosOrderbookRes>(
-      `${this.baseUrl}/v2/trading/${base}-${quote}/orders/?market=`,
+      `${this.baseUrl}/v2/trading/${base}-${quote}/orderbook/`,
     );
     if (!res.success) {
       throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR, res.msg);

@@ -6,15 +6,31 @@ import { IOrderbook, ITicker } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface ISatoshiTangoTicker {
-  ask: number;
+  date: string;
+  timestamp: number;
   bid: number;
+  ask: number;
+  high: number;
+  low: number;
   volume: number;
+  change: number;
 }
 
 interface ISatoshiTangoTickerRes {
   data: {
     ticker: {
-      [key: string]: ISatoshiTangoTicker;
+      [base: string]: ISatoshiTangoTicker;
+    };
+    code: string;
+  };
+}
+
+interface ISatoshiTangoTickersRes {
+  data: {
+    ticker: {
+      [quote: string]: {
+        [base: string]: ISatoshiTangoTicker;
+      };
     };
     code: string;
   };
@@ -38,6 +54,38 @@ export class satoshitango<T> extends Exchange<T> {
     else if (base === "DAI") return 50000;
     else if (base === "DAI" || base === "USDC") return 50000;
     return 20;
+  }
+
+  async getAllTickers(): Promise<ITicker[]> {
+    const { data: res } = await this.fetch<ISatoshiTangoTickersRes>(
+      `${this.baseUrl}/ticker/ALL`,
+    );
+
+    if (res.code !== "success")
+      throw new ConnectorError(ERROR_TYPES.API_RESPONSE_ERROR);
+
+    const tickers: ITicker[] = [];
+
+    for (const quote in res.ticker) {
+      const tickersForQuote = res.ticker[quote];
+      for (const base in tickersForQuote) {
+        const { ask, bid, volume } = tickersForQuote[
+          base
+        ] as ISatoshiTangoTicker;
+
+        tickers.push({
+          exchangeId: this.id,
+          base,
+          quote,
+          last: (ask + bid) / 2,
+          ask,
+          bid,
+          vol: volume,
+        });
+      }
+    }
+
+    return tickers;
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
