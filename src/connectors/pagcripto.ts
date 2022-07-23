@@ -27,7 +27,7 @@ interface IPagCriptoOrderbookOrder {
 }
 
 interface IPagcriptoTickersRes extends IPagCriptoBaseRes {
-  data: { [pair: string]: IPagCriptoTicker };
+  data: [{ [pair: string]: IPagCriptoTicker }];
 }
 
 interface IPagcriptoTickerRes extends IPagCriptoBaseRes {
@@ -53,9 +53,9 @@ export class pagcripto<T> extends Exchange<T> {
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
-    const { data: res } = await this.fetch<IPagcriptoTickersRes>(
-      this.baseUrl + "/tickers",
-    );
+    const {
+      data: [res],
+    } = await this.fetch<IPagcriptoTickersRes>(this.baseUrl + "/tickers");
 
     const tickers: ITicker[] = [];
 
