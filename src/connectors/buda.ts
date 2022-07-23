@@ -2,21 +2,25 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+
+type IBudaTickerEntry = [string, string];
 
 interface IBudaTickerRes {
   ticker: {
-    last_price: [number];
-    min_ask: [number];
-    max_bid: [number];
-    volume: [number];
+    last_price: IBudaTickerEntry;
+    min_ask: IBudaTickerEntry;
+    max_bid: IBudaTickerEntry;
+    volume: IBudaTickerEntry;
   };
 }
 
+type IBudaOrderbookOrder = [string, string];
+
 interface IBudaOrderbookRes {
   order_book: {
-    asks: [number, number][];
-    bids: [number, number][];
+    asks: IBudaOrderbookOrder[];
+    bids: IBudaOrderbookOrder[];
   };
 }
 
@@ -32,18 +36,26 @@ export class buda<T> extends Exchange<T> {
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const { ticker } = await this.fetch<IBudaTickerRes>(
-      `${this.baseUrl}/
-      s/${base.toLowerCase()}-${quote.toLowerCase()}/ticker`,
+      `${
+        this.baseUrl
+      }/markets/${base.toLowerCase()}-${quote.toLowerCase()}/ticker`,
     );
 
     return {
       exchangeId: this.id,
       base,
       quote,
-      last: ticker.last_price[0],
-      ask: ticker.min_ask[0],
-      bid: ticker.max_bid[0],
-      vol: ticker.volume[0],
+      last: Number(ticker.last_price[0]),
+      ask: Number(ticker.min_ask[0]),
+      bid: Number(ticker.max_bid[0]),
+      vol: Number(ticker.volume[0]),
+    };
+  }
+
+  private parseOrder([price, amount]: IBudaOrderbookOrder): IOrderbookOrder {
+    return {
+      price: Number(price),
+      amount: Number(amount),
     };
   }
 
@@ -55,14 +67,8 @@ export class buda<T> extends Exchange<T> {
     );
 
     return {
-      asks: order_book.asks.map(([price, amount]) => ({
-        price,
-        amount,
-      })),
-      bids: order_book.bids.map(([price, amount]) => ({
-        price,
-        amount,
-      })),
+      asks: order_book.asks.map(this.parseOrder),
+      bids: order_book.bids.map(this.parseOrder),
     };
   }
 }

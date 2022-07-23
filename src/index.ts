@@ -51,5 +51,6 @@ export { tauros } from "./connectors/tauros";
 export { upcambio } from "./connectors/upcambio";
 export { kucoin } from "./connectors/kucoin";
 export { liqi } from "./connectors/liqi";
+export { walltime } from "./connectors/walltime";
 
 export { Fetcher } from "./utils/Fetcher";
