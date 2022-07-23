@@ -2,7 +2,46 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { ITicker } from "../types/common";
+
+import { IOrderbookOrder, ITicker, IOrderbook } from "../types/common";
+
+interface IFTXTicker {
+  name: string;
+  enabled: boolean;
+  postOnly: boolean;
+  priceIncrement: number;
+  sizeIncrement: number;
+  minProvideSize: number;
+  last: number;
+  bid: number;
+  ask: number;
+  price: number;
+  type: string;
+  futureType: string;
+  baseCurrency?: any;
+  isEtfMarket: boolean;
+  quoteCurrency?: any;
+  underlying: string;
+  restricted: boolean;
+  highLeverageFeeExempt: boolean;
+  largeOrderThreshold: number;
+  change1h: number;
+  change24h: number;
+  changeBod: number;
+  quoteVolume24h: number;
+  volumeUsd24h: number;
+  priceHigh24h: number;
+  priceLow24h: number;
+}
+
+type FTXOrderbookOrder = [number, number];
+
+interface IFTXOrderbookRes {
+  result: {
+    bids: FTXOrderbookOrder[];
+    asks: FTXOrderbookOrder[];
+  };
+}
 
 export class ftx<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -14,15 +53,15 @@ export class ftx<T> extends Exchange<T> {
     });
   }
 
-  async getTicker(base: string, quote: string): Promise<ITicker> {
-    if (quote === "BRL") quote = "BRZ";
-    let res = await this.fetch(`${this.baseUrl}/markets/${base}_${quote}`);
+  private parseTicker(res: IFTXTicker): ITicker {
+    if (res.quoteCurrency === "BRZ") {
+      res.quoteCurrency = "BRL";
+    }
 
-    res = res.result;
     return {
       exchangeId: this.id,
-      base,
-      quote,
+      base: res.baseCurrency,
+      quote: res.quoteCurrency,
       last: res.last,
       ask: res.ask,
       bid: res.bid,
@@ -30,22 +69,42 @@ export class ftx<T> extends Exchange<T> {
     };
   }
 
-  async getBook(base: any, quote: string) {
-    if (quote === "BRL") quote = "BRZ";
-    let res = await this.fetch(
+  async getAllTickers(): Promise<ITicker[]> {
+    const { result: res } = await this.fetch<{ result: IFTXTicker[] }>(
+      `${this.baseUrl}/markets`,
+    );
+
+    return res.map((t) => this.parseTicker(t)).filter((t) => t.base && t.quote);
+  }
+
+  async getTicker(base: string, quote: string): Promise<ITicker> {
+    if (quote === "BRL") {
+      quote = "BRZ";
+    }
+
+    const { result: res } = await this.fetch<{ result: IFTXTicker }>(
+      `${this.baseUrl}/markets/${base}_${quote}`,
+    );
+
+    return this.parseTicker(res);
+  }
+
+  private parseOrder([price, amount]: FTXOrderbookOrder): IOrderbookOrder {
+    return { price, amount };
+  }
+
+  async getBook(base: any, quote: string): Promise<IOrderbook> {
+    if (quote === "BRL") {
+      quote = "BRZ";
+    }
+
+    const { result: res } = await this.fetch<IFTXOrderbookRes>(
       `${this.baseUrl}/markets/${base}_${quote}/orderbook?depth=50`,
     );
 
-    res = res.result;
     return {
-      asks: res.asks.map((order: any[]) => ({
-        price: order[0],
-        amount: order[1],
-      })),
-      bids: res.bids.map((order: any[]) => ({
-        price: order[0],
-        amount: order[1],
-      })),
+      asks: res.asks.map(this.parseOrder),
+      bids: res.bids.map(this.parseOrder),
     };
   }
 }

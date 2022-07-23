@@ -1,6 +1,5 @@
 export { alterbank } from "./connectors/alterbank";
 export { binance } from "./connectors/binance";
-export { binance_je } from "./connectors/binance_je";
 export { binance_us } from "./connectors/binance_us";
 export { bipa } from "./connectors/bipa";
 export { biscoint } from "./connectors/biscoint";

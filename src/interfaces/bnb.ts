@@ -87,7 +87,7 @@ export class bnb<T> extends Exchange<T> {
     };
   }
 
-  private parseOder(orders: IBinanceOrder[]) {
+  private parseOrder(orders: IBinanceOrder[]) {
     return orders.map(([price, amount]: IBinanceOrder) => ({
       price: Number(price),
       amount: Number(amount),
@@ -100,8 +100,8 @@ export class bnb<T> extends Exchange<T> {
     );
 
     return {
-      asks: this.parseOder(res.asks),
-      bids: this.parseOder(res.bids),
+      asks: this.parseOrder(res.asks),
+      bids: this.parseOrder(res.bids),
     };
   }
 }

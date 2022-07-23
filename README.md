@@ -113,7 +113,6 @@ binance.getAllTickers().them(tickers => console.log(tickers));
 | id                | getTicker | getAllTickers | getAllTickersByQuote | getBook |
 | ----------------- | --------- | ------------- | -------------------- | ------- |
 | alterbank 🇧🇷      | 1         |               |                      | 1       |
-| binance_je        | 1         | 1             |                      | 1       |
 | binance_us 🇺🇸     | 1         | 1             |                      | 1       |
 | binance 🌐        | 1         | 1             |                      | 1       |
 | bipa 🇧🇷           | 1         |               |                      | 1       |
