@@ -22,12 +22,12 @@ Getters: all connectors have this same getters used to verify if the connector h
 
 ```JavaScript
 /**
- * will return true if this exchange has the method that return all * tickers with all available quote
+ * will return true if this exchange has the method that return all tickers with all available quote
  */
 console.log(bitpreco.hasAllTickers);
 
 /**
- * will return true if this exchange has the method that return all * tickers with specific quote as argument
+ * will return true if this exchange has the method that return all tickers with specific quote as argument
  */
 console.log(bitpreco.hasAllTickersByQuote);
 ```
