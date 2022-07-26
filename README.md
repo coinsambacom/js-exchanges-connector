@@ -35,7 +35,7 @@ console.log(bitpreco.hasAllTickersByQuote);
 ```JavaScript
 import { pagcripto, binance } from '@coinsamba/js-exchanges-connector';
 
-pagcripto.getTicker('BTC', 'BRL').them(ticker => console.log(ticker));
+pagcripto.getTicker('BTC', 'BRL').then(ticker => console.log(ticker));
 // will return the ticker in the specified market
 // {
 //     exchangeId: "pagcripto",
@@ -47,7 +47,7 @@ pagcripto.getTicker('BTC', 'BRL').them(ticker => console.log(ticker));
 //     vol: 16,
 // }
 
-pagcripto.getBook('BTC', 'BRL').them(book => console.log(book));
+pagcripto.getBook('BTC', 'BRL').then(book => console.log(book));
 // will return orderbook of specified market
 // {
 //     asks: [{price: 1000, amount: 1}],
@@ -55,7 +55,7 @@ pagcripto.getBook('BTC', 'BRL').them(book => console.log(book));
 // }
 
 
-pagcripto.getAllTickersByQuote('BRL').them(tickers => console.log(tickers));
+pagcripto.getAllTickersByQuote('BRL').then(tickers => console.log(tickers));
 // will return all tickers in the specified market
 // [
 //     {
@@ -79,7 +79,7 @@ pagcripto.getAllTickersByQuote('BRL').them(tickers => console.log(tickers));
 // ]
 
 
-binance.getAllTickers().them(tickers => console.log(tickers));
+binance.getAllTickers().then(tickers => console.log(tickers));
 // will return all tickers in all markets
 // [
 //     {
