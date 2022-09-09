@@ -2,6 +2,20 @@ import { alphapoint } from "../interfaces/alphapoint";
 import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
 import { ITicker } from "../types/common";
 
+interface IFoxbitAllTickers {
+  symbol: string;
+  price: number;
+  priceChange24hPercent: number;
+  name: string;
+  icon: string;
+  rank: number;
+  volume: number;
+  low: number;
+  high: number;
+  marketcap: number;
+  lastUpdateTimestamp: number;
+}
+
 export class foxbit<T> extends alphapoint<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
@@ -11,6 +25,8 @@ export class foxbit<T> extends alphapoint<T> {
       opts: args?.opts,
       limiter: args?.limiter,
     });
+
+    this.tickerUrl = "https://foxbit.com.br/_api/ticker?cache=0";
   }
 
   normalizeAsset(asset: string | number): string | number {
@@ -41,5 +57,19 @@ export class foxbit<T> extends alphapoint<T> {
       bid: res.buyPrice,
       vol: res.vol,
     };
+  }
+
+  async getAllTickers(): Promise<ITicker[]> {
+    const res = await this.fetch<IFoxbitAllTickers[]>(this.tickerUrl);
+
+    return res.map((ticker) => ({
+      exchangeId: this.id,
+      base: ticker.symbol,
+      quote: "BRL",
+      last: ticker.price,
+      ask: ticker.price,
+      bid: ticker.price,
+      vol: ticker.volume,
+    }));
   }
 }
