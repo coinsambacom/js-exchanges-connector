@@ -144,7 +144,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | decrypto 🇦🇷       |           |               |                      | 1       |
 | exmo 🌐           | 1         | 1             |                      | 1       |
 | flowbtc 🇧🇷        | 1         |               | 1                    | 1       |
-| foxbit 🇧🇷         | 1         |               | 1                    | 1       |
+| foxbit 🇧🇷         | 1         | 1             |                      | 1       |
 | ftx 🌐            | 1         |               |                      | 1       |
 | gateio 🌐         | 1         | 1             |                      | 1       |
 | isbit 🇲🇽          | 1         |               |                      | 1       |
@@ -152,7 +152,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | kucoin 🌐         | 1         | 1             |                      | 1       |
 | liqi 🇧🇷           | 1         | 1             |                      | 1       |
 | makesexchange 🇧🇷  | 1         |               |                      | 1       |
-| mercadobitcoin 🇧🇷 | 1         |               |                      | 1       |
+| mercadobitcoin 🇧🇷 | 1         | 1             |                      | 1       |
 | novadax 🇧🇷        | 1         | 1             |                      | 1       |
 | noxbitcoin 🇧🇷     | 1         |               |                      |         |
 | pagcripto_otc 🇧🇷  | 1         |               |                      | 1       |
