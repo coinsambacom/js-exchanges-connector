@@ -8,6 +8,7 @@ export interface IExchangeImplementationConstructorArgs<T = any> {
 }
 
 export interface IExchangeBaseConstructorArgs<T> {
+  [x: string]: any; // hack to suport any parameters
   /**
    * this exchange id
    */
@@ -16,6 +17,9 @@ export interface IExchangeBaseConstructorArgs<T> {
    * this exchange base URL
    */
   baseUrl: string;
+  /**
+   * custom optiions to inject in your Fetcher function
+   */
   opts?: T;
   /**
    * bottleneck rate limit
@@ -28,7 +32,7 @@ export class Exchange<T> implements IExchangeBase<T> {
   public id!: string;
   public baseUrl!: string;
   public limiter!: Bottleneck;
-  public opts?: any;
+  public opts?: T;
 
   constructor(args: IExchangeBaseConstructorArgs<T>) {
     Object.assign(this, args);
