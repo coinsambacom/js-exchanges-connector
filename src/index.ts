@@ -31,6 +31,7 @@ export { cryptomarket } from "./connectors/cryptomarket";
 export { decrypto } from "./connectors/decrypto";
 export { exmo } from "./connectors/exmo";
 export { flowbtc } from "./connectors/flowbtc";
+export { fluyez } from "./connectors/fluyez";
 export { foxbit } from "./connectors/foxbit";
 export { ftx } from "./connectors/ftx";
 export { gateio } from "./connectors/gateio";

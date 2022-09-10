@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbookOrder, ITicker } from "../types/common";
+import { ITicker } from "../types/common";
 
 export class walltime<T> extends Exchange<T> {
   public id: any;
@@ -37,13 +37,6 @@ export class walltime<T> extends Exchange<T> {
     };
   }
 
-  private parseOrder(o: [string, string]): IOrderbookOrder {
-    return {
-      price: eval(o[1]) / eval(o[0]),
-      amount: eval(o[0]),
-    };
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getBook(base: string, quote: string) {
     const currentRound = (await this.fetch(this.baseUrl + "/meta.json"))[
@@ -56,8 +49,14 @@ export class walltime<T> extends Exchange<T> {
     if (!res) return false;
 
     return {
-      asks: res["xbt-brl"].map(this.parseOrder),
-      bids: res["xbt-brl"].map(this.parseOrder),
+      asks: res["xbt-brl"].map((o: [string, string]) => ({
+        price: eval(o[1]) / eval(o[0]),
+        amount: eval(o[0]),
+      })),
+      bids: res["xbt-brl"].map((o: [string, string]) => ({
+        price: eval(o[0]) / eval(o[1]),
+        amount: eval(o[1]),
+      })),
     };
   }
 }

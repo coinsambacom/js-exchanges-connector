@@ -69,19 +69,21 @@ export class satoshitango<T> extends Exchange<T> {
     for (const quote in res.ticker) {
       const tickersForQuote = res.ticker[quote];
       for (const base in tickersForQuote) {
-        const { ask, bid, volume } = tickersForQuote[
-          base
-        ] as ISatoshiTangoTicker;
+        if (tickersForQuote[base]) {
+          const { ask, bid, volume } = tickersForQuote[
+            base
+          ] as ISatoshiTangoTicker;
 
-        tickers.push({
-          exchangeId: this.id,
-          base,
-          quote,
-          last: (ask + bid) / 2,
-          ask,
-          bid,
-          vol: volume,
-        });
+          tickers.push({
+            exchangeId: this.id,
+            base,
+            quote,
+            last: (ask + bid) / 2,
+            ask,
+            bid,
+            vol: volume,
+          });
+        }
       }
     }
 
