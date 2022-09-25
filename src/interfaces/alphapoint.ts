@@ -114,7 +114,7 @@ export class alphapoint<T> extends Exchange<T> {
             m: 0,
             n: "Ping",
             o: {},
-          });
+          }).catch(() => null);
         }, 15000);
 
         this.wsReady = true;
