@@ -117,6 +117,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | binance 🌐        | 1         | 1             |                      | 1       |
 | bipa 🇧🇷           | 1         |               |                      | 1       |
 | biscoint 🇧🇷       | 1         |               |                      | 1       |
+| bisq 🌐           | 1         |               |                      | 1       |
 | bitbay            | 1         |               |                      | 1       |
 | bitblue 🇧🇷        | 1         |               |                      | 1       |
 | bitcointoyou 🇧🇷   | 1         |               |                      | 1       |
