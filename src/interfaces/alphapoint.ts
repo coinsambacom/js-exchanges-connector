@@ -223,10 +223,10 @@ export class alphapoint<T> extends Exchange<T> {
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    base = this.normalizeAsset(base) as string;
+    const normalizedBase = this.normalizeAsset(base) as string;
 
     const res = await this.fetch(
-      `${this.baseUrl}/GetLevel1?OMSId=1&InstrumentId=${base} `,
+      `${this.baseUrl}/GetLevel1?OMSId=1&InstrumentId=${normalizedBase} `,
     );
 
     return {
