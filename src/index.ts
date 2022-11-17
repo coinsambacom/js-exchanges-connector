@@ -3,6 +3,7 @@ export { binance } from "./connectors/binance";
 export { binance_us } from "./connectors/binance_us";
 export { bipa } from "./connectors/bipa";
 export { biscoint } from "./connectors/biscoint";
+export { bisq } from "./connectors/bisq";
 export { bitbay } from "./connectors/bitbay";
 export { bitblue } from "./connectors/bitblue";
 export { bitcointoyou } from "./connectors/bitcointoyou";
