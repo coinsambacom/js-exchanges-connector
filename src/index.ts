@@ -17,6 +17,7 @@ export { bitstamp } from "./connectors/bitstamp";
 export { bittrex } from "./connectors/bittrex";
 export { bleutrade } from "./connectors/bleutrade";
 export { blocktane } from "./connectors/blocktane";
+export { brasilbitcoin_otc } from "./connectors/brasilbitcoin_otc";
 export { brasilbitcoin } from "./connectors/brasilbitcoin";
 export { brfinex } from "./connectors/brfinex";
 export { buda } from "./connectors/buda";
