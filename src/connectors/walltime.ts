@@ -2,7 +2,8 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../types/common";
+import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface IWalltimeTicker {
   version: string;
@@ -44,6 +45,14 @@ interface IWalltimeCurrentRound {
   };
 }
 
+type TWalltimeOrderbookOrder = [string, string];
+
+interface IWalltimeOrderbook {
+  timestamp: number;
+  "xbt-brl": TWalltimeOrderbookOrder[];
+  "brl-xbt": TWalltimeOrderbookOrder[];
+}
+
 export class walltime<T> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
@@ -57,7 +66,7 @@ export class walltime<T> extends Exchange<T> {
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const { BRL_XBT: res } = await this.fetch<IWalltimeTicker>(
-      `${this.baseUrl}/walltime-info.json`,
+      `${this.baseUrl}/walltime-info.json?now=${Date.now()}`,
     );
 
     return {
@@ -71,24 +80,30 @@ export class walltime<T> extends Exchange<T> {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getBook(base: string, quote: string) {
+  async getBook(_: string, __: string): Promise<IOrderbook> {
+    const now = Date.now();
+
     const currentRound = await this.fetch<IWalltimeCurrentRound>(
-      this.baseUrl + "/meta.json",
+      `${this.baseUrl}/meta.json?now=${now}`,
     );
 
-    if (!currentRound) return false;
-    const res = await this.fetch(
-      this.baseUrl + "/order-book/v8878cb_r" + currentRound + "_p0.json",
+    if (!currentRound?.current_round) {
+      throw new ConnectorError(
+        ERROR_TYPES.API_RESPONSE_ERROR,
+        "walltime has returned invalid round",
+      );
+    }
+
+    const book = await this.fetch<IWalltimeOrderbook>(
+      `${this.baseUrl}/${currentRound.order_book_prefix}_r${currentRound.current_round}_p0.json?now=${now}`,
     );
-    if (!res) return false;
 
     return {
-      asks: res["xbt-brl"].map((o: [string, string]) => ({
+      asks: book["xbt-brl"].map((o) => ({
         price: eval(o[1]) / eval(o[0]),
         amount: eval(o[0]),
       })),
-      bids: res["xbt-brl"].map((o: [string, string]) => ({
+      bids: book["brl-xbt"].map((o) => ({
         price: eval(o[0]) / eval(o[1]),
         amount: eval(o[1]),
       })),
