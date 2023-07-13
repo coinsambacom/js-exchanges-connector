@@ -41,12 +41,12 @@ export class bitpreco<T> extends Exchange<T> {
   }
 
   async getBalance(): Promise<IBalance> {
-    const res = await this.fetch<Record<string, any>>({
-      ...this.signer({
+    const res = await this.fetch<Record<string, any>>(
+      this.signer({
         url: `${this.baseUrl}/v1/trading/balance`,
+        method: FetcherRequisitionMethods.POST,
       }),
-      method: FetcherRequisitionMethods.POST,
-    });
+    );
 
     const balance: IBalance = {};
 
@@ -92,13 +92,9 @@ export class bitpreco<T> extends Exchange<T> {
     };
   }
 
-  private get auth_token(): string {
-    return this.apiSecret! + this.apiKey!;
-  }
-
   private signer(args: SignerArguments): SignerReturn {
-    const headers = { auth_token: this.auth_token };
+    const headers = { auth_token: this.apiSecret! + this.apiKey! };
 
-    return { headers, url: args.url, data: args.data };
+    return { ...args, headers };
   }
 }

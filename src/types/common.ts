@@ -24,23 +24,98 @@ export interface IOrderbook {
   bids: IOrderbookOrder[];
 }
 
-export interface IExchangeBase<T> {
+export enum OrderSide {
+  BUY = "buy",
+  SELL = "sell",
+}
+
+export interface PlaceOrderArguments {
+  price: number;
+  amount: number;
+  side: OrderSide;
+  base: string;
+  quote: string;
+}
+
+export interface CancelOrderArguments {
   id: string;
+  base: string;
+  quote: string;
+}
+
+export type GetOrderArguments = CancelOrderArguments;
+
+export enum OrderStatus {
+  EMPTY = "empty",
+  PARTIAL = "partial",
+  FILLED = "filled",
+  CANCELED = "canceled",
+}
+
+export interface IOrder {
+  status: OrderStatus;
+  side: OrderSide;
+  price: number;
+  amount: number;
+  executed: number;
+}
+
+/**
+ * Represents the base interface for an exchange.
+ */
+export interface IExchangeBase<T> {
+  /**
+   * The exchange ID.
+   */
+  id: string;
+  /**
+   * The exchange base URL.
+   */
   baseUrl: string;
+  /**
+   * The rate limiter for the exchange.
+   */
   limiter: Bottleneck;
+  /**
+   * Custom options to inject in the Fetcher function.
+   */
   opts?: T;
 
   /**
-   * true if this exchange implements all tickers by specified quote
+   * Indicates whether this exchange implements all tickers by specified quote.
    */
   hasAllTickersByQuote: boolean;
   /**
-   * true if this exchange implements all tickers with all available quotes
+   * Indicates whether this exchange implements all tickers with all available quotes.
    */
   hasAllTickers: boolean;
 
+  /**
+   * Retrieves all tickers for this exchange.
+   * @returns A promise that resolves to an array of ITicker objects.
+   */
   getAllTickers?: () => Promise<ITicker[]>;
+
+  /**
+   * Retrieves all tickers for this exchange based on the specified quote.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an array of ITicker objects.
+   */
   getAllTickersByQuote?: (quote: string) => Promise<ITicker[]>;
+
+  /**
+   * Retrieves the ticker for the specified base and quote currencies.
+   * @param base The base currency.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an ITicker object.
+   */
   getTicker?: (base: string, quote: string) => Promise<ITicker>;
+
+  /**
+   * Retrieves the order book for the specified base and quote currencies.
+   * @param base The base currency.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an IOrderbook object.
+   */
   getBook?: (base: string, quote: string) => Promise<IOrderbook>;
 }

@@ -1,6 +1,6 @@
 import Bottleneck from "bottleneck";
 import { IExchangeBase } from "../types/common";
-import { Fetcher, FetcherArgs } from "../utils/Fetcher";
+import { Fetcher, FetcherArgs, FetcherObjectArgs } from "../utils/Fetcher";
 
 /**
  * Represents the constructor arguments for a public exchange.
@@ -47,19 +47,12 @@ export interface IExchangeBaseConstructorArgs<T>
 /**
  * Represents the arguments for signing requests.
  */
-export interface SignerArguments {
-  url: string;
-  data?: Record<string, any>;
-}
+export type SignerArguments = Omit<FetcherObjectArgs, "headers">;
 
 /**
  * Represents the return value of the signer function.
  */
-export interface SignerReturn {
-  url: string;
-  headers: Record<string, string | number | boolean>;
-  data?: Record<string, any>;
-}
+export type SignerReturn = FetcherObjectArgs;
 
 /**
  * Abstract base class for exchanges.

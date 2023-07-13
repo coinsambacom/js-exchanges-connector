@@ -79,7 +79,8 @@ class Fetcher {
             headers: args.headers,
             url: args.url,
             method: args.method,
-            data: args.data,
+            [args.method === FetcherRequisitionMethods.GET ? "params" : "data"]:
+              args.data,
           });
           return data;
         }
