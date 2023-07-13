@@ -1,5 +1,9 @@
 import Bottleneck from "bottleneck";
 
+export interface IBalance {
+  [symbol: string]: number;
+}
+
 export interface ITicker {
   exchangeId: string;
   base: string;
