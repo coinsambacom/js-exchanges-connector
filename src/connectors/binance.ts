@@ -7,7 +7,6 @@ export class binance<T> extends bnb<T> {
       id: "binance",
       baseUrl: "https://api.binance.com/api/v3",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

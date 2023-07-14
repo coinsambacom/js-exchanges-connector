@@ -7,7 +7,6 @@ export class comprarbitcoin<T> extends bws<T> {
       id: "comprarbitcoin",
       baseUrl: "https://app.comprarbitcoin.com.br/api/v3/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

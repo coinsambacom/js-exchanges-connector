@@ -1,4 +1,3 @@
-// @ts-ignore
 import { walltime } from "../src/index";
 
 const ex = new walltime();

@@ -1,4 +1,3 @@
-// @ts-ignore
 import { bisq } from "../src/index";
 
 const ex = new bisq();

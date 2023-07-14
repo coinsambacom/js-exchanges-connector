@@ -18,13 +18,12 @@ interface IBrasilBitcoinOtcTicker {
   money: number;
 }
 
-export class brasilbitcoin_otc<T> extends Exchange<T> {
+export class brasilbitcoin_otc<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "brasilbitcoin_otc",
       baseUrl: "https://brasilbitcoin.com.br/API",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

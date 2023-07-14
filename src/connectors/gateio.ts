@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class gateio<T> extends Exchange<T> {
+export class gateio<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "gateio",
       baseUrl: "https://data.gateio.la/api2/1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

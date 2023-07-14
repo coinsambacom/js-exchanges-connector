@@ -22,13 +22,12 @@ interface ICitcoinOrderbookRes {
   ask: ICitcoinOrder[];
   bid: ICitcoinOrder[];
 }
-export class citcoin<T> extends Exchange<T> {
+export class citcoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "citcoin",
       baseUrl: "https://api.citcoin.com.br/v1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

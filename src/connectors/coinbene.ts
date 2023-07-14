@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class coinbene<T> extends Exchange<T> {
+export class coinbene<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "coinbene",
       baseUrl: "http://api.coinbene.com/v1/market",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

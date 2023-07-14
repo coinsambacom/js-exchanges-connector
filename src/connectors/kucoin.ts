@@ -44,13 +44,12 @@ interface IKucoinOrderbookRes extends KucoinBaseRes {
   };
 }
 
-export class kucoin<T> extends Exchange<T> {
+export class kucoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "kucoin",
       baseUrl: "https://api.kucoin.com/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

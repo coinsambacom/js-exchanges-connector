@@ -10,13 +10,12 @@ interface IFluyezTickerRes {
   };
 }
 
-export class fluyez<T> extends Exchange<T> {
+export class fluyez<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "fluyez",
       baseUrl: "https://api.fluyez.com/w/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

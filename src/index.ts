@@ -55,4 +55,4 @@ export { kucoin } from "./connectors/kucoin";
 export { liqi } from "./connectors/liqi";
 export { walltime } from "./connectors/walltime";
 
-export { Fetcher } from "./utils/Fetcher";
+export { FetcherHandler } from "./utils/FetcherHandler";

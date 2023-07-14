@@ -39,13 +39,12 @@ interface IBitcoinTradeOrderBookRes {
   };
 }
 
-export class bitcointrade<T> extends Exchange<T> {
+export class bitcointrade<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitcointrade",
       baseUrl: "https://api.bitcointrade.com.br/v3/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

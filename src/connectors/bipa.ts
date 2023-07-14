@@ -11,13 +11,12 @@ interface IBipaTickerRes {
   };
 }
 
-export class bipa<T> extends Exchange<T> {
+export class bipa<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bipa",
       baseUrl: "https://prices.bipa.app",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

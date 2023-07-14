@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class bitbay<T> extends Exchange<T> {
+export class bitbay<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitbay",
       baseUrl: "https://bitbay.net/API/Public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

@@ -7,7 +7,6 @@ export class isbit<T> extends peatio<T> {
       id: "isbit",
       baseUrl: "https://www.isbit.co/api/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

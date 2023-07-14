@@ -42,13 +42,12 @@ interface IPagcriptoOrderbookRes extends IPagCriptoBaseRes {
   };
 }
 
-export class pagcripto<T> extends Exchange<T> {
+export class pagcripto<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto",
       baseUrl: "https://api.pagcripto.com.br/v2/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

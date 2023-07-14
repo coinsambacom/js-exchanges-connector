@@ -1,5 +1,3 @@
-import Bottleneck from "bottleneck";
-
 export interface ITicker {
   exchangeId: string;
   base: string;
@@ -23,7 +21,6 @@ export interface IOrderbook {
 export interface IExchangeBase<T> {
   id: string;
   baseUrl: string;
-  limiter: Bottleneck;
   opts?: T;
 
   /**

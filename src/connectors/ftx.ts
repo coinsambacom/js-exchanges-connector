@@ -43,13 +43,12 @@ interface IFTXOrderbookRes {
   };
 }
 
-export class ftx<T> extends Exchange<T> {
+export class ftx<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "ftx",
       baseUrl: "https://ftx.com/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

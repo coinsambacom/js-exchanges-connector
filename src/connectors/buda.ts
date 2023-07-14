@@ -24,13 +24,12 @@ interface IBudaOrderbookRes {
   };
 }
 
-export class buda<T> extends Exchange<T> {
+export class buda<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "buda",
       baseUrl: "https://www.buda.com/api/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

@@ -7,7 +7,6 @@ export class bitrecife<T> extends bws<T> {
       id: "bitrecife",
       baseUrl: "https://exchange.bitrecife.com.br/api/v3/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

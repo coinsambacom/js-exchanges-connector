@@ -11,7 +11,6 @@ export class coinext<T> extends alphapoint<T> {
       baseUrl: "https://api.coinext.com.br:8443/AP",
       websocketUrl: "wss://api.coinext.com.br/WSGateway/",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
 
     this.tickerUrl = "http://apex.coinext.com.br/tickers";

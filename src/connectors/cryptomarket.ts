@@ -27,13 +27,12 @@ interface ICryptoMarketOrderbookRes {
   bid: ICryptoMarketOrder[];
 }
 
-export class cryptomarket<T> extends Exchange<T> {
+export class cryptomarket<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "cryptomarket",
       baseUrl: "https://api.exchange.cryptomkt.com/api/3",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

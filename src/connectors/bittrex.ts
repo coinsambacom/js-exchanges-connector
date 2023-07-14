@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class bittrex<T> extends Exchange<T> {
+export class bittrex<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bittrex",
       baseUrl: "https://api.bittrex.com/api/v1.1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

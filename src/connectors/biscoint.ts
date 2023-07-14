@@ -15,13 +15,12 @@ interface IBiscointTickerRes {
   };
 }
 
-export class biscoint<T> extends Exchange<T> {
+export class biscoint<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "biscoint",
       baseUrl: "https://api.biscoint.io/v1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

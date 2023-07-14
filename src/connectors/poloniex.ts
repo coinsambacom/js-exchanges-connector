@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class poloniex<T> extends Exchange<T> {
+export class poloniex<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "poloniex",
       baseUrl: "https://poloniex.com/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 
