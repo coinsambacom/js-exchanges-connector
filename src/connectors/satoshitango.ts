@@ -36,13 +36,12 @@ interface ISatoshiTangoTickersRes {
   };
 }
 
-export class satoshitango<T> extends Exchange<T> {
+export class satoshitango<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "satoshitango",
       baseUrl: "https://api.satoshitango.com/v3",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

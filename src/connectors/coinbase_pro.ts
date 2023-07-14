@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class coinbase_pro<T> extends Exchange<T> {
+export class coinbase_pro<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "coinbase_pro",
       baseUrl: "https://api.pro.coinbase.com",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

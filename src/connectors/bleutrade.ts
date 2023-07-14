@@ -7,7 +7,6 @@ export class bleutrade<T> extends bws<T> {
       id: "bleutrade",
       baseUrl: "https://bleutrade.com/api/v3/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

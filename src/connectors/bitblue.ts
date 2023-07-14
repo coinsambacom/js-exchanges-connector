@@ -25,13 +25,12 @@ interface IBitblueOrderbookRes {
   };
 }
 
-export class bitblue<T> extends Exchange<T> {
+export class bitblue<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitblue",
       baseUrl: "https://bitblue.com/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

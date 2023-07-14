@@ -9,13 +9,12 @@ interface IBitsoOrderbookOrder {
   amount: string;
 }
 
-export class bitso<T> extends Exchange<T> {
+export class bitso<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitso",
       baseUrl: "https://api.bitso.com/v3",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

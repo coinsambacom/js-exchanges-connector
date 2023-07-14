@@ -1,4 +1,3 @@
-// @ts-ignore
 import { fluyez } from "../src/index";
 
 const ex = new fluyez();

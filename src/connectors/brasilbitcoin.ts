@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class brasilbitcoin<T> extends Exchange<T> {
+export class brasilbitcoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "brasilbitcoin",
       baseUrl: "https://brasilbitcoin.com.br/API",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

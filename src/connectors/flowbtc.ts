@@ -8,7 +8,6 @@ export class flowbtc<T> extends alphapoint<T> {
       baseUrl: "https://api.flowbtc.com.br:8443/ap",
       websocketUrl: "wss://api.flowbtc.com.br/WSGateway/",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

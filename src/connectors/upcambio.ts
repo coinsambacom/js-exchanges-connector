@@ -7,7 +7,6 @@ export class upcambio<T> extends upex<T> {
       id: "upcambio",
       baseUrl: "https://api.upcambio.com",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

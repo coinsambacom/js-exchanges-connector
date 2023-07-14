@@ -18,13 +18,12 @@ interface IBitnuvemTickerRes {
   };
 }
 
-export class bitnuvem<T> extends Exchange<T> {
+export class bitnuvem<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitnuvem",
       baseUrl: "https://bitnuvem.com/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

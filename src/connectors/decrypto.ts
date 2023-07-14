@@ -13,13 +13,12 @@ interface IDecryptoOrderbookRes {
   bids: IDecryptoOrderbookOrder[];
 }
 
-export class decrypto<T> extends Exchange<T> {
+export class decrypto<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "decrypto",
       baseUrl: "https://api.decrypto.la:8081/1.0/frontend",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class bitstamp<T> extends Exchange<T> {
+export class bitstamp<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitstamp",
       baseUrl: "https://www.bitstamp.net/api/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

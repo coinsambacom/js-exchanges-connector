@@ -60,7 +60,6 @@ export class walltime<T> extends Exchange<T> {
       baseUrl:
         "https://s3.amazonaws.com/data-production-walltime-info/production/dynamic",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

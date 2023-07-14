@@ -33,13 +33,12 @@ interface IBisqBookRes {
   };
 }
 
-export class bisq<T> extends Exchange<T> {
+export class bisq<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bisq",
       baseUrl: "https://bisq.markets/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

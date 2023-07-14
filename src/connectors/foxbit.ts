@@ -23,7 +23,6 @@ export class foxbit<T> extends alphapoint<T> {
       baseUrl: "https://watcher.foxbit.com.br/api",
       websocketUrl: "wss://api.foxbit.com.br/",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
 
     this.tickerUrl = "https://foxbit.com.br/_api/ticker?cache=0";

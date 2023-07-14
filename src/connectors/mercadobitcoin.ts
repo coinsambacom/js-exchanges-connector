@@ -38,13 +38,12 @@ interface IMercadoBitcoinOrderbookRes {
   bids: IMercadoBitcoinOrderbookOrder[];
 }
 
-export class mercadobitcoin<T> extends Exchange<T> {
+export class mercadobitcoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "mercadobitcoin",
       baseUrl: "https://api.mercadobitcoin.net/api/v4",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

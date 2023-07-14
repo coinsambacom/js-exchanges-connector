@@ -26,13 +26,12 @@ interface IBRFinexOrderbookRes {
   };
 }
 
-export class brfinex<T> extends Exchange<T> {
+export class brfinex<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "brfinex",
       baseUrl: "https://api.brfinex.com/v1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

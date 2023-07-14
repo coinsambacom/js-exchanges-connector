@@ -18,13 +18,12 @@ interface INoxBitcoinTickerRes {
   ticker_usd: INoxBitcoinTicker;
 }
 
-export class noxbitcoin<T> extends Exchange<T> {
+export class noxbitcoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "noxbitcoin",
       baseUrl: "https://app.noxbitcoin.com.br/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

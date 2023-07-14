@@ -4,8 +4,8 @@ import {
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { isNumber } from "../utils/isNumber";
+import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface IPagCriptoOTCTickerRes {
   otc_ticker: {
@@ -23,13 +23,12 @@ interface IPagCriptoOTCTickerRes {
   };
 }
 
-export class pagcripto_otc<T> extends Exchange<T> {
+export class pagcripto_otc<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto_otc",
       baseUrl: "https://api.pagcripto.com.br/v2/otc",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

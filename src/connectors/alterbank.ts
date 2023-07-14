@@ -12,13 +12,12 @@ interface IAlterbankTickerRes {
   volume: string;
 }
 
-export class alterbank<T> extends Exchange<T> {
+export class alterbank<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "alterbank",
       baseUrl: "https://api.alterbank.com.br/public-api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

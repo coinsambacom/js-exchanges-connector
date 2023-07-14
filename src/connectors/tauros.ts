@@ -22,13 +22,12 @@ interface ITaurosOrderbookRes {
   };
 }
 
-export class tauros<T> extends Exchange<T> {
+export class tauros<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "tauros",
       baseUrl: "https://api.tauros.io/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

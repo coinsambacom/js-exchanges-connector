@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { ITicker } from "../types/common";
 
-export class bitcointoyou<T> extends Exchange<T> {
+export class bitcointoyou<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitcointoyou",
       baseUrl: "https://back.bitcointoyou.com/api/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

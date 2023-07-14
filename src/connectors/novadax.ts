@@ -41,13 +41,12 @@ interface INovaDAXOrderbookRes extends INovaDAXBaseApiResponse {
   };
 }
 
-export class novadax<T> extends Exchange<T> {
+export class novadax<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "novadax",
       baseUrl: "https://api.novadax.com",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

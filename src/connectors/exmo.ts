@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class exmo<T> extends Exchange<T> {
+export class exmo<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "exmo",
       baseUrl: "https://api.exmo.com/v1.1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

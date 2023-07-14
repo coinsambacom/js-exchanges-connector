@@ -1,10 +1,8 @@
-import Bottleneck from "bottleneck";
 import { IExchangeBase } from "../types/common";
-import { Fetcher } from "../utils/Fetcher";
+import { FetcherHandler, FetcherArgs } from "../utils/FetcherHandler";
 
 export interface IExchangeImplementationConstructorArgs<T = any> {
   opts?: T;
-  limiter?: Bottleneck;
 }
 
 export interface IExchangeBaseConstructorArgs<T> {
@@ -21,33 +19,25 @@ export interface IExchangeBaseConstructorArgs<T> {
    * custom optiions to inject in your Fetcher function
    */
   opts?: T;
-  /**
-   * bottleneck rate limit
-   */
-  limiter?: Bottleneck;
 }
 
 export class Exchange<T> implements IExchangeBase<T> {
   [x: string]: any;
   public id!: string;
   public baseUrl!: string;
-  public limiter!: Bottleneck;
   public opts?: T;
 
   constructor(args: IExchangeBaseConstructorArgs<T>) {
     Object.assign(this, args);
-    if (!args.limiter) {
-      this.limiter = new Bottleneck({
-        maxConcurrent: 2,
-        reservoir: 60,
-        reservoirRefreshAmount: 10,
-        reservoirRefreshInterval: 60 * 1000,
-      });
-    }
   }
 
-  public fetch<T = any>(url: string) {
-    return this.limiter.schedule<T>(() => Fetcher.get<T>(url, this.opts));
+  /**
+   * Performs an HTTP request using the Fetcher class.
+   * @param args The arguments for the HTTP request.
+   * @returns A promise that resolves to the response data.
+   */
+  public fetch<T = any>(args: FetcherArgs) {
+    return FetcherHandler.fetch<T>(args);
   }
 
   public get hasAllTickers(): boolean {
