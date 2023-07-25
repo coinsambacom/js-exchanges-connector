@@ -5,7 +5,7 @@ import {
   SignerReturn,
 } from "../interfaces/exchange";
 import { IBalance, IOrderbook, ITicker } from "../types/common";
-import { FetcherRequisitionMethods } from "../utils/Fetcher";
+import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 export class bitpreco<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

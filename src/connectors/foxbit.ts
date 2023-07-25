@@ -17,6 +17,7 @@ interface IFoxbitAllTickers {
 }
 
 export class foxbit<T> extends alphapoint<T> {
+  private tickerUrl: string;
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "foxbit",
