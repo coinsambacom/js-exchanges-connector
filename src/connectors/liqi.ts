@@ -31,13 +31,12 @@ interface ILiqiOrderbookRes {
   asks: ILiqiOrderbookOrder[];
 }
 
-export class liqi<T> extends Exchange<T> {
+export class liqi<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "liqi",
       baseUrl: "https://api.liqi.com.br/exchange/v1",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

@@ -1,4 +1,3 @@
-// @ts-ignore
 import { mercadobitcoin } from "../src/index";
 
 const ex = new mercadobitcoin();

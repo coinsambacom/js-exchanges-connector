@@ -1,6 +1,3 @@
-import Axios, { AxiosError } from "axios";
-import { ConnectorError, ERROR_TYPES } from "./ConnectorError";
-
 /**
  * Enum representing different types of HTTP request methods.
  */
@@ -34,29 +31,15 @@ export interface ICustomFetcher {
  * Class responsible for handling HTTP requests using Axios.
  * It provides the ability to set a custom fetcher and performs requests based on the provided arguments.
  */
-class Fetcher {
+class FetcherHandler {
   private fetcher?: ICustomFetcher;
 
   /**
    * Sets a custom fetcher implementation.
    * @param fetcher The custom fetcher implementing the ICustomFetcher interface.
    */
-  setCustomFetcher(fetcher: ICustomFetcher): void {
+  setFetcher(fetcher: ICustomFetcher): void {
     this.fetcher = fetcher;
-  }
-
-  private parseAxiosError(e: AxiosError): ConnectorError {
-    let message = `E - ${e.code}`;
-    if (e.response) {
-      message += ` - ${e.response.status} - ${e.config.url} ${
-        typeof e.response.data === "object"
-          ? `- ${JSON.stringify(e.response.data)}`
-          : ""
-      }`;
-    } else {
-      message += ` - ${e.config.url}`;
-    }
-    return new ConnectorError(ERROR_TYPES.API_NETWORK_ERROR, message, e);
   }
 
   /**
@@ -66,31 +49,15 @@ class Fetcher {
    * @returns A promise that resolves to the response data.
    * @throws ConnectorError if an AxiosError occurs during the request.
    */
-  public async fetch<ResponseType>(args: FetcherArgs): Promise<ResponseType> {
+  async fetch<ResponseType>(args: FetcherArgs): Promise<ResponseType> {
     if (this.fetcher) {
       return this.fetcher.fetch<ResponseType>(args);
     } else {
-      try {
-        if (typeof args == "string") {
-          const { data } = await Axios.get<ResponseType>(args);
-          return data;
-        } else {
-          const { data } = await Axios.request<ResponseType>({
-            headers: args.headers,
-            url: args.url,
-            method: args.method,
-            [args.method === FetcherRequisitionMethods.GET ? "params" : "data"]:
-              args.data,
-          });
-          return data;
-        }
-      } catch (error: any) {
-        throw this.parseAxiosError(error as unknown as AxiosError);
-      }
+      throw Error("need to attach fetcher before this call");
     }
   }
 }
 
 // Singleton instance of the Fetcher class
-const instance = new Fetcher();
-export { instance as Fetcher };
+const instance = new FetcherHandler();
+export { instance as FetcherHandler };

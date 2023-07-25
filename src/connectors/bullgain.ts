@@ -7,7 +7,6 @@ export class bullgain<T> extends bws<T> {
       id: "bullgain",
       baseUrl: "https://trade.bullgain.com/api/v3/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

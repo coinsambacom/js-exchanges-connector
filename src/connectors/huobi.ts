@@ -48,13 +48,12 @@ interface IHuobiOrderbookRes {
   };
 }
 
-export class huobi<T> extends Exchange<T> {
+export class huobi<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "huobi",
       baseUrl: "https://api.huobi.pro",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

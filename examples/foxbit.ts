@@ -1,4 +1,3 @@
-// @ts-ignore
 import { foxbit } from "../src/index";
 
 const ex = new foxbit();

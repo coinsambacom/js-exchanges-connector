@@ -7,7 +7,6 @@ export class makesexchange<T> extends upex<T> {
       id: "makesexchange",
       baseUrl: "https://api.makes.exchange/index.php?",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 }

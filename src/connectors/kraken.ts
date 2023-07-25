@@ -37,13 +37,12 @@ interface IKrakenBookRes {
   result: { [key: string]: IKrakenOrderbook };
 }
 
-export class kraken<T> extends Exchange<T> {
+export class kraken<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "kraken",
       baseUrl: "https://api.kraken.com/0/public",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

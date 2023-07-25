@@ -1,6 +1,9 @@
-import Bottleneck from "bottleneck";
 import { IExchangeBase } from "../types/common";
-import { Fetcher, FetcherArgs, FetcherObjectArgs } from "../utils/Fetcher";
+import {
+  FetcherHandler,
+  FetcherArgs,
+  FetcherObjectArgs,
+} from "../utils/FetcherHandler";
 
 /**
  * Represents the constructor arguments for a public exchange.
@@ -19,9 +22,7 @@ export interface PublicExchangeConstructorArgs<T> {
  * Represents the constructor arguments for an exchange implementation.
  */
 export interface IExchangeImplementationConstructorArgs<T = any>
-  extends PublicExchangeConstructorArgs<T> {
-  limiter?: Bottleneck;
-}
+  extends PublicExchangeConstructorArgs<T> {}
 
 /**
  * Represents the constructor arguments for the base exchange.
@@ -39,9 +40,9 @@ export interface IExchangeBaseConstructorArgs<T>
   baseUrl: string;
 
   /**
-   * The rate limiter for the exchange.
+   * custom optiions to inject in your Fetcher function
    */
-  limiter?: Bottleneck;
+  opts?: T;
 }
 
 /**
@@ -67,10 +68,6 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
    */
   public baseUrl!: string;
   /**
-   * The rate limiter for the exchange.
-   */
-  public limiter!: Bottleneck;
-  /**
    * Custom options to inject in the Fetcher function.
    */
   public opts?: T;
@@ -88,17 +85,7 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
    * @param args The constructor arguments.
    */
   constructor(args: IExchangeBaseConstructorArgs<T>) {
-    Object.assign(this, {
-      ...args,
-      limiter:
-        args.limiter ??
-        new Bottleneck({
-          maxConcurrent: 2,
-          reservoir: 60,
-          reservoirRefreshAmount: 10,
-          reservoirRefreshInterval: 60 * 1000,
-        }),
-    });
+    Object.assign(this, args);
   }
 
   /**
@@ -107,7 +94,7 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
    * @returns A promise that resolves to the response data.
    */
   public fetch<T = any>(args: FetcherArgs) {
-    return this.limiter.schedule<T>(() => Fetcher.fetch<T>(args));
+    return FetcherHandler.fetch<T>(args);
   }
 
   /**

@@ -3,11 +3,11 @@
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
     ],
-    "parserOptions": {
-        "project": [
-            "./tsconfig.json"
-        ]
-    },
+    // "parserOptions": {
+    //     "project": [
+    //         "./tsconfig.json"
+    //     ]
+    // },
     "overrides": [
         {
             "files": "*.ts",
@@ -35,8 +35,7 @@
     "ignorePatterns": [
         "/lib/",
         "/typings/",
-        "/docs/",
-        "/test/"
+        "/docs/"
     ],
     "reportUnusedDisableDirectives": true,
     "env": {

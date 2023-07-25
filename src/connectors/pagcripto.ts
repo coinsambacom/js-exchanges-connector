@@ -17,7 +17,7 @@ import {
   PlaceOrderArguments,
 } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherRequisitionMethods } from "../utils/Fetcher";
+import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 interface IPagCriptoBaseRes {
   code: string;
@@ -89,13 +89,12 @@ interface IPagcriptoGetOrderRes {
   update_date: string;
 }
 
-export class pagcripto<T> extends Exchange<T> {
+export class pagcripto<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "pagcripto",
       baseUrl: "https://api.pagcripto.com.br/v2",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

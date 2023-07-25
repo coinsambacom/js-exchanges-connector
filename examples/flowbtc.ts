@@ -1,4 +1,3 @@
-// @ts-ignore
 import { flowbtc } from "../src/index";
 
 const ex = new flowbtc();

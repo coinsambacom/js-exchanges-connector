@@ -7,13 +7,12 @@ import {
 import { IBalance, IOrderbook, ITicker } from "../types/common";
 import { FetcherRequisitionMethods } from "../utils/Fetcher";
 
-export class bitpreco<T> extends Exchange<T> {
+export class bitpreco<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitpreco",
       baseUrl: "https://api.bitpreco.com",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

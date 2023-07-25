@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../types/common";
 
-export class cexio<T> extends Exchange<T> {
+export class cexio<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "cexio",
       baseUrl: "https://cex.io/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

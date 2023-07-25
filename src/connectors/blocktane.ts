@@ -4,13 +4,12 @@ import {
 } from "../interfaces/exchange";
 import { ITicker } from "../types/common";
 
-export class blocktane<T> extends Exchange<T> {
+export class blocktane<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "blocktane",
       baseUrl: "https://trade.blocktane.io/api",
       opts: args?.opts,
-      limiter: args?.limiter,
     });
   }
 

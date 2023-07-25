@@ -1,5 +1,3 @@
-import Bottleneck from "bottleneck";
-
 export interface IBalance {
   [symbol: string]: number;
 }
@@ -72,10 +70,6 @@ export interface IExchangeBase<T> {
    * The exchange base URL.
    */
   baseUrl: string;
-  /**
-   * The rate limiter for the exchange.
-   */
-  limiter: Bottleneck;
   /**
    * Custom options to inject in the Fetcher function.
    */
