@@ -92,7 +92,7 @@ export class bitpreco<T = any> extends Exchange<T> {
   }
 
   private signer(args: SignerArguments): SignerReturn {
-    const headers = { auth_token: this.apiSecret! + this.apiKey! };
+    const headers = { auth_token: this.key! + this.secret! };
 
     return { ...args, headers };
   }

@@ -66,14 +66,6 @@ export interface IExchangeBase<T> {
    * The exchange ID.
    */
   id: string;
-  /**
-   * The exchange base URL.
-   */
-  baseUrl: string;
-  /**
-   * Custom options to inject in the Fetcher function.
-   */
-  opts?: T;
 
   /**
    * Indicates whether this exchange implements all tickers by specified quote.

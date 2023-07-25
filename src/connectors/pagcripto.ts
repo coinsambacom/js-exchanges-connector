@@ -94,7 +94,7 @@ export class pagcripto<T = any> extends Exchange<T> {
     super({
       id: "pagcripto",
       baseUrl: "https://api.pagcripto.com.br/v2",
-      opts: args?.opts,
+      ...args,
     });
   }
 
@@ -197,7 +197,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }: PlaceOrderArguments): Promise<string> {
     const res = await this.fetch<IPagcriptoPlaceOrderRes>(
       this.signer({
-        url: `${this.baseUrl}/v2/trade/create/${base}${quote}`,
+        url: `${this.baseUrl}/trade/create/${base}${quote}`,
         method: FetcherRequisitionMethods.POST,
         data: {
           quantity: side == OrderSide.BUY ? price * amount : amount,
@@ -217,7 +217,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }: CancelOrderArguments): Promise<boolean> {
     await this.fetch(
       this.signer({
-        url: `${this.baseUrl}/v2/trade/cancel/${base}${quote}`,
+        url: `${this.baseUrl}/trade/cancel/${base}${quote}`,
         method: FetcherRequisitionMethods.POST,
         data: {
           idOrder: id,
@@ -231,13 +231,15 @@ export class pagcripto<T = any> extends Exchange<T> {
   async getOrder({ id, base, quote }: GetOrderArguments): Promise<IOrder> {
     const res = await this.fetch<IPagcriptoGetOrderRes>(
       this.signer({
-        url: `${this.baseUrl}/v2/trade/status/${base}${quote}`,
+        url: `${this.baseUrl}/trade/status/${base}${quote}`,
         method: FetcherRequisitionMethods.POST,
         data: {
           idOrder: id,
         },
       }),
     );
+
+    console.log(res);
 
     let status = OrderStatus.EMPTY;
 
@@ -273,7 +275,8 @@ export class pagcripto<T = any> extends Exchange<T> {
   }
 
   private signer(args: SignerArguments): SignerReturn {
-    const headers = { "X-Authentication": this.apiKey! };
+    this.ensureApiCredentials(true); // TODO use decorators
+    const headers = { "X-Authentication": this.key! };
 
     return { ...args, headers };
   }

@@ -1,12 +1,36 @@
-// @ts-ignore
-import { pagcripto } from "../src/index";
+import "dotenv/config";
+import { pagcripto, FetcherHandler } from "../src/index";
+import { MyFetcher } from "../test/utils/MyFetcher";
+import { OrderSide } from "../src/types/common";
 
-const ex = new pagcripto();
+FetcherHandler.setFetcher(new MyFetcher());
 
-ex.getBook("BTC", "BRL").then((v) => console.log("book from", ex.id, v));
+console.log(process.env.PAGCRIPTO_KEY);
 
-ex.getBalance().then((v) => console.log("balance from", ex.id, v));
+const ex = new pagcripto({ key: process.env.PAGCRIPTO_KEY });
 
 // ex.getAllTickers().then((tickers) =>
 //   console.log("tickers from mercadobitcoin", tickers),
 // );
+
+// ex.getBook("BTC", "BRL").then((v) => console.log("book from", ex.id, v));
+
+// ex.getBalance().then((v) => console.log("balance from", ex.id, v));
+
+// ex.cancelOrder({ id: "asasdas", base: "BTC", quote: "BRL" }).then((v) =>
+//   console.log("cancel order from", ex.id, v),
+// );
+
+// ex.placeOrder({
+//   price: 50,
+//   amount: 1,
+//   side: OrderSide.BUY,
+//   base: "BTC",
+//   quote: "BRL",
+// }).then((v) => console.log("place order from", ex.id, v));
+
+ex.getOrder({
+  id: "64c041e3dfe35",
+  base: "BTC",
+  quote: "BRL",
+}).then((v) => console.log("get order from", ex.id, v));

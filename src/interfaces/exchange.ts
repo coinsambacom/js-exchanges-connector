@@ -1,4 +1,5 @@
 import { IExchangeBase } from "../types/common";
+import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import {
   FetcherHandler,
   FetcherArgs,
@@ -66,19 +67,19 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
   /**
    * The exchange base URL.
    */
-  public baseUrl!: string;
+  protected baseUrl!: string;
   /**
    * Custom options to inject in the Fetcher function.
    */
-  public opts?: T;
+  protected opts?: T;
   /**
    * The API key for the exchange.
    */
-  public apiKey?: string;
+  protected key?: string;
   /**
    * The API secret for the exchange.
    */
-  public apiSecret?: string;
+  protected secret?: string;
 
   /**
    * Constructs a new instance of the Exchange class.
@@ -93,7 +94,7 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
    * @param args The arguments for the HTTP request.
    * @returns A promise that resolves to the response data.
    */
-  public fetch<T = any>(args: FetcherArgs) {
+  protected fetch<T = any>(args: FetcherArgs) {
     return FetcherHandler.fetch<T>(args);
   }
 
@@ -109,5 +110,11 @@ export abstract class Exchange<T> implements IExchangeBase<T> {
    */
   public get hasAllTickersByQuote(): boolean {
     return typeof this["getAllTickersByQuote"] === "function";
+  }
+
+  protected ensureApiCredentials(onlyKey = false): void {
+    if (!this.key && (onlyKey ? false : !this.secret)) {
+      throw new ConnectorError(ERROR_TYPES.MISSING_API_KEYS);
+    }
   }
 }
