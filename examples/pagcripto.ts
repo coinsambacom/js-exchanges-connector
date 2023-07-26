@@ -10,7 +10,7 @@ console.log(process.env.PAGCRIPTO_KEY);
 const ex = new pagcripto({ key: process.env.PAGCRIPTO_KEY });
 
 ex.getAllTickersByQuote("BRL").then((tickers) =>
-  console.log("tickers from mercadobitcoin", tickers),
+  console.log("tickers from ", ex.id, tickers),
 );
 
 ex.getBook("BTC", "BRL").then((v) => console.log("book from", ex.id, v));
