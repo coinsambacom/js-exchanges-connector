@@ -1,32 +1,72 @@
 import { IExchangeBase } from "../types/common";
+import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { FetcherHandler, FetcherArgs } from "../utils/FetcherHandler";
 
+/**
+ * Represents the constructor arguments for an exchange implementation.
+ */
 export interface IExchangeImplementationConstructorArgs<T = any> {
+  /**
+   * Custom options to inject in your Fetcher function.
+   */
   opts?: T;
+
+  // api key
+  key?: string;
+  // api secret
+  secret?: string;
 }
 
-export interface IExchangeBaseConstructorArgs<T> {
-  [x: string]: any; // hack to suport any parameters
+/**
+ * Represents the constructor arguments for the base exchange.
+ */
+export interface IExchangeBaseConstructorArgs<T>
+  extends IExchangeImplementationConstructorArgs<T> {
+  [x: string]: any; // hack to support any parameters
   /**
-   * this exchange id
+   * The exchange ID.
    */
   id: string;
   /**
-   * this exchange base URL
+   * The exchange base URL.
    */
   baseUrl: string;
+
   /**
    * custom optiions to inject in your Fetcher function
    */
   opts?: T;
 }
 
-export class Exchange<T> implements IExchangeBase<T> {
-  [x: string]: any;
+/**
+ * Abstract base class for exchanges.
+ */
+export abstract class Exchange<T> implements IExchangeBase<T> {
+  /**
+   * The exchange ID.
+   */
   public id!: string;
-  public baseUrl!: string;
-  public opts?: T;
+  /**
+   * The exchange base URL.
+   */
+  protected baseUrl!: string;
+  /**
+   * Custom options to inject in the Fetcher function.
+   */
+  protected opts?: T;
+  /**
+   * The API key for the exchange.
+   */
+  protected key?: string;
+  /**
+   * The API secret for the exchange.
+   */
+  protected secret?: string;
 
+  /**
+   * Constructs a new instance of the Exchange class.
+   * @param args The constructor arguments.
+   */
   constructor(args: IExchangeBaseConstructorArgs<T>) {
     Object.assign(this, args);
   }
@@ -36,15 +76,27 @@ export class Exchange<T> implements IExchangeBase<T> {
    * @param args The arguments for the HTTP request.
    * @returns A promise that resolves to the response data.
    */
-  public fetch<T = any>(args: FetcherArgs) {
+  protected fetch<T = any>(args: FetcherArgs) {
     return FetcherHandler.fetch<T>(args);
   }
 
+  /**
+   * Checks if the exchange implementation has the `getAllTickers` method.
+   */
   public get hasAllTickers(): boolean {
-    return typeof this.getAllTickers === "function";
+    return typeof this["getAllTickers"] === "function";
   }
 
+  /**
+   * Checks if the exchange implementation has the `getAllTickersByQuote` method.
+   */
   public get hasAllTickersByQuote(): boolean {
-    return typeof this.getAllTickersByQuote === "function";
+    return typeof this["getAllTickersByQuote"] === "function";
+  }
+
+  protected ensureApiCredentials(onlyKey = false): void {
+    if (!this.key && (onlyKey ? false : !this.secret)) {
+      throw new ConnectorError(ERROR_TYPES.MISSING_API_KEYS);
+    }
   }
 }

@@ -2,7 +2,14 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import {
+  IBalance,
+  IOrderbook,
+  ITicker,
+  SignerArguments,
+  SignerReturn,
+} from "../types/common";
+import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 export class bitpreco<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -36,6 +43,25 @@ export class bitpreco<T = any> extends Exchange<T> {
     return tickers;
   }
 
+  async getBalance(): Promise<IBalance> {
+    const res = await this.fetch<Record<string, any>>(
+      this.signer({
+        url: `${this.baseUrl}/v1/trading/balance`,
+        method: FetcherRequisitionMethods.POST,
+      }),
+    );
+
+    const balance: IBalance = {};
+
+    for (const symbol in res) {
+      if (symbol !== "success" && !symbol.includes("_locked")) {
+        balance[symbol] = Number(res[symbol]);
+      }
+    }
+
+    return balance;
+  }
+
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const res = await this.fetch(
       `${this.baseUrl}/${base.toLowerCase()}-${quote.toLowerCase()}/ticker`,
@@ -67,5 +93,11 @@ export class bitpreco<T = any> extends Exchange<T> {
         amount,
       })),
     };
+  }
+
+  private signer(args: SignerArguments): SignerReturn {
+    const headers = { auth_token: this.key! + this.secret! };
+
+    return { ...args, headers };
   }
 }

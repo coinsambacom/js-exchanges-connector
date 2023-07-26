@@ -1,15 +1,16 @@
 export enum ERROR_TYPES {
-  API_NETWORK_ERROR = "api network error",
-  API_RESPONSE_ERROR = "api response error",
-  LIB_PARSE_ERROR = "lib parse error",
+  MISSING_API_KEYS = "MISSING_API_KEYS",
+  API_NETWORK_ERROR = "API_NETWORK_ERROR",
+  API_RESPONSE_ERROR = "API_RESPONSE_ERROR",
+  LIB_PARSE_ERROR = "LIB_PARSE_ERROR",
 }
 
 export class ConnectorError extends Error {
   public type: ERROR_TYPES;
-  public originalError?: any;
+  public originalError?: Error;
 
   constructor(type: ERROR_TYPES, message?: string, originalError?: any) {
-    super(message);
+    super(message ?? type);
     this.type = type;
     this.originalError = originalError;
   }
