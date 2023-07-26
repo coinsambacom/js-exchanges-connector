@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { pagcripto, FetcherHandler } from "../src/index";
 import { MyFetcher } from "../test/utils/MyFetcher";
-import { OrderSide } from "../src/types/common";
+// import { OrderSide } from "../src/types/common";
 
 FetcherHandler.setFetcher(new MyFetcher());
 
@@ -9,13 +9,13 @@ console.log(process.env.PAGCRIPTO_KEY);
 
 const ex = new pagcripto({ key: process.env.PAGCRIPTO_KEY });
 
-// ex.getAllTickers().then((tickers) =>
-//   console.log("tickers from mercadobitcoin", tickers),
-// );
+ex.getAllTickersByQuote("BRL").then((tickers) =>
+  console.log("tickers from mercadobitcoin", tickers),
+);
 
-// ex.getBook("BTC", "BRL").then((v) => console.log("book from", ex.id, v));
+ex.getBook("BTC", "BRL").then((v) => console.log("book from", ex.id, v));
 
-// ex.getBalance().then((v) => console.log("balance from", ex.id, v));
+ex.getBalance().then((v) => console.log("balance from", ex.id, v));
 
 // ex.cancelOrder({ id: "asasdas", base: "BTC", quote: "BRL" }).then((v) =>
 //   console.log("cancel order from", ex.id, v),
@@ -34,3 +34,9 @@ ex.getOrder({
   base: "BTC",
   quote: "BRL",
 }).then((v) => console.log("get order from", ex.id, v));
+
+ex.getHistory({
+  page: 1,
+  base: "BTC",
+  quote: "BRL",
+}).then((v) => console.log("get history from", ex.id, v));

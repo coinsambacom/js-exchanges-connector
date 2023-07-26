@@ -1,3 +1,15 @@
+import { FetcherObjectArgs } from "../utils/FetcherHandler";
+
+/**
+ * Represents the arguments for signing requests.
+ */
+export type SignerArguments = Omit<FetcherObjectArgs, "headers">;
+
+/**
+ * Represents the return value of the signer function.
+ */
+export type SignerReturn = FetcherObjectArgs;
+
 export interface IBalance {
   [symbol: string]: number;
 }
@@ -43,6 +55,12 @@ export interface CancelOrderArguments {
 
 export type GetOrderArguments = CancelOrderArguments;
 
+export interface GetHistoryArguments {
+  page: number;
+  base: string;
+  quote: string;
+}
+
 export enum OrderStatus {
   EMPTY = "empty",
   PARTIAL = "partial",
@@ -56,6 +74,24 @@ export interface IOrder {
   price: number;
   amount: number;
   executed: number;
+}
+
+export interface HistoryItem {
+  base: string;
+  quote: string;
+  status: OrderStatus | null;
+  side: OrderSide;
+  price: number;
+  amount: number;
+  executed: number | null;
+  date: Date | null;
+}
+
+export interface History {
+  page: number;
+  pages: number;
+  perPage: number;
+  items: HistoryItem[];
 }
 
 /**

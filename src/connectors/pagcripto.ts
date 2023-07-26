@@ -1,8 +1,6 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-  SignerArguments,
-  SignerReturn,
 } from "../interfaces/exchange";
 import {
   CancelOrderArguments,
@@ -15,15 +13,19 @@ import {
   OrderStatus,
   OrderSide,
   PlaceOrderArguments,
+  GetHistoryArguments,
+  SignerArguments,
+  SignerReturn,
+  History,
 } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
-interface IPagCriptoBaseRes {
+interface PagCriptoBaseRes {
   code: string;
 }
 
-interface IPagCriptoTicker {
+interface PagCriptoTicker {
   high: string;
   low: string;
   volume: string;
@@ -34,29 +36,29 @@ interface IPagCriptoTicker {
   buy: string;
 }
 
-interface IPagCriptoOrderbookOrder {
+interface PagCriptoOrderbookOrder {
   nick: string;
   amount: string;
   price: string;
 }
 
-interface IPagcriptoTickersRes extends IPagCriptoBaseRes {
-  data: [{ [pair: string]: IPagCriptoTicker }];
+interface PagCriptoTickersRes extends PagCriptoBaseRes {
+  data: [{ [pair: string]: PagCriptoTicker }];
 }
 
-interface IPagcriptoTickerRes extends IPagCriptoBaseRes {
-  data: IPagCriptoTicker;
+interface PagCriptoTickerRes extends PagCriptoBaseRes {
+  data: PagCriptoTicker;
 }
 
-interface IPagcriptoOrderbookRes extends IPagCriptoBaseRes {
+interface PagCriptoOrderbookRes extends PagCriptoBaseRes {
   data: {
     pair: string;
-    bids: IPagCriptoOrderbookOrder[] | any;
-    asks: IPagCriptoOrderbookOrder[] | any;
+    bids: PagCriptoOrderbookOrder[] | any;
+    asks: PagCriptoOrderbookOrder[] | any;
   };
 }
 
-interface IPagcriptoBalanceRes {
+interface PagCriptoBalanceRes {
   balance: {
     [symbol: string]: {
       current: string;
@@ -67,7 +69,7 @@ interface IPagcriptoBalanceRes {
   };
 }
 
-interface IPagcriptoPlaceOrderRes {
+interface PagCriptoPlaceOrderRes {
   [symbol: string]: {
     id: string;
     quantity: number;
@@ -77,16 +79,39 @@ interface IPagcriptoPlaceOrderRes {
   };
 }
 
-interface IPagcriptoGetOrderRes {
+interface PagCriptoGetOrderRes {
   pair: string;
   id: string;
   status: number;
+  cotacao: string;
   preco_total: string;
   qnt_executada: string;
   qnt_total: string;
   tipo: number;
   create_date: string;
   update_date: string;
+}
+
+interface PagCriptoPagination {
+  current_page: number;
+  total_pages: number;
+  per_page: number;
+  total_records: number;
+}
+
+interface PagCriptoHistoryItem {
+  pair: string;
+  quantity: string;
+  price: string;
+  total: string;
+  order: "venda" | "compra"; // assuming order can only be "venda" or "compra"
+  tax: string;
+  date: string;
+}
+
+interface PagCriptoGetHistoryRes {
+  pagination: PagCriptoPagination;
+  history: PagCriptoHistoryItem[];
 }
 
 export class pagcripto<T = any> extends Exchange<T> {
@@ -101,9 +126,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
     const {
       data: [res],
-    } = await this.fetch<IPagcriptoTickersRes>(
-      this.baseUrl + "/public/tickers",
-    );
+    } = await this.fetch<PagCriptoTickersRes>(this.baseUrl + "/public/tickers");
 
     const tickers: ITicker[] = [];
 
@@ -128,7 +151,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    const { data: res } = await this.fetch<IPagcriptoTickerRes>(
+    const { data: res } = await this.fetch<PagCriptoTickerRes>(
       this.baseUrl + "/public/ticker/" + base + quote,
     );
 
@@ -146,7 +169,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   private parseOrder({
     price,
     amount,
-  }: IPagCriptoOrderbookOrder): IOrderbookOrder {
+  }: PagCriptoOrderbookOrder): IOrderbookOrder {
     return {
       price: Number(price),
       amount: Number(amount),
@@ -154,7 +177,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    const res = await this.fetch<IPagcriptoOrderbookRes>(
+    const res = await this.fetch<PagCriptoOrderbookRes>(
       this.baseUrl + "/public/orders/" + base + quote,
     );
     if (!res || !res.data) {
@@ -172,7 +195,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   // Trade methods
 
   async getBalance(): Promise<IBalance> {
-    const { balance: res } = await this.fetch<IPagcriptoBalanceRes>(
+    const { balance: res } = await this.fetch<PagCriptoBalanceRes>(
       this.signer({
         url: `${this.baseUrl}/trade/balance`,
         method: FetcherRequisitionMethods.GET,
@@ -195,7 +218,7 @@ export class pagcripto<T = any> extends Exchange<T> {
     base,
     quote,
   }: PlaceOrderArguments): Promise<string> {
-    const res = await this.fetch<IPagcriptoPlaceOrderRes>(
+    const res = await this.fetch<PagCriptoPlaceOrderRes>(
       this.signer({
         url: `${this.baseUrl}/trade/create/${base}${quote}`,
         method: FetcherRequisitionMethods.POST,
@@ -229,7 +252,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }
 
   async getOrder({ id, base, quote }: GetOrderArguments): Promise<IOrder> {
-    const res = await this.fetch<IPagcriptoGetOrderRes>(
+    const res = await this.fetch<PagCriptoGetOrderRes>(
       this.signer({
         url: `${this.baseUrl}/trade/status/${base}${quote}`,
         method: FetcherRequisitionMethods.POST,
@@ -238,8 +261,6 @@ export class pagcripto<T = any> extends Exchange<T> {
         },
       }),
     );
-
-    console.log(res);
 
     let status = OrderStatus.EMPTY;
 
@@ -270,7 +291,39 @@ export class pagcripto<T = any> extends Exchange<T> {
       side: res.tipo == 1 ? OrderSide.BUY : OrderSide.SELL,
       amount: Number(res.qnt_total),
       executed: Number(res.qnt_executada),
-      price: Number(res.preco_total) / Number(res.qnt_total),
+      price: Number(res.cotacao),
+    };
+  }
+
+  async getHistory({
+    page,
+    base,
+    quote,
+  }: GetHistoryArguments): Promise<History> {
+    const res = await this.fetch<PagCriptoGetHistoryRes>(
+      this.signer({
+        url: `${this.baseUrl}/trade/history/${base}${quote}`,
+        method: FetcherRequisitionMethods.GET,
+        data: {
+          page,
+        },
+      }),
+    );
+
+    return {
+      page,
+      pages: res.pagination.total_pages,
+      perPage: res.pagination.per_page,
+      items: res.history.map((h) => ({
+        base,
+        quote,
+        status: null,
+        side: h.order == "compra" ? OrderSide.BUY : OrderSide.SELL,
+        price: Number(h.price),
+        amount: Number(h.quantity),
+        executed: null,
+        date: new Date(h.date),
+      })),
     };
   }
 

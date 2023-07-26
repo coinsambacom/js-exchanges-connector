@@ -1,35 +1,27 @@
 import { IExchangeBase } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import {
-  FetcherHandler,
-  FetcherArgs,
-  FetcherObjectArgs,
-} from "../utils/FetcherHandler";
+import { FetcherHandler, FetcherArgs } from "../utils/FetcherHandler";
 
 /**
- * Represents the constructor arguments for a public exchange.
+ * Represents the constructor arguments for an exchange implementation.
  */
-export interface PublicExchangeConstructorArgs<T> {
+export interface IExchangeImplementationConstructorArgs<T = any> {
   /**
    * Custom options to inject in your Fetcher function.
    */
   opts?: T;
 
+  // api key
   key?: string;
+  // api secret
   secret?: string;
 }
-
-/**
- * Represents the constructor arguments for an exchange implementation.
- */
-export interface IExchangeImplementationConstructorArgs<T = any>
-  extends PublicExchangeConstructorArgs<T> {}
 
 /**
  * Represents the constructor arguments for the base exchange.
  */
 export interface IExchangeBaseConstructorArgs<T>
-  extends PublicExchangeConstructorArgs<T> {
+  extends IExchangeImplementationConstructorArgs<T> {
   [x: string]: any; // hack to support any parameters
   /**
    * The exchange ID.
@@ -45,16 +37,6 @@ export interface IExchangeBaseConstructorArgs<T>
    */
   opts?: T;
 }
-
-/**
- * Represents the arguments for signing requests.
- */
-export type SignerArguments = Omit<FetcherObjectArgs, "headers">;
-
-/**
- * Represents the return value of the signer function.
- */
-export type SignerReturn = FetcherObjectArgs;
 
 /**
  * Abstract base class for exchanges.
