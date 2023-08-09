@@ -1,7 +1,7 @@
 {
   "name": "@coinsamba/js-exchanges-connector",
   "description": "Collection of JavaScript implementations of cryptocurrency exchange APIs",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "repository": "git@github.com:coinsambacom/js-exchanges-connector.git",
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
@@ -9,17 +9,23 @@
   "type": "module",
   "source": "src/index.ts",
   "exports": {
-    "types": "./typings/index.d.ts",
-    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.cjs",
     "default": "./dist/index.modern.js"
   },
-  "types": "./typings/index.d.ts",
+  "types": "dist/index.d.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
+  "keywords": [
+    "exchanges",
+    "cryptocurrency",
+    "coinsamba",
+    "nodejs"
+  ],
   "files": [
     "dist/**.js*",
-    "typings/**/*.ts"
+    "dist/**/*.ts"
   ],
   "scripts": {
     "prepare": "yarn run --silent build",
@@ -32,12 +38,6 @@
     "refresh": "yarn run clean && yarn ci",
     "clean": "git clean -fX .eslintcache dist/"
   },
-  "keywords": [
-    "exchanges",
-    "cryptocurrency",
-    "coinsamba",
-    "nodejs"
-  ],
   "engines": {
     "node": "^12.20.0 || >=14.13.1"
   },
