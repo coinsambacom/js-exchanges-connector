@@ -1,7 +1,7 @@
 {
   "name": "@coinsamba/js-exchanges-connector",
   "description": "Collection of JavaScript implementations of cryptocurrency exchange APIs",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "repository": "git@github.com:coinsambacom/js-exchanges-connector.git",
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
@@ -9,11 +9,11 @@
   "type": "module",
   "source": "src/index.ts",
   "exports": {
-    "types": "./dist/index.d.ts",
+    "types": "./dist/types/index.d.ts",
     "require": "./dist/index.cjs",
     "default": "./dist/index.modern.js"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "unpkg": "./dist/index.umd.js",
