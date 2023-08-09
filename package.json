@@ -1,7 +1,7 @@
 {
   "name": "@coinsamba/js-exchanges-connector",
   "description": "Collection of JavaScript implementations of cryptocurrency exchange APIs",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "repository": "git@github.com:coinsambacom/js-exchanges-connector.git",
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
@@ -19,7 +19,7 @@
   "unpkg": "./dist/index.umd.js",
   "files": [
     "dist/**.js*",
-    "types/**/*.ts"
+    "typings/**/*.ts"
   ],
   "scripts": {
     "prepare": "yarn run --silent build",
