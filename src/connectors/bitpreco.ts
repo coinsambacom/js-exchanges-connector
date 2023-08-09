@@ -11,6 +11,18 @@ import {
 } from "../types/common";
 import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
+interface BitprecoOrderbookRes {
+  bids?: BitprecoOrderbookOrder[];
+  asks?: BitprecoOrderbookOrder[];
+  timestamp: string;
+}
+
+interface BitprecoOrderbookOrder {
+  amount: number;
+  price: number;
+  id: string;
+}
+
 export class bitpreco<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
@@ -79,19 +91,21 @@ export class bitpreco<T = any> extends Exchange<T> {
   }
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    const res = await this.fetch(
+    const res = await this.fetch<BitprecoOrderbookRes>(
       `${this.baseUrl}/${base.toLowerCase()}-${quote.toLowerCase()}/orderbook`,
     );
 
     return {
-      asks: res.asks.map(({ price, amount }) => ({
-        price,
-        amount,
-      })),
-      bids: res.bids.map(({ price, amount }) => ({
-        price,
-        amount,
-      })),
+      asks:
+        res.asks?.map(({ price, amount }) => ({
+          price,
+          amount,
+        })) ?? [],
+      bids:
+        res.bids?.map(({ price, amount }) => ({
+          price,
+          amount,
+        })) ?? [],
     };
   }
 

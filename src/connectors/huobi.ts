@@ -42,9 +42,9 @@ interface IHuobiTickersRes {
 type IHuobiOrderbookOrder = [number, number];
 
 interface IHuobiOrderbookRes {
-  tick: {
-    bids: IHuobiOrderbookOrder[];
-    asks: IHuobiOrderbookOrder[];
+  tick?: {
+    bids?: IHuobiOrderbookOrder[];
+    asks?: IHuobiOrderbookOrder[];
   };
 }
 
@@ -116,8 +116,8 @@ export class huobi<T = any> extends Exchange<T> {
     );
 
     return {
-      asks: res.asks.map(this.parseOrder),
-      bids: res.bids.map(this.parseOrder),
+      asks: res?.asks?.map(this.parseOrder) ?? [],
+      bids: res?.bids?.map(this.parseOrder) ?? [],
     };
   }
 }
