@@ -1,8 +1,15 @@
 import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 import WebSocket from "ws";
-import crypto from "crypto";
 import * as sort from "fast-sort";
+
+function alternativeRandomInt(min: number, max: number) {
+  const timestamp = Date.now();
+  const randomFraction = Math.random();
+  const scaledRandom = min + Math.floor((max - min + 1) * randomFraction);
+  const finalRandom = (scaledRandom + timestamp) % (max - min + 1);
+  return finalRandom;
+}
 
 const WEBSOCKET_TIMEOUT_MS = 5000;
 
@@ -48,9 +55,7 @@ enum ALPHAPOINT_METHOD {
 }
 
 export class alphapoint<T> extends Exchange<T> {
-  public baseUrl: any;
   public websocketUrl?: string;
-
   private ws?: WebSocket;
   public wsReady?: boolean;
   private wsPingInterval?: NodeJS.Timer;
@@ -182,7 +187,7 @@ export class alphapoint<T> extends Exchange<T> {
   private buildMessageFrame(rawFrame: IRawMessageFrame): IMessageFrame {
     return {
       m: rawFrame.m,
-      i: crypto.randomInt(2, 999999),
+      i: alternativeRandomInt(2, 999999),
       n: rawFrame.n,
       o: JSON.stringify(rawFrame.o),
     };
