@@ -8,15 +8,7 @@
   "private": false,
   "type": "commonjs",
   "source": "src/index.ts",
-  "exports": {
-    "types": "./dist/index.d.ts",
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
-  },
-  "types": "dist/index.d.ts",
   "main": "./dist/index.js",
-  "module": "./dist/index.module.js",
-  "unpkg": "./dist/index.umd.js",
   "keywords": [
     "exchanges",
     "cryptocurrency",
@@ -24,7 +16,9 @@
     "nodejs"
   ],
   "files": [
-    "dist"
+    "dist/**/*.js",
+    "typings/**/*.d.ts",
+    "typings/**/*.d.ts.map"
   ],
   "scripts": {
     "prepare": "yarn run --silent build",

@@ -4,7 +4,7 @@
         "composite": true,
         "declaration": true,
         "declarationMap": true,
-        // "declarationDir": "typings",
+        "declarationDir": "typings",
         "outDir": "dist",
         "rootDir": "src",
         "target": "ES2019",
