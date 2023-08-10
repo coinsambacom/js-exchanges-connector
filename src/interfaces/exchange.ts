@@ -3,7 +3,7 @@ import {
   FetcherHandler,
   FetcherArgs,
   FetcherObjectArgs,
-} from "../FetcherHandler";
+} from "../utils/FetcherHandler";
 import { IExchange } from "../utils/DTOs";
 
 /**

@@ -19,7 +19,7 @@ import {
   History,
 } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherRequisitionMethods } from "../FetcherHandler";
+import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 interface PagCriptoBaseRes {
   code: string;

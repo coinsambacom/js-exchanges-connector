@@ -5,7 +5,7 @@ import {
   SignerReturn,
 } from "../interfaces/exchange";
 import { IBalance, IOrderbook, ITicker } from "../utils/DTOs";
-import { FetcherRequisitionMethods } from "../FetcherHandler";
+import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 interface BitprecoOrderbookRes {
   bids?: BitprecoOrderbookOrder[];

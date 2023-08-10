@@ -1,2 +1,3 @@
 export * as exchanges from "./exchanges";
-export { FetcherHandler } from "./FetcherHandler";
+export * as types from "./types";
+export { FetcherHandler } from "./utils/FetcherHandler";
