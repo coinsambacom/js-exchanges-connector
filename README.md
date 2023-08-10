@@ -170,8 +170,6 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | alterbank 🇧🇷      | 1         |               |                      | 1       |
 | binance_us 🇺🇸     | 1         | 1             |                      | 1       |
 | binance 🌐        | 1         | 1             |                      | 1       |
-| bipa 🇧🇷           | 1         |               |                      | 1       |
-| biscoint 🇧🇷       | 1         |               |                      | 1       |
 | bisq 🌐           | 1         |               |                      | 1       |
 | bitbay            | 1         |               |                      | 1       |
 | bitblue 🇧🇷        | 1         |               |                      | 1       |
@@ -207,7 +205,6 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | kraken 🌐         | 1         |               |                      | 1       |
 | kucoin 🌐         | 1         | 1             |                      | 1       |
 | liqi 🇧🇷           | 1         | 1             |                      | 1       |
-| makesexchange 🇧🇷  | 1         |               |                      | 1       |
 | mercadobitcoin 🇧🇷 | 1         | 1             |                      | 1       |
 | novadax 🇧🇷        | 1         | 1             |                      | 1       |
 | noxbitcoin 🇧🇷     | 1         |               |                      |         |
@@ -216,7 +213,6 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | poloniex 🌐       | 1         | 1             |                      | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
 | stonoex 🇧🇷        | 1         |               | 1                    | 1       |
-| tauros 🇲🇽         |           | 1             |                      | 1       |
 | upcambio 🇧🇷       | 1         |               |                      | 1       |
 
 ## Known Whitelabel Platforms
