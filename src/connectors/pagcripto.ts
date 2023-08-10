@@ -17,9 +17,9 @@ import {
   PlaceOrderArguments,
   GetHistoryArguments,
   History,
+  FetcherRequisitionMethods,
 } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
 
 interface PagCriptoBaseRes {
   code: string;
