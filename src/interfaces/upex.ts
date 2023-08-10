@@ -1,6 +1,6 @@
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { isNumber } from "../utils/isNumber";
+import { isNumber } from "lodash";
 import { Exchange } from "./exchange";
 
 interface IUpexTickerRes {
@@ -34,7 +34,7 @@ export class upex<T> extends Exchange<T> {
       last: res.lastPrice,
       ask: res.orderMarketBuyPrice,
       bid: res.orderMarketSellPrice,
-      vol: isNumber(res.volume24H) ? res.volume24H : 0,
+      vol: isNumber(Number(res.volume24H)) ? res.volume24H : 0,
     };
   }
 

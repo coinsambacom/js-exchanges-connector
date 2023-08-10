@@ -3,7 +3,7 @@ import {
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
 
-import { IOrderbookOrder, ITicker, IOrderbook } from "../types/common";
+import { IOrderbookOrder, ITicker, IOrderbook } from "../utils/DTOs";
 
 interface IFTXTicker {
   name: string;

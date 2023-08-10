@@ -3,9 +3,9 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
-import { isNumber } from "../utils/isNumber";
+import { IOrderbook, ITicker } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
+import { isNumber } from "lodash";
 
 interface IPagCriptoOTCTickerRes {
   otc_ticker: {
@@ -39,7 +39,7 @@ export class pagcripto_otc<T = any> extends Exchange<T> {
 
     const ticker = omit(res.otc_ticker, ["crypto"]);
 
-    const isValid = Object.values(ticker).every((value) => isNumber(value));
+    const isValid = Object.values(ticker).every((value) => isNumber());
 
     if (!isValid) {
       throw new ConnectorError(

@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../utils/DTOs";
 
 export class cexio<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

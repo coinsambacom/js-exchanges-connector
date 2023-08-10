@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { ITicker } from "../types/common";
+import { ITicker } from "../utils/DTOs";
 
 export class bitcointoyou<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

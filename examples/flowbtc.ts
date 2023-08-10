@@ -1,4 +1,4 @@
-import { flowbtc } from "../src/index";
+import { flowbtc } from "../src/exchanges";
 
 const ex = new flowbtc();
 

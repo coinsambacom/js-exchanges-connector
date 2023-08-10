@@ -1,4 +1,4 @@
-import { bisq } from "../src/index";
+import { bisq } from "../src/exchanges";
 
 const ex = new bisq();
 

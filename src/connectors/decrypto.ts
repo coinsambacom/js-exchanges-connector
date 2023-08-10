@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook } from "../types/common";
+import { IOrderbook } from "../utils/DTOs";
 
 interface IDecryptoOrderbookOrder {
   precio: number;

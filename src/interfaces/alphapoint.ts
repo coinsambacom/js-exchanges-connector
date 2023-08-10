@@ -1,4 +1,4 @@
-import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 import WebSocket from "ws";
 import * as sort from "fast-sort";
@@ -147,7 +147,6 @@ export class alphapoint<T> extends Exchange<T> {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async subscribeBook(
     base: string,
     quote: string,

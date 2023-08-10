@@ -1,6 +1,19 @@
-import { IExchangeBase } from "../types/common";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherHandler, FetcherArgs } from "../utils/FetcherHandler";
+import {
+  FetcherHandler,
+  FetcherArgs,
+  FetcherObjectArgs,
+} from "../FetcherHandler";
+
+/**
+ * Represents the arguments for signing requests.
+ */
+export type SignerArguments = Omit<FetcherObjectArgs, "headers">;
+
+/**
+ * Represents the return value of the signer function.
+ */
+export type SignerReturn = FetcherObjectArgs;
 
 /**
  * Represents the constructor arguments for an exchange implementation.
@@ -41,7 +54,7 @@ export interface IExchangeBaseConstructorArgs<T>
 /**
  * Abstract base class for exchanges.
  */
-export abstract class Exchange<T> implements IExchangeBase<T> {
+export abstract class Exchange<T> {
   /**
    * The exchange ID.
    */

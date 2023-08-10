@@ -1,4 +1,4 @@
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../utils/DTOs";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 
 interface IKfexTicker {

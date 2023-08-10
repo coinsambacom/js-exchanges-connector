@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, IOrderbookOrder, ITicker } from "../types/common";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
 
 interface IKrakenBaseRes {
   error: [];

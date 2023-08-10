@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbookOrder, ITicker } from "../types/common";
+import { IOrderbookOrder, ITicker } from "../utils/DTOs";
 
 interface ICitcoinTickerRes {
   date: string;

@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { ITicker } from "../types/common";
+import { ITicker } from "../utils/DTOs";
 
 interface IBrasilBitcoinOtcTicker {
   last: number;

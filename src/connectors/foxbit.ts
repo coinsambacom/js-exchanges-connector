@@ -1,6 +1,6 @@
 import { alphapoint } from "../interfaces/alphapoint";
 import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
-import { ITicker } from "../types/common";
+import { ITicker } from "../utils/DTOs";
 
 interface IFoxbitAllTickers {
   symbol: string;

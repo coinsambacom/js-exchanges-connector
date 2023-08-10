@@ -2,7 +2,7 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../types/common";
+import { IOrderbook, ITicker } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 
 interface ISatoshiTangoTicker {

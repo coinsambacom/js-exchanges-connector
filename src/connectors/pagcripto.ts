@@ -1,6 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
+  SignerArguments,
+  SignerReturn,
 } from "../interfaces/exchange";
 import {
   CancelOrderArguments,
@@ -14,12 +16,10 @@ import {
   OrderSide,
   PlaceOrderArguments,
   GetHistoryArguments,
-  SignerArguments,
-  SignerReturn,
   History,
-} from "../types/common";
+} from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
+import { FetcherRequisitionMethods } from "../FetcherHandler";
 
 interface PagCriptoBaseRes {
   code: string;
@@ -328,7 +328,7 @@ export class pagcripto<T = any> extends Exchange<T> {
   }
 
   private signer(args: SignerArguments): SignerReturn {
-    this.ensureApiCredentials(true); // TODO use decorators
+    this.ensureApiCredentials(true);
     const headers = { "X-Authentication": this.key! };
 
     return { ...args, headers };

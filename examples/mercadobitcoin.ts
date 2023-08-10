@@ -1,4 +1,4 @@
-import { mercadobitcoin } from "../src/index";
+import { mercadobitcoin } from "../src/exchanges";
 
 const ex = new mercadobitcoin();
 

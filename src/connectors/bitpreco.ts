@@ -1,15 +1,11 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import {
-  IBalance,
-  IOrderbook,
-  ITicker,
   SignerArguments,
   SignerReturn,
-} from "../types/common";
-import { FetcherRequisitionMethods } from "../utils/FetcherHandler";
+} from "../interfaces/exchange";
+import { IBalance, IOrderbook, ITicker } from "../utils/DTOs";
+import { FetcherRequisitionMethods } from "../FetcherHandler";
 
 interface BitprecoOrderbookRes {
   bids?: BitprecoOrderbookOrder[];

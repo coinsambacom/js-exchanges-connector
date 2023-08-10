@@ -1,4 +1,4 @@
-import { fluyez } from "../src/index";
+import { fluyez } from "../src/exchanges";
 
 const ex = new fluyez();
 

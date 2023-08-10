@@ -2,7 +2,7 @@ import {
   FetcherArgs,
   FetcherRequisitionMethods,
   ICustomFetcher,
-} from "../../src/utils/FetcherHandler";
+} from "../../src/FetcherHandler";
 import Axios, { AxiosError } from "axios";
 
 export class MyFetcher implements ICustomFetcher {

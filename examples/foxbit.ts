@@ -1,4 +1,4 @@
-import { foxbit } from "../src/index";
+import { foxbit } from "../src/exchanges";
 
 const ex = new foxbit();
 
