@@ -36,7 +36,7 @@ export class bitblue<T = any> extends Exchange<T> {
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
     const { stats: res } = await this.fetch<IBitblueTickerRes>(
-      `${this.baseUrl}/stats?market=${base}`,
+      `${this.baseUrl}/stats?market=${base}&currency=${quote}`,
     );
 
     return {
@@ -52,7 +52,7 @@ export class bitblue<T = any> extends Exchange<T> {
 
   async getBook(base: any, quote: string): Promise<IOrderbook> {
     const res = await this.fetch<IBitblueOrderbookRes>(
-      `${this.baseUrl}/order-book?market=${quote}&currency=${base}`,
+      `${this.baseUrl}/order-book?market=${base}&currency=${quote}`,
     );
 
     return {
