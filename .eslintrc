@@ -33,7 +33,7 @@
         "@typescript-eslint/strict-boolean-expressions": "off"
     },
     "ignorePatterns": [
-        "/lib/",
+        "/dist/",
         "/typings/",
         "/docs/"
     ],
