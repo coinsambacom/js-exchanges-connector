@@ -1,9 +1,9 @@
+import Axios, { AxiosError } from "axios";
 import {
+  ICustomFetcher,
   FetcherArgs,
   FetcherRequisitionMethods,
-  ICustomFetcher,
-} from "../../src/FetcherHandler";
-import Axios, { AxiosError } from "axios";
+} from "../../src/types";
 
 export class MyFetcher implements ICustomFetcher {
   private parseAxiosError(e: AxiosError) {

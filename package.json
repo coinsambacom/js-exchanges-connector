@@ -6,7 +6,7 @@
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
   "private": false,
-  "type": "module",
+  "type": "commonjs",
   "source": "src/index.ts",
   "exports": {
     "types": "./dist/index.d.ts",
