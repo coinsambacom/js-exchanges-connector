@@ -39,7 +39,9 @@ export class pagcripto_otc<T = any> extends Exchange<T> {
 
     const ticker = omit(res.otc_ticker, ["crypto"]);
 
-    const isValid = Object.values(ticker).every((value) => isNumber(value));
+    const isValid = Object.values(ticker).every((value) =>
+      isNumber(Number(value)),
+    );
 
     if (!isValid) {
       throw new ConnectorError(
