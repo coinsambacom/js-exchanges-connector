@@ -1,8 +1,5 @@
-export { alterbank } from "./connectors/alterbank";
 export { binance } from "./connectors/binance";
 export { binance_us } from "./connectors/binance_us";
-export { bipa } from "./connectors/bipa";
-export { biscoint } from "./connectors/biscoint";
 export { bisq } from "./connectors/bisq";
 export { bitbay } from "./connectors/bitbay";
 export { bitblue } from "./connectors/bitblue";
@@ -40,7 +37,6 @@ export { gateio } from "./connectors/gateio";
 export { huobi } from "./connectors/huobi";
 export { isbit } from "./connectors/isbit";
 export { kraken } from "./connectors/kraken";
-export { makesexchange } from "./connectors/makesexchange";
 export { mercadobitcoin } from "./connectors/mercadobitcoin";
 export { novadax } from "./connectors/novadax";
 export { noxbitcoin } from "./connectors/noxbitcoin";
@@ -49,10 +45,8 @@ export { pagcripto_otc } from "./connectors/pagcripto_otc";
 export { poloniex } from "./connectors/poloniex";
 export { satoshitango } from "./connectors/satoshitango";
 export { stonoex } from "./connectors/stonoex";
-export { tauros } from "./connectors/tauros";
 export { upcambio } from "./connectors/upcambio";
 export { kucoin } from "./connectors/kucoin";
 export { liqi } from "./connectors/liqi";
-export { walltime } from "./connectors/walltime";
 
 export { FetcherHandler } from "./utils/FetcherHandler";
