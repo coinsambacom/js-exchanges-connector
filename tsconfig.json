@@ -1,13 +1,10 @@
 {
     "compilerOptions": {
-        "module": "ES2015",
-        "composite": true,
+        "module": "CommonJS",
+        "target": "ES2019",
         "declaration": true,
-        "declarationMap": true,
-        "declarationDir": "typings",
         "outDir": "dist",
         "rootDir": "src",
-        "target": "ES2019",
         "strict": true,
         "noUncheckedIndexedAccess": true,
         "tsBuildInfoFile": "typings/tsconfig.tsbuildinfo",
