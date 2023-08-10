@@ -1,10 +1,6 @@
+import { FetcherHandler } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import {
-  FetcherHandler,
-  FetcherArgs,
-  FetcherObjectArgs,
-} from "../utils/FetcherHandler";
-import { IExchange } from "../utils/DTOs";
+import { FetcherArgs, FetcherObjectArgs, IExchange } from "../utils/DTOs";
 
 /**
  * Represents the arguments for signing requests.

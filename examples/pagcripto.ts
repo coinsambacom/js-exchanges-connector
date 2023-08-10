@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { FetcherHandler } from "../src/index";
+import { FetcherHandler } from "../src/utils/DTOs";
 import { pagcripto } from "../src/exchanges";
 import { MyFetcher } from "../test/utils/MyFetcher";
 // import { OrderSide } from "../src/types/common";
