@@ -129,3 +129,32 @@ export interface IExchange {
    */
   getBook?: (base: string, quote: string) => Promise<IOrderbook>;
 }
+
+/**
+ * Enum representing different types of HTTP request methods.
+ */
+export enum FetcherRequisitionMethods {
+  GET = "get",
+  POST = "post",
+}
+
+export interface FetcherObjectArgs {
+  url: string;
+  method: FetcherRequisitionMethods;
+  headers: Record<string, string | number | boolean>;
+  data?: Record<string, any>;
+  opts?: any;
+}
+
+/**
+ * Type representing the arguments for making an HTTP request.
+ * It can be either a string representing the URL or an object with additional options.
+ */
+export type FetcherArgs = string | FetcherObjectArgs;
+
+/**
+ * Interface representing a custom fetcher with a fetch method.
+ */
+export interface ICustomFetcher {
+  fetch: <T>(args: FetcherArgs) => Promise<T>;
+}
