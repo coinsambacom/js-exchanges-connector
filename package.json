@@ -24,8 +24,7 @@
     "nodejs"
   ],
   "files": [
-    "dist/**.js*",
-    "dist/**/*.ts"
+    "dist"
   ],
   "scripts": {
     "prepare": "yarn run --silent build",
