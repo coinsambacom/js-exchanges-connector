@@ -4,6 +4,7 @@ import {
   FetcherArgs,
   FetcherObjectArgs,
 } from "../FetcherHandler";
+import { IExchange } from "../utils/DTOs";
 
 /**
  * Represents the arguments for signing requests.
@@ -54,7 +55,7 @@ export interface IExchangeBaseConstructorArgs<T>
 /**
  * Abstract base class for exchanges.
  */
-export abstract class Exchange<T> {
+export abstract class Exchange<T> implements IExchange {
   /**
    * The exchange ID.
    */

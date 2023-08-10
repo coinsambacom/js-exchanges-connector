@@ -81,3 +81,51 @@ export interface History {
   perPage: number;
   items: HistoryItem[];
 }
+
+/**
+ * Represents the base interface for an exchange.
+ */
+export interface IExchange {
+  /**
+   * The exchange ID.
+   */
+  id: string;
+
+  /**
+   * Indicates whether this exchange implements all tickers by specified quote.
+   */
+  hasAllTickersByQuote: boolean;
+  /**
+   * Indicates whether this exchange implements all tickers with all available quotes.
+   */
+  hasAllTickers: boolean;
+
+  /**
+   * Retrieves all tickers for this exchange.
+   * @returns A promise that resolves to an array of ITicker objects.
+   */
+  getAllTickers?: () => Promise<ITicker[]>;
+
+  /**
+   * Retrieves all tickers for this exchange based on the specified quote.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an array of ITicker objects.
+   */
+  getAllTickersByQuote?: (quote: string) => Promise<ITicker[]>;
+
+  /**
+   * Retrieves the ticker for the specified base and quote currencies.
+   * @param base The base currency.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an ITicker object.
+   */
+  getTicker?: (base: string, quote: string) => Promise<ITicker>;
+
+  /**
+   * Retrieves the order book for the specified base and quote currencies.
+   * @param base The base currency.
+   * @param quote The quote currency.
+   * @returns A promise that resolves to an IOrderbook object.
+   */
+  getBook?: (base: string, quote: string) => Promise<IOrderbook>;
+}
