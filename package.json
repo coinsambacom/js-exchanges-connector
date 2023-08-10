@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "prepare": "yarn run --silent build",
-    "build": "microbundle",
-    "dev": "microbundle watch",
+    "build": "dts build",
+    "dev": "dts watch --rollupTypes",
     "pretest": "yarn run build",
     "test": "ts-jest",
     "lint": "eslint .",
@@ -51,6 +51,7 @@
     "@typescript-eslint/parser": "^5.10.2",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
+    "dts-cli": "^2.0.3",
     "envalid": "^7.3.1",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
