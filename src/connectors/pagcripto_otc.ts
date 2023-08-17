@@ -7,6 +7,19 @@ import { IOrderbook, ITicker } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { isNumber } from "lodash";
 
+interface PagCriptoTicker {
+  volume: string;
+  last: string;
+  buy: string;
+  sell: string;
+}
+
+interface PagCriptoTickersRes {
+  otc_tickers: {
+    [symbol: string]: PagCriptoTicker;
+  };
+}
+
 interface IPagCriptoOTCTickerRes {
   otc_ticker: {
     crypto: string;
@@ -59,6 +72,29 @@ export class pagcripto_otc<T = any> extends Exchange<T> {
       bid: Number(ticker.buy),
       vol: Number(ticker.volume),
     };
+  }
+
+  async getAllTickers(): Promise<ITicker[]> {
+    const res = await this.fetch<PagCriptoTickersRes>(
+      `${this.baseUrl}/tickers`,
+    );
+
+    const tickers: ITicker[] = Object.keys(res.otc_tickers).map((v) => {
+      const ticker = res.otc_tickers[v]!;
+      const base = v.toUpperCase();
+
+      return {
+        exchangeId: this.id,
+        base,
+        quote: "BRL",
+        last: Number(ticker.last),
+        ask: Number(ticker.sell),
+        bid: Number(ticker.buy),
+        vol: Number(ticker.volume),
+      };
+    });
+
+    return tickers;
   }
 
   private amountByCurreny(currency: string): number {
