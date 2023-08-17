@@ -3,7 +3,7 @@ import {
   ICustomFetcher,
   FetcherArgs,
   FetcherRequisitionMethods,
-} from "../../src/types";
+} from "../../src/utils/DTOs";
 
 export class MyFetcher implements ICustomFetcher {
   private parseAxiosError(e: AxiosError) {
