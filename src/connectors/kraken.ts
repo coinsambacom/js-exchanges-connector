@@ -47,9 +47,8 @@ export class kraken<T = any> extends Exchange<T> {
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    if (base == "BTC") base = "XBT";
     const { result: res } = await this.fetch<IKrakenTickerRes>(
-      this.baseUrl + "/Ticker?pair=" + base + quote,
+      `${this.baseUrl}/Ticker?pair=${base == "BTC" ? "XBT" : base}${quote}`,
     );
 
     const ticker = res[Object.keys(res)[0] as string] as IKrakenTicker;
