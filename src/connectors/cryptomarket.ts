@@ -37,7 +37,7 @@ export class cryptomarket<T = any> extends Exchange<T> {
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
-    const { data: res } = await this.fetch<ICryptoMarketTickersRes>(
+    const res = await this.fetch<ICryptoMarketTickersRes>(
       this.baseUrl + "/public/ticker",
     );
 
@@ -45,7 +45,8 @@ export class cryptomarket<T = any> extends Exchange<T> {
 
     for (const pair in res) {
       if (pair.endsWith(quote)) {
-        const ticker = res[pair] as ICryptoMarketTicker;
+        const ticker = res[pair]!;
+
         tickers.push({
           exchangeId: this.id,
           base: pair.replace(quote, ""),

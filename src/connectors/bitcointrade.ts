@@ -55,20 +55,17 @@ export class bitcointrade<T = any> extends Exchange<T> {
 
     const tickers: ITicker[] = [];
 
-    for (const pair in res) {
-      if (pair.startsWith(quote)) {
-        const ticker = res[pair];
-        if (ticker) {
-          tickers.push({
-            exchangeId: this.id,
-            base: pair.replace(quote, ""),
-            quote,
-            last: ticker.last,
-            ask: ticker.sell,
-            bid: ticker.buy,
-            vol: ticker.volume,
-          });
-        }
+    for (const ticker of res) {
+      if (ticker.pair.startsWith(quote)) {
+        tickers.push({
+          exchangeId: this.id,
+          base: ticker.pair.replace(quote, ""),
+          quote,
+          last: ticker.last,
+          ask: ticker.sell,
+          bid: ticker.buy,
+          vol: ticker.volume,
+        });
       }
     }
 

@@ -4,6 +4,41 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../utils/DTOs";
 
+export interface CexioBaseRes {
+  e: string;
+  ok: string;
+}
+
+export interface CexioTickersRes extends CexioBaseRes {
+  data: {
+    timestamp: string;
+    pair: string;
+    low: string;
+    high: string;
+    last: string;
+    volume: string;
+    volume30d: string;
+    priceChange: string;
+    priceChangePercentage: string;
+    bid?: number;
+    ask?: number;
+  }[];
+}
+
+export interface CexioTickerRes {
+  timestamp: string;
+  pair: string;
+  low: string;
+  high: string;
+  last: string;
+  volume: string;
+  volume30d: string;
+  priceChange: string;
+  priceChangePercentage: string;
+  bid?: number;
+  ask?: number;
+}
+
 export class cexio<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
@@ -14,45 +49,41 @@ export class cexio<T = any> extends Exchange<T> {
   }
 
   async getAllTickersByQuote(quote: string): Promise<ITicker[]> {
-    let res = await this.fetch(this.baseUrl + "/tickers/" + quote);
-
-    res = res.data;
-    return res.map(
-      (t: {
-        pair: { split: (arg0: string) => [any, any] };
-        last: any;
-        ask: any;
-        bid: any;
-        volume: any;
-      }) => {
-        const [base, quote] = t.pair.split(":");
-
-        return {
-          exchangeId: this.id,
-          base,
-          quote,
-          last: t.last,
-          ask: t.ask,
-          bid: t.bid,
-          vol: t.volume,
-        };
-      },
+    const { data: res } = await this.fetch<CexioTickersRes>(
+      this.baseUrl + "/tickers/" + quote,
     );
+
+    return res.map((t) => {
+      const [base, quote] = t.pair.split(":") as [string, string];
+      const last = Number(t.last);
+
+      return {
+        exchangeId: this.id,
+        base,
+        quote,
+        last: last,
+        ask: t.ask ?? last,
+        bid: t.bid ?? last,
+        vol: Number(t.volume),
+      };
+    });
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    const res = await this.fetch(
+    const res = await this.fetch<CexioTickerRes>(
       this.baseUrl + "/ticker/" + base + "/" + quote,
     );
+
+    const last = Number(res.last);
 
     return {
       exchangeId: this.id,
       base,
       quote,
-      last: res.last,
-      ask: res.ask,
-      bid: res.bid,
-      vol: res.volume,
+      last: last,
+      ask: res.ask ?? last,
+      bid: res.bid ?? last,
+      vol: Number(res.volume),
     };
   }
 
