@@ -211,6 +211,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | pagcripto_otc 🇧🇷  | 1         |               |                      | 1       |
 | pagcripto 🇧🇷      | 1         |               | 1                    | 1       |
 | poloniex 🌐       | 1         | 1             |                      | 1       |
+| quidax 🇳🇬         |           |               | 1                    | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
 | stonoex 🇧🇷        | 1         |               | 1                    | 1       |
 | upcambio 🇧🇷       | 1         |               |                      | 1       |

@@ -11,10 +11,7 @@
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
         "noImplicitAny": false,
-        "skipLibCheck": true,
-        "types": [
-            "jest",
-        ]
+        "skipLibCheck": true
     },
     "include": [
         "src/**/*.ts"

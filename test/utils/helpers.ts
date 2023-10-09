@@ -1,3 +1,5 @@
+import { expect } from "chai";
+
 /**
  * Verifies the property types of an object using Jest assertions.
  *
@@ -14,11 +16,11 @@ export function expectPropertyTypes(
     /**
      * Checks if the property is present in the object using Jest's `expect(obj).toHaveProperty(prop)`.
      */
-    expect(obj).toHaveProperty(prop);
+    expect(obj).to.have.property(prop);
 
     /**
      * Checks if the property type matches the expected type using Jest's `expect(typeof obj[prop]).toBe(type)`.
      */
-    expect(typeof obj[prop]).toBe(type);
+    expect(typeof obj[prop]).to.equal(type);
   }
 }
