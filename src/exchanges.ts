@@ -49,3 +49,4 @@ export { upcambio } from "./connectors/upcambio";
 export { kucoin } from "./connectors/kucoin";
 export { liqi } from "./connectors/liqi";
 export { quidax } from "./connectors/quidax";
+export { luno } from "./connectors/luno";

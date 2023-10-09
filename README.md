@@ -205,6 +205,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | kraken 🌐         | 1         |               |                      | 1       |
 | kucoin 🌐         | 1         | 1             |                      | 1       |
 | liqi 🇧🇷           | 1         | 1             |                      | 1       |
+| luno 🇿🇦           |           |               | 1                    | 1       |
 | mercadobitcoin 🇧🇷 | 1         | 1             |                      | 1       |
 | novadax 🇧🇷        | 1         | 1             |                      | 1       |
 | noxbitcoin 🇧🇷     | 1         |               |                      |         |
