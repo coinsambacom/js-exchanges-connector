@@ -47,9 +47,14 @@ export class kraken<T = any> extends Exchange<T> {
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    if (base == "BTC") base = "XBT";
+    let requestBase = base;
+
+    if (requestBase === "BTC") {
+      requestBase = "XBT";
+    }
+
     const { result: res } = await this.fetch<IKrakenTickerRes>(
-      this.baseUrl + "/Ticker?pair=" + base + quote,
+      this.baseUrl + "/Ticker?pair=" + requestBase + quote,
     );
 
     const ticker = res[Object.keys(res)[0] as string] as IKrakenTicker;
@@ -73,9 +78,14 @@ export class kraken<T = any> extends Exchange<T> {
   }
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    if (base == "BTC") base = "XBT";
+    let requestBase = base;
+
+    if (requestBase === "BTC") {
+      requestBase = "XBT";
+    }
+
     const { result: res } = await this.fetch<IKrakenBookRes>(
-      this.baseUrl + "/Depth?pair=" + base + quote,
+      this.baseUrl + "/Depth?pair=" + requestBase + quote,
     );
 
     const book = res[Object.keys(res)[0] as string] as IKrakenOrderbook;
