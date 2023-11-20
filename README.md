@@ -202,6 +202,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | ftx 🌐            | 1         |               |                      | 1       |
 | gateio 🌐         | 1         | 1             |                      | 1       |
 | isbit 🇲🇽          | 1         |               |                      | 1       |
+| isistrade 🇧🇷      |           |               | 1                    | 1       |
 | kraken 🌐         | 1         |               |                      | 1       |
 | kucoin 🌐         | 1         | 1             |                      | 1       |
 | liqi 🇧🇷           | 1         | 1             |                      | 1       |
