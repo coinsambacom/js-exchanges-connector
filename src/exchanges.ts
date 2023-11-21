@@ -36,6 +36,7 @@ export { ftx } from "./connectors/ftx";
 export { gateio } from "./connectors/gateio";
 export { huobi } from "./connectors/huobi";
 export { isbit } from "./connectors/isbit";
+export { isistrade } from "./connectors/isistrade";
 export { kraken } from "./connectors/kraken";
 export { mercadobitcoin } from "./connectors/mercadobitcoin";
 export { novadax } from "./connectors/novadax";
