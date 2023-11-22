@@ -212,6 +212,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | noxbitcoin 🇧🇷     | 1         |               |                      |         |
 | pagcripto_otc 🇧🇷  | 1         |               |                      | 1       |
 | pagcripto 🇧🇷      | 1         |               | 1                    | 1       |
+| paxos 🌐          | 1         |               |                      | 1       |
 | poloniex 🌐       | 1         | 1             |                      | 1       |
 | quidax 🇳🇬         |           |               | 1                    | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
