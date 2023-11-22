@@ -42,6 +42,7 @@ export { mercadobitcoin } from "./connectors/mercadobitcoin";
 export { novadax } from "./connectors/novadax";
 export { noxbitcoin } from "./connectors/noxbitcoin";
 export { pagcripto } from "./connectors/pagcripto";
+export { paxos } from "./connectors/paxos";
 export { pagcripto_otc } from "./connectors/pagcripto_otc";
 export { poloniex } from "./connectors/poloniex";
 export { satoshitango } from "./connectors/satoshitango";
