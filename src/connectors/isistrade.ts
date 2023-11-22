@@ -65,8 +65,8 @@ export class isistrade<T = any> extends Exchange<T> {
     quantity,
   }: IsisTradeOrderbookOrder): IOrderbookOrder {
     return {
-      price: Number(price),
-      amount: Number(quantity),
+      price: parseBRLNumberString(price),
+      amount: parseBRLNumberString(quantity),
     };
   }
 
