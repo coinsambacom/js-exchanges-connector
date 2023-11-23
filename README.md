@@ -12,7 +12,7 @@ or
 
 # Usage
 
-Before using the library you need to create a class to fetch the data, you can use the code below as an exampleBefore using the library you need to create a class to fetch the data, you can use the code below as an example
+Before using the library you need to create a class to fetch the data, you can use the code below as an example
 
 ```JavaScript
 import {
@@ -175,6 +175,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | bitblue 🇧🇷        | 1         |               |                      | 1       |
 | bitcointoyou 🇧🇷   | 1         |               |                      | 1       |
 | bitcointrade 🇧🇷   | 1         |               |                      | 1       |
+| bitget 🌐         |           | 1             |                      | 1       |
 | bitmonedero 🇦🇷    | 1         |               |                      | 1       |
 | bitnuvem 🇧🇷       | 1         |               |                      | 1       |
 | bitpreco 🇧🇷       | 1         |               | 1                    | 1       |

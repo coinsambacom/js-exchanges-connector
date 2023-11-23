@@ -1,7 +1,7 @@
 {
   "name": "@coinsamba/js-exchanges-connector",
   "description": "Collection of JavaScript implementations of cryptocurrency exchange APIs",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "repository": "git@github.com:coinsambacom/js-exchanges-connector.git",
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
