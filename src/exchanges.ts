@@ -5,6 +5,7 @@ export { bitbay } from "./connectors/bitbay";
 export { bitblue } from "./connectors/bitblue";
 export { bitcointoyou } from "./connectors/bitcointoyou";
 export { bitcointrade } from "./connectors/bitcointrade";
+export { bitget } from "./connectors/bitget";
 export { bitmonedero } from "./connectors/bitmonedero";
 export { bitnuvem } from "./connectors/bitnuvem";
 export { bitpreco } from "./connectors/bitpreco";
