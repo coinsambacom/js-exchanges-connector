@@ -4,6 +4,22 @@ import {
 } from "../interfaces/exchange";
 import { IOrderbook, ITicker } from "../utils/DTOs";
 
+interface GateIoTickerRes {
+  result: string;
+  last: string;
+  lowestAsk: string;
+  highestBid: string;
+  percentChange: string;
+  baseVolume: string;
+  quoteVolume: string;
+  high24hr: string;
+  low24hr: string;
+}
+
+interface GateIoTickersRes {
+  [pair: string]: GateIoTickerRes;
+}
+
 export class gateio<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
@@ -14,26 +30,27 @@ export class gateio<T = any> extends Exchange<T> {
   }
 
   async getAllTickers(): Promise<ITicker[]> {
-    const res = await this.fetch(`${this.baseUrl}/tickers`);
+    const res = await this.fetch<GateIoTickersRes>(`${this.baseUrl}/tickers`);
 
     const tickers: ITicker[] = [];
     for (const pair in res) {
-      const ticker = res[pair];
+      const ticker = res[pair]!;
+
       tickers.push({
         exchangeId: this.id,
         base: (pair.split("_")[0] as string).toUpperCase(),
         quote: (pair.split("_")[1] as string).toUpperCase(),
-        last: ticker.last,
-        ask: ticker.lowestAsk,
-        bid: ticker.quoteVolume,
-        vol: ticker.vol,
+        last: Number(ticker.last),
+        ask: Number(ticker.lowestAsk),
+        bid: Number(ticker.highestBid),
+        vol: Number(ticker.quoteVolume),
       });
     }
     return tickers;
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    const res = await this.fetch(
+    const res = await this.fetch<GateIoTickersRes>(
       `${this.baseUrl}/ticker/${base.toLowerCase()}_${quote.toLowerCase()}`,
     );
 
