@@ -10,9 +10,9 @@ interface INovaDAXBaseApiResponse {
 }
 
 interface INovaDAXTicker {
-  ask: string;
+  ask?: string;
   baseVolume24h: string;
-  bid: string;
+  bid?: string;
   high24h: string;
   lastPrice: string;
   low24h: string;
@@ -60,8 +60,8 @@ export class novadax<T = any> extends Exchange<T> {
       base: t.symbol.split("_")[0] as string,
       quote: t.symbol.split("_")[1] as string,
       last: Number(t.lastPrice),
-      ask: Number(t.ask),
-      bid: Number(t.bid),
+      ask: Number(t.ask ?? 0),
+      bid: Number(t.bid ?? 0),
       vol: Number(t.baseVolume24h),
     }));
   }
@@ -76,8 +76,8 @@ export class novadax<T = any> extends Exchange<T> {
       base,
       quote,
       last: Number(res.lastPrice),
-      ask: Number(res.ask),
-      bid: Number(res.bid),
+      ask: Number(res.ask ?? 0),
+      bid: Number(res.bid ?? 0),
       vol: Number(res.baseVolume24h),
     };
   }
