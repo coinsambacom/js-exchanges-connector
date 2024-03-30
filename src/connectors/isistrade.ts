@@ -8,7 +8,7 @@ import { parseBRLNumberString } from "../utils/utils";
 interface BaseRes<T> {
   success: boolean;
   message: string;
-  result: T;
+  result: T | null;
 }
 
 interface IsisTradeOrderbookOrder {
@@ -49,15 +49,17 @@ export class isistrade<T = any> extends Exchange<T> {
       >
     >(`${this.baseUrl}/public/marketsummaries?basemarket=${quote}`);
 
-    return res.result.map((t) => ({
-      exchangeId: this.id,
-      base: t.marketAsset,
-      quote: t.baseAsset,
-      ask: parseBRLNumberString(t.ask),
-      bid: parseBRLNumberString(t.bid),
-      last: parseBRLNumberString(t.last),
-      vol: parseBRLNumberString(t.volume),
-    }));
+    return (
+      res.result?.map((t) => ({
+        exchangeId: this.id,
+        base: t.marketAsset,
+        quote: t.baseAsset,
+        ask: parseBRLNumberString(t.ask),
+        bid: parseBRLNumberString(t.bid),
+        last: parseBRLNumberString(t.last),
+        vol: parseBRLNumberString(t.volume),
+      })) ?? []
+    );
   }
 
   private parseOrder({
@@ -81,8 +83,8 @@ export class isistrade<T = any> extends Exchange<T> {
     );
 
     return {
-      asks: res.result.sell.map(this.parseOrder),
-      bids: res.result.buy.map(this.parseOrder),
+      asks: res.result?.sell.map(this.parseOrder) ?? [],
+      bids: res.result?.buy.map(this.parseOrder) ?? [],
     };
   }
 }
