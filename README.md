@@ -167,7 +167,6 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 
 | id                | getTicker | getAllTickers | getAllTickersByQuote | getBook |
 | ----------------- | --------- | ------------- | -------------------- | ------- |
-| alterbank 🇧🇷      | 1         |               |                      | 1       |
 | binance_us 🇺🇸     | 1         | 1             |                      | 1       |
 | binance 🌐        | 1         | 1             |                      | 1       |
 | bisq 🌐           | 1         |               |                      | 1       |
@@ -179,34 +178,25 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | bitmonedero 🇦🇷    | 1         |               |                      | 1       |
 | bitnuvem 🇧🇷       | 1         |               |                      | 1       |
 | bitpreco 🇧🇷       | 1         |               | 1                    | 1       |
-| bitrecife 🇧🇷      | 1         |               | 1                    | 1       |
 | bitso 🇲🇽          | 1         |               |                      | 1       |
 | bitstamp          | 1         |               |                      | 1       |
-| bittrex 🌐        | 1         | 1             |                      | 1       |
-| bleutrade 🇧🇷      | 1         |               | 1                    | 1       |
-| blocktane 🇧🇷      | 1         |               |                      |         |
 | brasilbitcoin 🇧🇷  | 1         |               |                      | 1       |
 | buda 🇨🇴🇵🇪🇦🇷🇨🇱     | 1         |               |                      | 1       |
-| bullgain 🇧🇷       | 1         |               | 1                    | 1       |
 | cexio 🌐          | 1         |               | 1                    | 1       |
 | citcoin 🇧🇷        | 1         |               |                      | 1       |
 | coinbase_pro      | 1         |               |                      | 1       |
-| coinbene 🌐       | 1         |               |                      | 1       |
 | coinext 🇧🇷        | 1         |               | 1                    | 1       |
 | coinsbank 🌐      | 1         |               |                      | 1       |
-| comprarbitcoin 🇧🇷 | 1         |               | 1                    | 1       |
 | cryptomarket 🇦🇷   | 1         |               |                      | 1       |
 | decrypto 🇦🇷       |           |               |                      | 1       |
 | exmo 🌐           | 1         | 1             |                      | 1       |
 | flowbtc 🇧🇷        | 1         |               | 1                    | 1       |
 | foxbit 🇧🇷         | 1         | 1             |                      | 1       |
-| ftx 🌐            | 1         |               |                      | 1       |
 | gateio 🌐         | 1         | 1             |                      | 1       |
 | isbit 🇲🇽          | 1         |               |                      | 1       |
 | isistrade 🇧🇷      |           |               | 1                    | 1       |
 | kraken 🌐         | 1         |               |                      | 1       |
 | kucoin 🌐         | 1         | 1             |                      | 1       |
-| liqi 🇧🇷           | 1         | 1             |                      | 1       |
 | luno 🇿🇦           |           |               | 1                    | 1       |
 | mercadobitcoin 🇧🇷 | 1         | 1             |                      | 1       |
 | novadax 🇧🇷        | 1         | 1             |                      | 1       |
@@ -217,14 +207,11 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | poloniex 🌐       | 1         | 1             |                      | 1       |
 | quidax 🇳🇬         |           |               | 1                    | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
-| stonoex 🇧🇷        | 1         |               | 1                    | 1       |
 | upcambio 🇧🇷       | 1         |               |                      | 1       |
 
 ## Known Whitelabel Platforms
 
 - alphapoint
 - bnb
-- bws
-- kfex
 - peatio
 - upex
