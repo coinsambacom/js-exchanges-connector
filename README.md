@@ -207,6 +207,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | poloniex 🌐       | 1         | 1             |                      | 1       |
 | quidax 🇳🇬         |           |               | 1                    | 1       |
 | satoshitango 🇦🇷   |           |               | 1                    | 1       |
+| trubit 🌐         | 1         | 1             |                      | 1       |
 | upcambio 🇧🇷       | 1         |               |                      | 1       |
 
 ## Known Whitelabel Platforms
