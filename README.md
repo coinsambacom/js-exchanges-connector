@@ -201,6 +201,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 | mercadobitcoin 🇧🇷 | 1         | 1             |                      | 1       |
 | novadax 🇧🇷        | 1         | 1             |                      | 1       |
 | noxbitcoin 🇧🇷     | 1         |               |                      |         |
+| okx 🌐            | 1         | 1             |                      | 1       |
 | pagcripto_otc 🇧🇷  | 1         |               |                      | 1       |
 | pagcripto 🇧🇷      | 1         |               | 1                    | 1       |
 | paxos 🌐          | 1         |               |                      | 1       |

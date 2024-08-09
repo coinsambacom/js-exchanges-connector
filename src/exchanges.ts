@@ -32,6 +32,7 @@ export { kraken } from "./connectors/kraken";
 export { mercadobitcoin } from "./connectors/mercadobitcoin";
 export { novadax } from "./connectors/novadax";
 export { noxbitcoin } from "./connectors/noxbitcoin";
+export { okx } from "./connectors/okx";
 export { pagcripto } from "./connectors/pagcripto";
 export { paxos } from "./connectors/paxos";
 export { pagcripto_otc } from "./connectors/pagcripto_otc";
