@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { pagcripto } from "../src/connectors/pagcripto";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
+
 import { expectPropertyTypes } from "./utils/helpers";
 
 describe("pagcripto", () => {
@@ -9,9 +8,6 @@ describe("pagcripto", () => {
 
   beforeEach(() => {
     exchange = new pagcripto();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getAllTickersByQuote", () => {

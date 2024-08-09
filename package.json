@@ -30,7 +30,7 @@
     "clean": "git clean -fX .eslintcache dist/"
   },
   "engines": {
-    "node": "^12.20.0 || >=14.13.1"
+    "node": ">=v20.5.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.6",
@@ -41,7 +41,6 @@
     "@types/ws": "^8.5.5",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
-    "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "envalid": "^7.3.1",
     "eslint": "^8.8.0",

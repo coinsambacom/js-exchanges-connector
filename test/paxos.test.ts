@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { paxos } from "../src/connectors/paxos";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
+
 import { expectPropertyTypes } from "./utils/helpers";
 
 describe("paxos", () => {
@@ -9,9 +8,6 @@ describe("paxos", () => {
 
   beforeEach(() => {
     exchange = new paxos();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getTicker", () => {

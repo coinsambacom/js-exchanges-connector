@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { luno } from "../src/connectors/luno";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
+
 import { expectPropertyTypes } from "./utils/helpers";
 
 const QUOTE = "NGN";
@@ -11,9 +10,6 @@ describe("luno", () => {
 
   beforeEach(() => {
     exchange = new luno();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getAllTickersByQuote", () => {
