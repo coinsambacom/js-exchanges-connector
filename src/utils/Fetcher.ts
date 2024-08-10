@@ -9,6 +9,7 @@ class DefaultFetcher implements ICustomFetcher {
   async fetch<ResponseType>(args: FetcherArgs): Promise<ResponseType> {
     let url: string;
     const options: RequestInit = {};
+    options.headers = new Headers();
 
     if (typeof args === "string") {
       url = args;
@@ -16,7 +17,6 @@ class DefaultFetcher implements ICustomFetcher {
     } else {
       url = args.url;
       options.method = args.method || FetcherRequisitionMethods.GET;
-      options.headers = new Headers();
 
       if (args.headers) {
         for (const [key, value] of Object.entries(args.headers)) {
@@ -26,8 +26,9 @@ class DefaultFetcher implements ICustomFetcher {
 
       if (options.method === FetcherRequisitionMethods.POST && args.data) {
         options.body = JSON.stringify(args.data);
-        options.headers.append("Content-Type", "application/json");
       }
+
+      options.headers.append("Content-Type", "application/json");
     }
 
     try {

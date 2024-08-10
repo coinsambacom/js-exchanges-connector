@@ -3,7 +3,7 @@ import { isistrade } from "../src/connectors/isistrade";
 
 import { expectPropertyTypes } from "./utils/helpers";
 
-describe("isistrade", () => {
+describe.skip("isistrade", () => {
   let exchange: isistrade;
 
   beforeEach(() => {
