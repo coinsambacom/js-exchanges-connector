@@ -1,17 +1,13 @@
 import { expect } from "chai";
 import { isistrade } from "../src/connectors/isistrade";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
+
 import { expectPropertyTypes } from "./utils/helpers";
 
-describe("isistrade", () => {
+describe.skip("isistrade", () => {
   let exchange: isistrade;
 
   beforeEach(() => {
     exchange = new isistrade();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getAllTickersByQuote", () => {

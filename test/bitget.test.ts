@@ -1,7 +1,5 @@
 import { expect } from "chai";
 import { bitget } from "../src/connectors/bitget";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
 import { expectPropertyTypes } from "./utils/helpers";
 
 const QUOTE = "BRL";
@@ -11,9 +9,6 @@ describe("bitget", () => {
 
   beforeEach(() => {
     exchange = new bitget();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getAllTickersByQuote", () => {

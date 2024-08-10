@@ -1,6 +1,5 @@
 import { okx } from "../src/connectors/okx";
-import { FetcherHandler } from "../src/utils/DTOs";
-import { MyFetcher } from "./utils/MyFetcher";
+
 import { testAllTickers, testBook, testTicker } from "./utils/helpers";
 
 const BASE = "BTC",
@@ -11,9 +10,6 @@ describe("okx", () => {
 
   beforeEach(() => {
     exchange = new okx();
-    const fetcher = new MyFetcher();
-
-    FetcherHandler.setFetcher(fetcher);
   });
 
   describe("getAllTickers", () => {
