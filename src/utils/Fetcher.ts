@@ -29,6 +29,7 @@ class DefaultFetcher implements ICustomFetcher {
       }
 
       options.headers.append("Content-Type", "application/json");
+      options.headers.append("Accept", "application/json");
     }
 
     try {
