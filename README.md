@@ -170,7 +170,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 
 | id           | getTicker | getAllTickers | getAllTickersByQuote | getBook |
 | ------------------- | --------- | ------------- | -------------------- | ------- |
-| binance us 🇺🇸      | ✓         | ✓             |                      | ✓       |
+| binance_us 🇺🇸      | ✓         | ✓             |                      | ✓       |
 | binance 🌐         | ✓         | ✓             |                      | ✓       |
 | bisq 🌐            | ✓         |               |                      | ✓       |
 | bitbay             | ✓         |               |                      | ✓       |
@@ -187,7 +187,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | buda 🇨🇴🇵🇪🇦🇷🇨🇱   | ✓         |               |                      | ✓       |
 | cexio 🌐           | ✓         |               | ✓                    | ✓       |
 | citcoin 🇧🇷         | ✓         |               |                      | ✓       |
-| coinbase pro       | ✓         |               |                      | ✓       |
+| coinbase_pro       | ✓         |               |                      | ✓       |
 | coinext 🇧🇷         | ✓         |               | ✓                    | ✓       |
 | coinsbank 🌐       | ✓         |               |                      | ✓       |
 | cryptomarket 🇦🇷    | ✓         |               |                      | ✓       |
@@ -205,7 +205,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | novadax 🇧🇷         | ✓         | ✓             |                      | ✓       |
 | noxbitcoin 🇧🇷      | ✓         |               |                      |         |
 | okx 🌐             | ✓         | ✓             |                      | ✓       |
-| pagcripto otc 🇧🇷   | ✓         |               |                      | ✓       |
+| pagcripto_otc 🇧🇷   | ✓         |               |                      | ✓       |
 | pagcripto 🇧🇷       | ✓         |               | ✓                    | ✓       |
 | paxos 🌐           | ✓         |               |                      | ✓       |
 | poloniex 🌐        | ✓         | ✓             |                      | ✓       |
