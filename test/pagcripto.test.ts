@@ -1,7 +1,10 @@
 import { expect } from "chai";
 import { pagcripto } from "../src/connectors/pagcripto";
 
-import { expectPropertyTypes } from "./utils/helpers";
+import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers";
+
+const BASE = "BTC",
+  QUOTE = "BRL";
 
 describe("pagcripto", () => {
   let exchange: pagcripto;
@@ -27,31 +30,17 @@ describe("pagcripto", () => {
 
   describe("getTicker", () => {
     it("should return an ITicker object", async () => {
-      const ticker = await exchange.getTicker("BTC", "BRL");
+      const ticker = await exchange.getTicker(BASE, QUOTE);
 
-      expectPropertyTypes(ticker, ["exchangeId", "base", "quote"], "string");
-      expectPropertyTypes(ticker, ["last", "ask", "bid", "vol"], "number");
+      testTicker(ticker);
     });
   });
 
   describe("getBook", () => {
     it("should return an IOrderbook object", async () => {
-      const book = await exchange.getBook("BTC", "BRL");
+      const book = await exchange.getBook(BASE, QUOTE);
 
-      expect(book).to.have.property("asks");
-      expect(book).to.have.property("bids");
-      expect(Array.isArray(book.asks)).to.be.true;
-      expect(Array.isArray(book.bids)).to.be.true;
-
-      if (book.asks.length > 0) {
-        const ask = book.asks[0];
-        expectPropertyTypes(ask, ["price", "amount"], "number");
-      }
-
-      if (book.bids.length > 0) {
-        const bid = book.bids[0];
-        expectPropertyTypes(bid, ["price", "amount"], "number");
-      }
+      testBook(book);
     });
   });
 });

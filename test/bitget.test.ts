@@ -1,8 +1,9 @@
 import { expect } from "chai";
 import { bitget } from "../src/connectors/bitget";
-import { expectPropertyTypes } from "./utils/helpers";
+import { expectPropertyTypes, testBook } from "./utils/helpers";
 
-const QUOTE = "BRL";
+const BASE = "BTC",
+  QUOTE = "BRL";
 
 describe("bitget", () => {
   let exchange: bitget;
@@ -28,22 +29,9 @@ describe("bitget", () => {
 
   describe("getBook", () => {
     it("should return an IOrderbook object", async () => {
-      const book = await exchange.getBook("BTC", QUOTE);
+      const book = await exchange.getBook(BASE, QUOTE);
 
-      expect(book).to.have.property("asks");
-      expect(book).to.have.property("bids");
-      expect(Array.isArray(book.asks)).to.be.true;
-      expect(Array.isArray(book.bids)).to.be.true;
-
-      if (book.asks.length > 0) {
-        const ask = book.asks[0];
-        expectPropertyTypes(ask, ["price", "amount"], "number");
-      }
-
-      if (book.bids.length > 0) {
-        const bid = book.bids[0];
-        expectPropertyTypes(bid, ["price", "amount"], "number");
-      }
+      testBook(book);
     });
   });
 });
