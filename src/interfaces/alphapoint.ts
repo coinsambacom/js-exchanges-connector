@@ -1,7 +1,6 @@
 import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
 import WebSocket from "ws";
-import * as sort from "fast-sort";
 
 function alternativeRandomInt(min: number, max: number) {
   const timestamp = Date.now();
@@ -305,10 +304,10 @@ class AlphapointOrderbook {
   private insertOrder(order: SubscribeLevel2) {
     if (order[9] === 0) {
       this.book.bids.push(order);
-      sort.sort(this.book.bids).desc((o) => o[6]);
+      this.book.bids.sort((a, b) => b[6] - a[6]);
     } else {
       this.book.asks.push(order);
-      sort.sort(this.book.asks).asc((o) => o[6]);
+      this.book.asks.sort((a, b) => a[6] - b[6]);
     }
   }
 
