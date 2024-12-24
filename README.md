@@ -168,51 +168,52 @@ FetcherHandler.setFetcher(new MyFetcher());
 
 ## Implementations
 
-| id           | getTicker | getAllTickers | getAllTickersByQuote | getBook |
-| ------------------- | --------- | ------------- | -------------------- | ------- |
-| binance_us 🇺🇸      | ✓         | ✓             |                      | ✓       |
-| binance 🌐         | ✓         | ✓             |                      | ✓       |
-| bisq 🌐            | ✓         |               |                      | ✓       |
-| bitbay             | ✓         |               |                      | ✓       |
-| bitblue 🇧🇷         | ✓         |               |                      | ✓       |
-| bitcointoyou 🇧🇷    | ✓         |               |                      | ✓       |
-| bitcointrade 🇧🇷    | ✓         |               |                      | ✓       |
-| bitget 🌐          |           | ✓             |                      | ✓       |
-| bitmonedero 🇦🇷     | ✓         |               |                      | ✓       |
-| bitnuvem 🇧🇷        | ✓         |               |                      | ✓       |
-| bitpreco 🇧🇷        | ✓         |               | ✓                    | ✓       |
-| bitso 🇲🇽           | ✓         |               |                      | ✓       |
-| bitstamp           | ✓         |               |                      | ✓       |
-| brasilbitcoin 🇧🇷   | ✓         |               |                      | ✓       |
-| buda 🇨🇴🇵🇪🇦🇷🇨🇱   | ✓         |               |                      | ✓       |
-| cexio 🌐           | ✓         |               | ✓                    | ✓       |
-| citcoin 🇧🇷         | ✓         |               |                      | ✓       |
-| coinbase_pro       | ✓         |               |                      | ✓       |
-| coinext 🇧🇷         | ✓         |               | ✓                    | ✓       |
-| coinsbank 🌐       | ✓         |               |                      | ✓       |
-| cryptomarket 🇦🇷    | ✓         |               |                      | ✓       |
-| decrypto 🇦🇷        |           |               |                      | ✓       |
-| exmo 🌐            | ✓         | ✓             |                      | ✓       |
-| flowbtc 🇧🇷         | ✓         |               | ✓                    | ✓       |
-| foxbit 🇧🇷          | ✓         | ✓             |                      | ✓       |
-| gateio 🌐          | ✓         | ✓             |                      | ✓       |
-| isbit 🇲🇽           | ✓         |               |                      | ✓       |
-| isistrade 🇧🇷       |           |               | ✓                    | ✓       |
-| kraken 🌐          | ✓         |               |                      | ✓       |
-| kucoin 🌐          | ✓         | ✓             |                      | ✓       |
-| luno 🇿🇦            |           |               | ✓                    | ✓       |
-| mercadobitcoin 🇧🇷  | ✓         | ✓             |                      | ✓       |
-| novadax 🇧🇷         | ✓         | ✓             |                      | ✓       |
-| noxbitcoin 🇧🇷      | ✓         |               |                      |         |
-| okx 🌐             | ✓         | ✓             |                      | ✓       |
-| pagcripto_otc 🇧🇷   | ✓         |               |                      | ✓       |
-| pagcripto 🇧🇷       | ✓         |               | ✓                    | ✓       |
-| paxos 🌐           | ✓         |               |                      | ✓       |
-| poloniex 🌐        | ✓         | ✓             |                      | ✓       |
-| quidax 🇳🇬          |           |               | ✓                    | ✓       |
-| satoshitango 🇦🇷    |           |               | ✓                    | ✓       |
-| trubit 🌐          | ✓         | ✓             |                      | ✓       |
-| upcambio 🇧🇷        | ✓         |               |                      | ✓       |
+| id                | getTicker | getAllTickers | getAllTickersByQuote | getBook |
+| ----------------- | --------- | ------------- | -------------------- | ------- |
+| binance_us 🇺🇸     | ✓         | ✓             |                      | ✓       |
+| binance 🌐        | ✓         | ✓             |                      | ✓       |
+| bisq 🌐           | ✓         |               |                      | ✓       |
+| bitbay            | ✓         |               |                      | ✓       |
+| bitblue 🇧🇷        | ✓         |               |                      | ✓       |
+| bitcointoyou 🇧🇷   | ✓         |               |                      | ✓       |
+| bitcointrade 🇧🇷   | ✓         |               |                      | ✓       |
+| bitget 🌐         |           | ✓             |                      | ✓       |
+| bitmonedero 🇦🇷    | ✓         |               |                      | ✓       |
+| bitnuvem 🇧🇷       | ✓         |               |                      | ✓       |
+| bitpreco 🇧🇷       | ✓         |               | ✓                    | ✓       |
+| bitso 🇲🇽          | ✓         |               |                      | ✓       |
+| bitstamp          | ✓         |               |                      | ✓       |
+| brasilbitcoin 🇧🇷  | ✓         |               |                      | ✓       |
+| buda 🇨🇴🇵🇪🇦🇷🇨🇱     | ✓         |               |                      | ✓       |
+| cexio 🌐          | ✓         |               | ✓                    | ✓       |
+| citcoin 🇧🇷        | ✓         |               |                      | ✓       |
+| coinbase_pro      | ✓         |               |                      | ✓       |
+| coinext 🇧🇷        | ✓         |               | ✓                    | ✓       |
+| coinsbank 🌐      | ✓         |               |                      | ✓       |
+| cryptomarket 🇦🇷   | ✓         |               |                      | ✓       |
+| decrypto 🇦🇷       |           |               |                      | ✓       |
+| digitra 🇧🇷        | ✓         |               |                      | ✓       |
+| exmo 🌐           | ✓         | ✓             |                      | ✓       |
+| flowbtc 🇧🇷        | ✓         |               | ✓                    | ✓       |
+| foxbit 🇧🇷         | ✓         | ✓             |                      | ✓       |
+| gateio 🌐         | ✓         | ✓             |                      | ✓       |
+| isbit 🇲🇽          | ✓         |               |                      | ✓       |
+| isistrade 🇧🇷      |           |               | ✓                    | ✓       |
+| kraken 🌐         | ✓         |               |                      | ✓       |
+| kucoin 🌐         | ✓         | ✓             |                      | ✓       |
+| luno 🇿🇦           |           |               | ✓                    | ✓       |
+| mercadobitcoin 🇧🇷 | ✓         | ✓             |                      | ✓       |
+| novadax 🇧🇷        | ✓         | ✓             |                      | ✓       |
+| noxbitcoin 🇧🇷     | ✓         |               |                      |         |
+| okx 🌐            | ✓         | ✓             |                      | ✓       |
+| pagcripto_otc 🇧🇷  | ✓         |               |                      | ✓       |
+| pagcripto 🇧🇷      | ✓         |               | ✓                    | ✓       |
+| paxos 🌐          | ✓         |               |                      | ✓       |
+| poloniex 🌐       | ✓         | ✓             |                      | ✓       |
+| quidax 🇳🇬         |           |               | ✓                    | ✓       |
+| satoshitango 🇦🇷   |           |               | ✓                    | ✓       |
+| trubit 🌐         | ✓         | ✓             |                      | ✓       |
+| upcambio 🇧🇷       | ✓         |               |                      | ✓       |
 
 ## Known Whitelabel Platforms
 
