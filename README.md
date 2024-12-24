@@ -185,6 +185,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | bitstamp          | ✓         |               |                      | ✓       |
 | brasilbitcoin 🇧🇷  | ✓         |               |                      | ✓       |
 | buda 🇨🇴🇵🇪🇦🇷🇨🇱     | ✓         |               |                      | ✓       |
+| bybit 🌐          | ✓         |               | ✓                    | ✓       |
 | cexio 🌐          | ✓         |               | ✓                    | ✓       |
 | citcoin 🇧🇷        | ✓         |               |                      | ✓       |
 | coinbase_pro      | ✓         |               |                      | ✓       |
