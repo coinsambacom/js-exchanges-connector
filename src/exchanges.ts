@@ -14,6 +14,7 @@ export { bitstamp } from "./connectors/bitstamp";
 export { brasilbitcoin_otc } from "./connectors/brasilbitcoin_otc";
 export { brasilbitcoin } from "./connectors/brasilbitcoin";
 export { buda } from "./connectors/buda";
+export { bybit } from "./connectors/bybit";
 export { cexio } from "./connectors/cexio";
 export { citcoin } from "./connectors/citcoin";
 export { coinbase_pro } from "./connectors/coinbase_pro";
