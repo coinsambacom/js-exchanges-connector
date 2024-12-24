@@ -21,6 +21,7 @@ export { coinext } from "./connectors/coinext";
 export { coinsbank } from "./connectors/coinsbank";
 export { cryptomarket } from "./connectors/cryptomarket";
 export { decrypto } from "./connectors/decrypto";
+export { digitra } from "./connectors/digitra";
 export { exmo } from "./connectors/exmo";
 export { flowbtc } from "./connectors/flowbtc";
 export { foxbit } from "./connectors/foxbit";
