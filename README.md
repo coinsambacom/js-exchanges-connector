@@ -193,7 +193,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | coinsbank 🌐      | ✓         |               |                      | ✓       |
 | cryptomarket 🇦🇷   | ✓         |               |                      | ✓       |
 | decrypto 🇦🇷       |           |               |                      | ✓       |
-| digitra 🇧🇷        | ✓         |               |                      | ✓       |
+| digitra 🇧🇷        | ✓         | ✓             |                      | ✓       |
 | exmo 🌐           | ✓         | ✓             |                      | ✓       |
 | flowbtc 🇧🇷        | ✓         |               | ✓                    | ✓       |
 | foxbit 🇧🇷         | ✓         | ✓             |                      | ✓       |

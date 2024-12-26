@@ -18,7 +18,32 @@ type BookRes = BaseRes<{
   bids: BookOrder[];
 }>;
 
-type TickerRes = BaseRes<{
+type PaginatedMarkets = BaseRes<Market[]> & {
+  links?: Links;
+};
+
+interface Links {
+  more_results: Moreresults;
+}
+
+interface Moreresults {
+  method: string;
+  href: string;
+}
+
+interface Market {
+  id: string;
+  base_currency: string;
+  quote_currency: string;
+  minimum_order_size: string;
+  increment_size: string;
+  price_increment_size: string;
+  market_order_tolerance: string;
+  enabled: boolean;
+  prices: TickerRes;
+}
+
+type TickerRes = {
   price: string;
   bid: string;
   ask: string;
@@ -27,7 +52,7 @@ type TickerRes = BaseRes<{
   high_24h: string;
   low_24h: string;
   price_change_percent_24h: string;
-}>;
+};
 
 export class digitra<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -38,8 +63,36 @@ export class digitra<T = any> extends Exchange<T> {
     });
   }
 
+  async getAllTickers(): Promise<ITicker[]> {
+    let href:
+      | string
+      | undefined = `/v3/markets?expand=PRICES&page=1&page_size=100`;
+
+    const markets: Market[] = [];
+
+    do {
+      const res = await this.fetch<PaginatedMarkets>(
+        `https://trade.api.digitra.com${href}`,
+      );
+
+      markets.push(...res.result);
+
+      href = res.links?.more_results?.href;
+    } while (href);
+
+    return markets.map((market) => ({
+      exchangeId: this.id,
+      base: market.base_currency,
+      quote: market.quote_currency,
+      last: Number(market.prices.price),
+      ask: Number(market.prices.ask),
+      bid: Number(market.prices.bid),
+      vol: Number(market.prices.base_volume_24h),
+    }));
+  }
+
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    const res = await this.fetch<TickerRes>(
+    const res = await this.fetch<BaseRes<TickerRes>>(
       `${this.baseUrl}/v1/markets/${base}-${quote}/prices`,
     );
 
