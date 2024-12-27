@@ -70,11 +70,29 @@ export class mercadobitcoin<T = any> extends Exchange<T> {
       `${this.baseUrl}/symbols`,
     );
 
-    const symbols = pairs.symbol.join(",");
+    const maxSymbols = 50;
 
-    const res = await this.fetch<IMercadoBitcoinTicker[]>(
-      `${this.baseUrl}/tickers?symbols=${symbols}`,
+    const symbolsChunks: string[] = [];
+    for (let i = 0; i < pairs.symbol.length; i += maxSymbols) {
+      symbolsChunks.push(pairs.symbol.slice(i, i + maxSymbols).join(","));
+    }
+
+    const tickersSettled = await Promise.allSettled(
+      symbolsChunks.map((symbols) =>
+        this.fetch<IMercadoBitcoinTicker[]>(
+          `${this.baseUrl}/tickers?symbols=${symbols}`,
+        ),
+      ),
     );
+
+    const tickers = tickersSettled
+      .filter(
+        (result): result is PromiseFulfilledResult<IMercadoBitcoinTicker[]> =>
+          result.status === "fulfilled",
+      )
+      .map((result) => result.value);
+
+    const res = tickers.flat();
 
     return res.map((ticker) => {
       const [base, quote] = ticker.pair.split("-") as [string, string];
