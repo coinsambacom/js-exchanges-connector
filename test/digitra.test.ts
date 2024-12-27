@@ -1,6 +1,6 @@
 import { IExchange } from "../src/utils/DTOs";
 
-import { testBook, testTicker } from "./utils/helpers";
+import { testAllTickers, testBook, testTicker } from "./utils/helpers";
 
 const CONNECTOR = "digitra",
   BASE = "BTC",
@@ -15,6 +15,14 @@ describe(CONNECTOR, () => {
     const ExchangeClass = Object.values(imported)[0] as { new (): IExchange };
 
     exchange = new ExchangeClass();
+  });
+
+  describe("getAllTickers", () => {
+    it("should return an array of ITicker objects", async () => {
+      const tickers = await exchange.getAllTickers!();
+
+      testAllTickers(tickers);
+    });
   });
 
   describe("getTicker", () => {
