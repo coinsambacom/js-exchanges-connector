@@ -1,6 +1,5 @@
 import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
 import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
-import WebSocket from "ws";
 
 function alternativeRandomInt(min: number, max: number) {
   const timestamp = Date.now();
@@ -14,9 +13,6 @@ const WEBSOCKET_TIMEOUT_MS = 5000;
 
 interface IAlphapointConstructorArgs<T>
   extends IExchangeBaseConstructorArgs<T> {
-  /**
-   * alphapoint websocket url
-   */
   websocketUrl: string;
 }
 
@@ -41,8 +37,7 @@ type SubscribeLevel2 = [
   number, // Price
   number, // ProductPairCode
   number, // Quantity
-  // Side 0 bid, 1 ask
-  number,
+  number, // Side 0 bid, 1 ask
 ];
 
 enum ALPHAPOINT_METHOD {
@@ -91,8 +86,8 @@ export class alphapoint<T> extends Exchange<T> {
       }, WEBSOCKET_TIMEOUT_MS);
 
       this.ws = new WebSocket(this.websocketUrl!);
-      this.ws.on("message", (data) => {
-        const parsedData = JSON.parse(data.toString()) as IMessageFrame;
+      this.ws.onmessage = (event) => {
+        const parsedData = JSON.parse(event.data.toString()) as IMessageFrame;
 
         if (this.id === "foxbit" && parsedData.m === 0) {
           parsedData.m = 1;
@@ -110,9 +105,9 @@ export class alphapoint<T> extends Exchange<T> {
         } else if (parsedData.m === ALPHAPOINT_METHOD.EVENT) {
           this.parseEvent(parsedData);
         }
-      });
+      };
       this.resolveMap = new Map();
-      this.ws.once("open", () => {
+      this.ws.onopen = () => {
         this.wsPingInterval = setInterval(() => {
           this.sendFrameToWs({
             m: 0,
@@ -125,10 +120,10 @@ export class alphapoint<T> extends Exchange<T> {
 
         clearTimeout(rejectTimer);
         resolve(this.wsReady);
-      });
+      };
 
-      this.ws.once("close", () => this.eraseWebsocket());
-      this.ws.once("error", () => this.eraseWebsocket());
+      this.ws.onclose = () => this.eraseWebsocket();
+      this.ws.onerror = () => this.eraseWebsocket();
     });
   }
 
@@ -174,7 +169,6 @@ export class alphapoint<T> extends Exchange<T> {
 
   private async unsubscribeBook(InstrumentId: number) {
     this.wsBooks.delete(InstrumentId);
-    // this.wsBooksCbs.clear();
     await this.sendFrameToWs({
       m: ALPHAPOINT_METHOD.UNSUBSCRIBE_FROM_EVENT,
       n: "SubscribeLevel2",
@@ -208,13 +202,13 @@ export class alphapoint<T> extends Exchange<T> {
         }
       }, WEBSOCKET_TIMEOUT_MS);
 
-      this.ws?.send(JSON.stringify(frame), (err) => {
-        if (err) {
-          this.resolveMap!.delete(frame.i);
-          clearTimeout(rejectTimer);
-          reject(err);
-        }
-      });
+      try {
+        this.ws?.send(JSON.stringify(frame));
+      } catch (err) {
+        this.resolveMap!.delete(frame.i);
+        clearTimeout(rejectTimer);
+        reject(err);
+      }
     });
 
     return promise;
