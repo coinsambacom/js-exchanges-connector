@@ -1,7 +1,7 @@
 import { IOrderbook, ITicker } from "../utils/DTOs";
 import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import isNumber from "lodash/isNumber";
 import { Exchange } from "./exchange";
+import { isNumber } from "../utils/utils";
 
 interface IUpexTickerRes {
   DATA: {
