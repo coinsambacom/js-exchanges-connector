@@ -29,7 +29,7 @@ export class trubit<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "trubit",
-      baseUrl: "https://api-spot.trubit.com/openapi/quote/v1/ticker/24hr",
+      baseUrl: "https://api-spot.trubit.com/openapi",
       opts: args?.opts,
     });
   }
@@ -51,7 +51,7 @@ export class trubit<T = any> extends Exchange<T> {
       `${this.baseUrl}/quote/v1/ticker/24hr`,
     );
 
-    return res.map(this.parseTicker);
+    return res.map(this.parseTicker.bind(this));
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
@@ -59,7 +59,7 @@ export class trubit<T = any> extends Exchange<T> {
       `${this.baseUrl}/quote/v1/ticker/24hr?symbol=${base}${quote}`,
     );
 
-    return this.parseTicker(res);
+    return { ...this.parseTicker(res), ...{ base, quote } };
   }
 
   private parseOrder(order: OrderbookOrder): IOrderbookOrder {
@@ -71,7 +71,7 @@ export class trubit<T = any> extends Exchange<T> {
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
     const res = await this.fetch<Orderbook>(
-      `${this.baseUrl}/quote/v1/depth?symbol=currencyPair=${base}${quote}&limit=100`,
+      `${this.baseUrl}/quote/v1/depth?symbol=${base}${quote}&limit=100`,
     );
 
     return {
