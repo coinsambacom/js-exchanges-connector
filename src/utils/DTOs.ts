@@ -136,12 +136,15 @@ export interface IExchange {
 export enum FetcherRequisitionMethods {
   GET = "get",
   POST = "post",
+  PUT = "put",
+  DELETE = "delete",
+  PATCH = "patch",
 }
 
 export interface FetcherObjectArgs {
   url: string;
   method: FetcherRequisitionMethods;
-  headers: Record<string, string | number | boolean>;
+  headers?: Record<string, string | number | boolean>;
   data?: Record<string, any>;
   opts?: any;
 }

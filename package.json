@@ -1,7 +1,7 @@
 {
   "name": "@coinsamba/js-exchanges-connector",
   "description": "Collection of JavaScript implementations of cryptocurrency exchange APIs",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "repository": "git@github.com:coinsambacom/js-exchanges-connector.git",
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "prepare": "yarn run --silent build",
     "build": "tsc",
     "pretest": "yarn run build",
-    "test": "mocha -r ts-node/register test/**.test.ts",
+    "test": "mocha -r ts-node/register test/**.test.ts --timeout 10000",
     "lint": "eslint .",
     "checks": "yarn test && yarn run lint",
     "refresh": "yarn run clean && yarn ci",
