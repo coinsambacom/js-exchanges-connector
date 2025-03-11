@@ -2,11 +2,11 @@ import { IExchange } from "../src/utils/DTOs";
 
 import { testAllTickers, testBook, testTicker } from "./utils/helpers";
 
-const CONNECTOR = "trubit",
+const CONNECTOR = "gateio",
   BASE = "BTC",
-  QUOTE = "BRL";
+  QUOTE = "USDT";
 
-describe(CONNECTOR, () => {
+describe.only(CONNECTOR, () => {
   let exchange: IExchange;
 
   beforeEach(async () => {

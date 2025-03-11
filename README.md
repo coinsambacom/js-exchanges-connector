@@ -2,7 +2,11 @@
 
 An open source JavaScript library for fetching cryptocurrency exchanges
 
-[<img src="https://api.gitsponsors.com/api/badge/img?id=390396345" height="20">](https://api.gitsponsors.com/api/badge/link?p=KrgdKlAz9G5H8q8A2PbjU28NjwMmxDN2xMI9xH8RJr4I3bXEyBialV9vw5uOkSBVdAd0jzYXT/PsCK1OyrUL2lB3mEZLCXRjpDCMNbP5tYGxK2pdXaPdf6SqImkwWWTk03xubKCDI7dkvwHTER/KrQ==)
+## Advantages
+
+- **Zero Dependencies**: This library has no external dependencies, making it lightweight and reducing security risks
+- Simple and consistent API across all supported exchanges
+- Typescript support
 
 # Instalation
 
@@ -17,7 +21,7 @@ or
 Import your favorite exchange connector
 
 ```JavaScript
-import { bitpreco } from '@coinsamba/js-exchanges-connector';
+import { gateio } from '@coinsamba/js-exchanges-connector';
 ```
 
 Getters: all connectors have this same getters used to verify if the connector have an implementation of desired method.
@@ -26,30 +30,30 @@ Getters: all connectors have this same getters used to verify if the connector h
 /**
  * will return true if this exchange has the method that return all tickers with all available quote
  */
-console.log(bitpreco.hasAllTickers);
+console.log(gateio.hasAllTickers);
 
 /**
  * will return true if this exchange has the method that return all tickers with specific quote as argument
  */
-console.log(bitpreco.hasAllTickersByQuote);
+console.log(gateio.hasAllTickersByQuote);
 ```
 
 ```JavaScript
-import { pagcripto, binance } from '@coinsamba/js-exchanges-connector';
+import { bybit, binance } from '@coinsamba/js-exchanges-connector';
 
-pagcripto.getTicker('BTC', 'BRL').then(ticker => console.log(ticker));
+bybit.getTicker('BTC', 'USDT').then(ticker => console.log(ticker));
 // will return the ticker in the specified market
 // {
-//     exchangeId: "pagcripto",
+//     exchangeId: "bybit",
 //     base: "BTC",
-//     quote: "BRL",
+//     quote: "USDT",
 //     last: 100000,
 //     ask: 100000,
 //     bid: 100000,
 //     vol: 16,
 // }
 
-pagcripto.getBook('BTC', 'BRL').then(book => console.log(book));
+bybit.getBook('BTC', 'USDT').then(book => console.log(book));
 // will return orderbook of specified market
 // {
 //     asks: [{price: 1000, amount: 1}],
@@ -57,22 +61,22 @@ pagcripto.getBook('BTC', 'BRL').then(book => console.log(book));
 // }
 
 
-pagcripto.getAllTickersByQuote('BRL').then(tickers => console.log(tickers));
+bybit.getAllTickersByQuote('USDT').then(tickers => console.log(tickers));
 // will return all tickers in the specified market
 // [
 //     {
-//         exchangeId: "pagcripto",
+//         exchangeId: "bybit",
 //         base: "BTC",
-//         quote: "BRL",
+//         quote: "USDT",
 //         last: 100000,
 //         ask: 100000,
 //         bid: 100000,
 //         vol: 16,
 //     },
 //     {
-//         exchangeId: "pagcripto",
+//         exchangeId: "bybit",
 //         base: "ETH",
-//         quote: "BRL",
+//         quote: "USDT",
 //         last: 100000,
 //         ask: 100000,
 //         bid: 100000,
@@ -108,7 +112,7 @@ binance.getAllTickers().then(tickers => console.log(tickers));
 
 # Custom fetcher
 
-You can use a custom fetcher, just create a class that implement `ICustomFetcher` interface, and call ` FetcherHandler.setFetcher(new MyFetcher());` to start using your custom fetcher.
+You can use a custom fetcher, just create a class that implement `ICustomFetcher` interface, and call `FetcherHandler.setFetcher(new MyFetcher());` to start using your custom fetcher.
 This is cool because you can define proxy or any different strategy to fetch the exchanges APIs.
 
 ```JavaScript
