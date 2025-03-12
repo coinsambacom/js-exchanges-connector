@@ -2,7 +2,33 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../utils/DTOs";
+import { FetcherRequisitionMethods, IOrderbook, ITicker } from "../utils/DTOs";
+
+type BrasilBitcoinBaseRes = {
+  success: boolean;
+  serverTime: number;
+};
+
+type BrasilBitcoinSymbol = {
+  symbol: string;
+  quoteCurrency: string;
+  askPrice: string;
+  bidPrice: string;
+  priceChangePercent: number;
+  isFrozen: number;
+  volume: string;
+  quoteVolume: string;
+  baseCurrency: string;
+  highPrice: string;
+  lowPrice: string;
+  lastPrice: string;
+  openPrice: string;
+};
+
+type BrasilBitcoinOrderbookOrder = {
+  "0": string;
+  "1": string;
+};
 
 export class brasilbitcoin<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
@@ -14,31 +40,67 @@ export class brasilbitcoin<T = any> extends Exchange<T> {
   }
 
   async getTicker(base: string, quote: string): Promise<ITicker> {
-    const res = await this.fetch(`${this.baseUrl}/prices/${base}`);
+    const res = await this.fetch({
+      url: `${this.baseUrl}/prices/${base}`,
+      method: FetcherRequisitionMethods.GET,
+    });
 
     return {
       exchangeId: this.id,
       base,
       quote,
-      last: res.last,
-      ask: res.sell,
-      bid: res.buy,
-      vol: res.vol,
+      last: parseFloat(res.last),
+      ask: parseFloat(res.sell),
+      bid: parseFloat(res.buy),
+      vol: parseFloat(res.vol),
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getAllTickers(): Promise<ITicker[]> {
+    const res = await this.fetch<
+      BrasilBitcoinBaseRes & {
+        symbols: BrasilBitcoinSymbol[];
+      }
+    >({
+      url: `${this.baseUrl}/v2/summary`,
+      method: FetcherRequisitionMethods.GET,
+    });
+
+    return res.symbols.map((s) => ({
+      exchangeId: this.id,
+      base: s.baseCurrency,
+      quote: s.quoteCurrency,
+      last: parseFloat(s.lastPrice),
+      ask: parseFloat(s.askPrice),
+      bid: parseFloat(s.bidPrice),
+      vol: parseFloat(s.volume),
+    }));
+  }
+
   async getBook(base: string, quote: string): Promise<IOrderbook> {
-    const res = await this.fetch(`${this.baseUrl}/orderbook/${base}`);
+    const res = await this.fetch<
+      BrasilBitcoinBaseRes & {
+        orders: {
+          bids: BrasilBitcoinOrderbookOrder[];
+          asks: BrasilBitcoinOrderbookOrder[];
+        };
+      }
+    >({
+      url: `${this.baseUrl}/v2/orderbook/${base}${quote}`,
+      method: FetcherRequisitionMethods.GET,
+      data: {
+        limit: 100,
+      },
+    });
 
     return {
-      asks: res.sell.map((o: { preco: number; quantidade: number }) => ({
-        price: o.preco,
-        amount: o.quantidade,
+      asks: res.orders.asks.map((order) => ({
+        price: parseFloat(order["0"]),
+        amount: parseFloat(order["1"]),
       })),
-      bids: res.buy.map((o: { preco: number; quantidade: number }) => ({
-        price: o.preco,
-        amount: o.quantidade,
+      bids: res.orders.bids.map((order) => ({
+        price: parseFloat(order["0"]),
+        amount: parseFloat(order["1"]),
       })),
     };
   }
