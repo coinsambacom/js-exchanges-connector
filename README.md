@@ -189,7 +189,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | bitpreco 🇧🇷       | ✓         |               | ✓                    | ✓       |
 | bitso 🇲🇽          | ✓         |               |                      | ✓       |
 | bitstamp          | ✓         |               |                      | ✓       |
-| brasilbitcoin 🇧🇷  | ✓         |               |                      | ✓       |
+| brasilbitcoin 🇧🇷  | ✓         | ✓             |                      | ✓       |
 | buda 🇨🇴🇵🇪🇦🇷🇨🇱     | ✓         |               |                      | ✓       |
 | bybit 🌐          | ✓         |               | ✓                    | ✓       |
 | cexio 🌐          | ✓         |               | ✓                    | ✓       |
