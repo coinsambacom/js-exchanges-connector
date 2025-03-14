@@ -190,6 +190,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | bitso 🇲🇽          | ✓         |               |                      | ✓       |
 | bitstamp          | ✓         |               |                      | ✓       |
 | brasilbitcoin 🇧🇷  | ✓         | ✓             |                      | ✓       |
+| btcmarkets 🇦🇺     | ✓         | ✓             |                      | ✓       |
 | buda 🇨🇴🇵🇪🇦🇷🇨🇱     | ✓         |               |                      | ✓       |
 | bybit 🌐          | ✓         |               | ✓                    | ✓       |
 | cexio 🌐          | ✓         |               | ✓                    | ✓       |
