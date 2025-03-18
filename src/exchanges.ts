@@ -41,6 +41,7 @@ export { pagcripto_otc } from "./connectors/pagcripto_otc";
 export { poloniex } from "./connectors/poloniex";
 export { satoshitango } from "./connectors/satoshitango";
 export { trubit } from "./connectors/trubit";
+export { upbit, upbit_id, upbit_sg } from "./connectors/upbit";
 export { upcambio } from "./connectors/upcambio";
 export { kucoin } from "./connectors/kucoin";
 export { quidax } from "./connectors/quidax";

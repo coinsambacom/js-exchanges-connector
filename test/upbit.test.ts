@@ -5,7 +5,7 @@ import { expectPropertyTypes, testBook } from "./utils/helpers";
 
 const CONNECTOR = "upbit",
   BASE = "BTC",
-  QUOTE = "SGD";
+  QUOTE = "KRW";
 
 describe.only(CONNECTOR, () => {
   let exchange: IExchange;

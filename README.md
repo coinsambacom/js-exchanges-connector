@@ -221,6 +221,8 @@ FetcherHandler.setFetcher(new MyFetcher());
 | satoshitango 🇦🇷   |           |               | ✓                    | ✓       |
 | trubit 🌐         | ✓         | ✓             |                      | ✓       |
 | upbit 🇰🇷          |           |               | ✓                    | ✓       |
+| upbit_id 🇮🇩       |           |               | ✓                    | ✓       |
+| upbit_sg 🇸🇬       |           |               | ✓                    | ✓       |
 | upcambio 🇧🇷       | ✓         |               |                      | ✓       |
 
 ## Known Whitelabel Platforms
