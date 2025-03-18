@@ -2,7 +2,6 @@ import {
   Exchange,
   IExchangeImplementationConstructorArgs,
 } from "../interfaces/exchange";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
 import { FetcherRequisitionMethods, IOrderbook, ITicker } from "../utils/DTOs";
 
 interface upbitTickerRes {
