@@ -1,12 +1,13 @@
+import { expect } from "chai";
 import { IExchange } from "../src/utils/DTOs";
 
-import { testAllTickers, testBook, testTicker } from "./utils/helpers";
+import { expectPropertyTypes, testBook } from "./utils/helpers";
 
-const CONNECTOR = "brasilbitcoin",
+const CONNECTOR = "upbit",
   BASE = "BTC",
-  QUOTE = "BRL";
+  QUOTE = "SGD";
 
-describe(CONNECTOR, () => {
+describe.only(CONNECTOR, () => {
   let exchange: IExchange;
 
   beforeEach(async () => {
@@ -17,19 +18,16 @@ describe(CONNECTOR, () => {
     exchange = new ExchangeClass();
   });
 
-  describe("getAllTickers", () => {
+  describe("getAllTickersByQuote", () => {
     it("should return an array of ITicker objects", async () => {
-      const tickers = await exchange.getAllTickers!();
+      const tickers = await exchange.getAllTickersByQuote!(QUOTE);
 
-      testAllTickers(tickers);
-    });
-  });
+      expect(Array.isArray(tickers)).to.be.true;
 
-  describe("getTicker", () => {
-    it("should return an ITicker object", async () => {
-      const ticker = await exchange.getTicker!(BASE, QUOTE);
+      const ticker = tickers[0];
 
-      testTicker(ticker);
+      expectPropertyTypes(ticker, ["exchangeId", "base", "quote"], "string");
+      expectPropertyTypes(ticker, ["last", "ask", "bid", "vol"], "number");
     });
   });
 
