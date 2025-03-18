@@ -220,6 +220,7 @@ FetcherHandler.setFetcher(new MyFetcher());
 | quidax 🇳🇬         |           |               | ✓                    | ✓       |
 | satoshitango 🇦🇷   |           |               | ✓                    | ✓       |
 | trubit 🌐         | ✓         | ✓             |                      | ✓       |
+| upbit 🇰🇷          |           |               | ✓                    | ✓       |
 | upcambio 🇧🇷       | ✓         |               |                      | ✓       |
 
 ## Known Whitelabel Platforms
