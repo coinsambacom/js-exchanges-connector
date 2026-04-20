@@ -1,7 +1,7 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert";
-import { bitget } from "../src/connectors/bitget.js";
-import { expectPropertyTypes, testBook } from "./utils/helpers.js";
+import { bitget } from "../dist/connectors/bitget.js";
+import { expectPropertyTypes, testBook } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "BRL";

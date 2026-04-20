@@ -1,8 +1,8 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert";
-import { isistrade } from "../src/connectors/isistrade.js";
+import { isistrade } from "../dist/connectors/isistrade.js";
 
-import { expectPropertyTypes, testBook } from "./utils/helpers.js";
+import { expectPropertyTypes, testBook } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "BRL";

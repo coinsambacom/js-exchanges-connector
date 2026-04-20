@@ -1,8 +1,8 @@
-import { describe, it, beforeEach } from 'node:test';
-import assert from 'node:assert';
-import { paxos } from '../src/connectors/paxos.js';
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { paxos } from "../dist/connectors/paxos.js";
 
-import { testBook, testTicker } from './utils/helpers.js';
+import { testBook, testTicker } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "USD";

@@ -1,8 +1,8 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert";
-import { pagcripto } from "../src/connectors/pagcripto.js";
+import { pagcripto } from "../dist/connectors/pagcripto.js";
 
-import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers.js";
+import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "BRL";

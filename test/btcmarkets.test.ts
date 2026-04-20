@@ -1,8 +1,8 @@
-import { describe, it, beforeEach } from 'node:test';
-import assert from 'node:assert';
-import { IExchange } from "../src/utils/DTOs.js";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import type { IExchange } from "../src/utils/DTOs.ts";
 
-import { testAllTickers, testBook, testTicker } from './utils/helpers.js';
+import { testAllTickers, testBook, testTicker } from "./utils/helpers.ts";
 
 const CONNECTOR = "btcmarkets",
   BASE = "BTC",
@@ -12,7 +12,7 @@ describe.only(CONNECTOR, () => {
   let exchange: IExchange;
 
   beforeEach(async () => {
-    const imported = await import(`../src/connectors/${CONNECTOR}`);
+    const imported = await import(`../dist/connectors/${CONNECTOR}.js`);
 
     const ExchangeClass = Object.values(imported)[0] as { new (): IExchange };
 

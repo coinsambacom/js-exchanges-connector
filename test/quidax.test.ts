@@ -1,8 +1,8 @@
 import { describe, it, beforeEach } from "node:test";
 import assert from "node:assert";
-import { quidax } from "../src/connectors/quidax.js";
+import { quidax } from "../dist/connectors/quidax.js";
 
-import { expectPropertyTypes, testBook } from "./utils/helpers.js";
+import { expectPropertyTypes, testBook } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "NGN";

@@ -1,8 +1,8 @@
-import { describe, it, beforeEach } from 'node:test';
-import assert from 'node:assert';
-import { okx } from '../src/connectors/okx.js';
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { okx } from "../dist/connectors/okx.js";
 
-import { testAllTickers, testBook, testTicker } from './utils/helpers.js';
+import { testAllTickers, testBook, testTicker } from "./utils/helpers.ts";
 
 const BASE = "BTC",
   QUOTE = "BRL";

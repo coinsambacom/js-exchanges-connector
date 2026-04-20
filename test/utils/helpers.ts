@@ -1,5 +1,9 @@
 import assert from "node:assert";
-import { IOrderbook, ITicker, IOrderbookOrder } from "../../src/utils/DTOs.js";
+import type {
+  IOrderbook,
+  ITicker,
+  IOrderbookOrder,
+} from "../../src/utils/DTOs.ts";
 
 /**
  * Verifies the property types of an object using Node.js assertions.

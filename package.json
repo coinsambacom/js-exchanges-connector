@@ -29,7 +29,7 @@
     "prepare": "pnpm run --silent build",
     "build": "tsc",
     "test": "node --experimental-strip-types --test 'test/**/*.test.ts'",
-    "lint": "eslint .",
+    "lint": "tsc --noEmit",
     "checks": "pnpm test && pnpm run lint",
     "refresh": "pnpm run clean && pnpm install",
     "clear": "rm -rf node_modules dist"
