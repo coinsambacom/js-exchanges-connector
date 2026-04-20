@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from '../interfaces/exchange.js';
-import { IOrderbook, IOrderbookOrder, ITicker } from '../utils/DTOs.js';
+} from "../interfaces/exchange.js";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs.js";
 
 interface BitgetBaseRes<T> {
   code: string;
@@ -12,40 +12,43 @@ interface BitgetBaseRes<T> {
 }
 
 interface BitgetProduct {
-  baseCoin: string;
-  buyLimitPriceRatio: string;
-  makerFeeRate: string;
-  maxOrderNum: string;
-  maxTradeAmount: string;
-  minTradeAmount: string;
-  minTradeUSDT: string;
-  priceScale: string;
-  quantityScale: string;
-  quoteCoin: string;
-  quotePrecision: string;
-  sellLimitPriceRatio: string;
-  status: string;
   symbol: string;
-  symbolName: string;
+  baseCoin: string;
+  quoteCoin: string;
+  minTradeAmount: string;
+  maxTradeAmount: string;
   takerFeeRate: string;
+  makerFeeRate: string;
+  pricePrecision: string;
+  quantityPrecision: string;
+  quotePrecision: string;
+  minTradeUSDT: string;
+  status: string;
+  buyLimitPriceRatio: string;
+  sellLimitPriceRatio: string;
+  areaSymbol: string;
+  orderQuantity: string;
+  openTime: string;
+  offTime: string;
 }
 
 interface BitgetTicker {
-  askSz: string;
-  baseVol: string;
-  bidSz: string;
-  buyOne: string;
-  change: string;
-  changeUtc: string;
-  close: string;
-  high24h: string;
-  low24h: string;
-  openUtc0: string;
-  quoteVol: string;
-  sellOne: string;
   symbol: string;
+  high24h: string;
+  open: string;
+  low24h: string;
+  lastPr: string;
+  quoteVolume: string;
+  baseVolume: string;
+  usdtVolume: string;
+  bidPr: string;
+  askPr: string;
+  bidSz: string;
+  askSz: string;
+  openUtc: string;
   ts: string;
-  usdtVol: string;
+  changeUtc24h: string;
+  change24h: string;
 }
 
 type BitgetOrderbookOrder = [string, string];
@@ -60,24 +63,24 @@ export class bitget<T = any> extends Exchange<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {
     super({
       id: "bitget",
-      baseUrl: "https://api.bitget.com/api",
+      baseUrl: "https://api.bitget.com",
       opts: args?.opts,
     });
   }
 
   async getAllTickers(): Promise<ITicker[]> {
     const { data: markets } = await this.fetch<BitgetBaseRes<BitgetProduct[]>>(
-      `${this.baseUrl}/spot/v1/public/products`,
+      `${this.baseUrl}/api/v2/spot/public/symbols`,
     );
     const { data: tickers } = await this.fetch<BitgetBaseRes<BitgetTicker[]>>(
-      `${this.baseUrl}/spot/v1/market/tickers`,
+      `${this.baseUrl}/api/v2/spot/market/tickers`,
     );
 
     const res: ITicker[] = [];
 
     for (const market of markets) {
       const ticker = tickers.find(
-        (tickerItem) => tickerItem.symbol === market.symbolName,
+        (tickerItem) => tickerItem.symbol === market.symbol,
       );
 
       if (ticker) {
@@ -85,10 +88,10 @@ export class bitget<T = any> extends Exchange<T> {
           exchangeId: this.id,
           base: market.baseCoin,
           quote: market.quoteCoin,
-          ask: Number(ticker.sellOne),
-          bid: Number(ticker.buyOne),
-          last: Number(ticker.close),
-          vol: Number(ticker.baseVol),
+          ask: Number(ticker.askPr),
+          bid: Number(ticker.bidPr),
+          last: Number(ticker.lastPr),
+          vol: Number(ticker.baseVolume),
         });
       }
     }
@@ -105,7 +108,7 @@ export class bitget<T = any> extends Exchange<T> {
 
   async getBook(base: string, quote: string): Promise<IOrderbook> {
     const res = await this.fetch<BitgetBaseRes<BitgetOrderbook>>(
-      `${this.baseUrl}/v2/spot/market/orderbook?symbol=${base}${quote}&type=step0&limit=100`,
+      `${this.baseUrl}/api/v2/spot/market/orderbook?symbol=${base}${quote}&type=step0&limit=100`,
     );
 
     return {

@@ -6,7 +6,7 @@ import { testAllTickers, testBook, testTicker } from "./utils/helpers.ts";
 
 const CONNECTOR = "trubit",
   BASE = "BTC",
-  QUOTE = "BRL";
+  QUOTE = "USDT";
 
 describe(CONNECTOR, () => {
   let exchange: IExchange;
