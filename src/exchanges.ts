@@ -13,6 +13,7 @@ export { bitso } from "./connectors/bitso";
 export { bitstamp } from "./connectors/bitstamp";
 export { brasilbitcoin_otc } from "./connectors/brasilbitcoin_otc";
 export { brasilbitcoin } from "./connectors/brasilbitcoin";
+export { btcmarkets } from "./connectors/btcmarkets";
 export { buda } from "./connectors/buda";
 export { bybit } from "./connectors/bybit";
 export { cexio } from "./connectors/cexio";

@@ -2,11 +2,11 @@ import { IExchange } from "../src/utils/DTOs";
 
 import { testAllTickers, testBook, testTicker } from "./utils/helpers";
 
-const CONNECTOR = "brasilbitcoin",
+const CONNECTOR = "btcmarkets",
   BASE = "BTC",
-  QUOTE = "BRL";
+  QUOTE = "AUD";
 
-describe(CONNECTOR, () => {
+describe.only(CONNECTOR, () => {
   let exchange: IExchange;
 
   beforeEach(async () => {
