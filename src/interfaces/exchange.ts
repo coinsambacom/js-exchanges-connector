@@ -1,6 +1,6 @@
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherArgs, FetcherObjectArgs, IExchange } from "../utils/DTOs";
-import { FetcherHandler } from "../utils/Fetcher";
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
+import { FetcherArgs, FetcherObjectArgs, IExchange } from '../utils/DTOs.js';
+import { FetcherHandler } from '../utils/Fetcher.js';
 
 /**
  * Represents the arguments for signing requests.

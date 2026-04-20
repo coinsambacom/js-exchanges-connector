@@ -3,7 +3,7 @@ import {
   IExchangeImplementationConstructorArgs,
   SignerArguments,
   SignerReturn,
-} from "../interfaces/exchange";
+} from '../interfaces/exchange.js';
 import {
   CancelOrderArguments,
   GetOrderArguments,
@@ -18,8 +18,8 @@ import {
   GetHistoryArguments,
   History,
   FetcherRequisitionMethods,
-} from "../utils/DTOs";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
+} from '../utils/DTOs.js';
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
 
 interface PagCriptoBaseRes {
   code: string;

@@ -3,13 +3,13 @@ import {
   IExchangeImplementationConstructorArgs,
   SignerArguments,
   SignerReturn,
-} from "../interfaces/exchange";
+} from '../interfaces/exchange.js';
 import {
   FetcherRequisitionMethods,
   IBalance,
   IOrderbook,
   ITicker,
-} from "../utils/DTOs";
+} from '../utils/DTOs.js';
 
 interface BitprecoOrderbookRes {
   bids?: BitprecoOrderbookOrder[];

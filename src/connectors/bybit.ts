@@ -1,13 +1,17 @@
 import crypto from "crypto";
-import { IOrderbook, ITicker, FetcherRequisitionMethods } from "../utils/DTOs";
+import {
+  IOrderbook,
+  ITicker,
+  FetcherRequisitionMethods,
+} from "../utils/DTOs.js";
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
   SignerArguments,
   SignerReturn,
-} from "../interfaces/exchange";
-import { ConnectorError } from "../utils/ConnectorError";
-import { ConnectorErrors } from "..";
+} from "../interfaces/exchange.js";
+import { ConnectorError } from "../utils/ConnectorError.js";
+import { ConnectorErrors } from "../index.js";
 import {
   CancelOrderArguments,
   GetOrderArguments,
@@ -16,7 +20,7 @@ import {
   OrderSide,
   OrderStatus,
   PlaceOrderArguments,
-} from "../utils/DTOs";
+} from "../utils/DTOs.js";
 
 interface BaseRes<T> {
   retCode: number;

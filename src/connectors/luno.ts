@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { IOrderbook, IOrderbookOrder, ITicker } from '../utils/DTOs.js';
 
 interface Order {
   price: string;

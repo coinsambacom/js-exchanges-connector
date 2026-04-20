@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbookOrder, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { IOrderbookOrder, ITicker } from '../utils/DTOs.js';
 
 interface ICitcoinTickerRes {
   date: string;

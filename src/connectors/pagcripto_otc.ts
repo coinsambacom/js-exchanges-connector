@@ -1,10 +1,10 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../utils/DTOs";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { isNumber, omit } from "../utils/utils";
+} from '../interfaces/exchange.js';
+import { IOrderbook, ITicker } from '../utils/DTOs.js';
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
+import { isNumber, omit } from '../utils/utils.js';
 
 interface PagCriptoTicker {
   volume: string;

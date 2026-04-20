@@ -1,4 +1,8 @@
-import { ICustomFetcher, FetcherArgs, FetcherRequisitionMethods } from "./DTOs";
+import {
+  ICustomFetcher,
+  FetcherArgs,
+  FetcherRequisitionMethods,
+} from "./DTOs.js";
 
 class DefaultFetcher implements ICustomFetcher {
   /**
@@ -9,82 +13,79 @@ class DefaultFetcher implements ICustomFetcher {
 
   private async parseFetchError(response: Response): Promise<Error> {
     try {
-      // Try to parse as JSON first to get more detailed error info
       const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
+      if (contentType?.includes("application/json")) {
         const errorData = await response.json();
         return new Error(
-          `HTTP Error ${response.status} - ${response.url} - ${JSON.stringify(
-            errorData,
-          )}`,
-        );
-      } else {
-        const text = await response.text();
-        return new Error(
-          `HTTP Error ${response.status} - ${response.url} - ${text}`,
+          `HTTP ${response.status}: ${response.url} - ${JSON.stringify(errorData)}`,
         );
       }
-    } catch (e) {
-      // If JSON parsing fails, fall back to status text
+      const text = await response.text();
+      return new Error(`HTTP ${response.status}: ${response.url} - ${text}`);
+    } catch {
       return new Error(
-        `HTTP Error ${response.status} - ${response.url} - ${response.statusText}`,
+        `HTTP ${response.status}: ${response.url} - ${response.statusText}`,
       );
     }
   }
 
   async fetch<ResponseType>(args: FetcherArgs): Promise<ResponseType> {
-    let url: string;
-    const options: RequestInit = {};
-    options.headers = new Headers();
-
-    // Create AbortController for timeout handling
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.requestTimeout);
-    options.signal = controller.signal;
-    options.headers.append("Accept", "application/json");
-
-    if (typeof args === "string") {
-      url = args;
-      options.method = FetcherRequisitionMethods.GET;
-    } else {
-      url = args.url;
-      options.method = args.method || FetcherRequisitionMethods.GET;
-
-      if (args.headers) {
-        for (const [key, value] of Object.entries(args.headers)) {
-          options.headers.append(key, String(value));
-        }
-      }
-
-      if (args.data) {
-        if (
-          options.method === FetcherRequisitionMethods.POST ||
-          options.method === FetcherRequisitionMethods.PUT ||
-          options.method === FetcherRequisitionMethods.PATCH
-        ) {
-          // Only add content-type for requests with body
-          if (!options.headers.has("Content-Type")) {
-            options.headers.append("Content-Type", "application/json");
-          }
-          options.body = JSON.stringify(args.data);
-        } else if (
-          options.method === FetcherRequisitionMethods.GET ||
-          options.method === FetcherRequisitionMethods.DELETE
-        ) {
-          // Add query parameters
-          const params = new URLSearchParams();
-          Object.entries(args.data).forEach(([key, value]) => {
-            params.append(key, String(value));
-          });
-          url += (url.includes("?") ? "&" : "?") + params.toString();
-        }
-      }
-    }
 
     try {
-      const response = await fetch(url, options);
+      let url: string;
+      const options: RequestInit = {
+        signal: controller.signal,
+        headers: {
+          Accept: "application/json",
+        },
+      };
 
-      // Clear timeout as request completed
+      if (typeof args === "string") {
+        url = args;
+        options.method = FetcherRequisitionMethods.GET;
+      } else {
+        url = args.url;
+        options.method = args.method || FetcherRequisitionMethods.GET;
+
+        if (args.headers) {
+          options.headers = {
+            ...options.headers,
+            ...Object.fromEntries(
+              Object.entries(args.headers).map(([k, v]) => [k, String(v)]),
+            ),
+          };
+        }
+
+        if (args.data) {
+          const isBodyMethod = [
+            FetcherRequisitionMethods.POST,
+            FetcherRequisitionMethods.PUT,
+            FetcherRequisitionMethods.PATCH,
+          ].includes(options.method as FetcherRequisitionMethods);
+
+          if (isBodyMethod) {
+            if (
+              !(options.headers as Record<string, string>)?.["Content-Type"]
+            ) {
+              options.headers = {
+                ...options.headers,
+                "Content-Type": "application/json",
+              } as Record<string, string>;
+            }
+            options.body = JSON.stringify(args.data);
+          } else {
+            const params = new URLSearchParams();
+            for (const [key, value] of Object.entries(args.data)) {
+              params.append(key, String(value));
+            }
+            url += (url.includes("?") ? "&" : "?") + params.toString();
+          }
+        }
+      }
+
+      const response = await fetch(url, options);
       clearTimeout(timeoutId);
 
       if (!response.ok) {
@@ -92,42 +93,33 @@ class DefaultFetcher implements ICustomFetcher {
       }
 
       if (response.status === 204) {
-        // No content response
         return {} as ResponseType;
       }
 
       const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("application/json")) {
-        const data: ResponseType = await response.json();
-        return data;
-      } else {
-        // Handle non-JSON responses more gracefully
-        const text = await response.text();
-        try {
-          // Try to parse as JSON anyway (some APIs don't set proper content type)
-          return JSON.parse(text) as ResponseType;
-        } catch {
-          // If not JSON, return the text as is
-          return text as unknown as ResponseType;
-        }
+      if (contentType?.includes("application/json")) {
+        return (await response.json()) as ResponseType;
+      }
+
+      const text = await response.text();
+      try {
+        return JSON.parse(text) as ResponseType;
+      } catch {
+        return text as unknown as ResponseType;
       }
     } catch (error) {
-      // Clear timeout in case of error
       clearTimeout(timeoutId);
 
       if (error instanceof Error) {
         if (error.name === "AbortError") {
+          const targetUrl = typeof args === "string" ? args : args.url;
           throw new Error(
-            `Request timeout after ${this.requestTimeout / 1000} seconds: ${
-              typeof args === "string" ? args : args.url
-            }`,
+            `Request timeout after ${this.requestTimeout / 1000}s: ${targetUrl}`,
           );
-        } else {
-          throw error;
         }
-      } else {
-        throw new Error(`Unknown error occurred: ${String(error)}`);
+        throw error;
       }
+      throw new Error(`Unknown error: ${String(error)}`);
     }
   }
 }
@@ -163,13 +155,7 @@ class FetcherHandler {
    * @throws Error if a fetcher is not attached or if the request fails.
    */
   async fetch<ResponseType>(args: FetcherArgs): Promise<ResponseType> {
-    if (this.fetcher) {
-      return this.fetcher.fetch<ResponseType>(args);
-    } else {
-      throw new Error(
-        "No fetcher attached. Call setFetcher before making requests.",
-      );
-    }
+    return this.fetcher.fetch<ResponseType>(args);
   }
 }
 

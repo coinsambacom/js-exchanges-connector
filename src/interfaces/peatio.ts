@@ -1,5 +1,5 @@
-import { IOrderbook, ITicker } from "../utils/DTOs";
-import { Exchange } from "./exchange";
+import { IOrderbook, ITicker } from '../utils/DTOs.js';
+import { Exchange } from './exchange.js';
 
 export class peatio<T> extends Exchange<T> {
   async getTicker(base: string, quote: string): Promise<ITicker> {

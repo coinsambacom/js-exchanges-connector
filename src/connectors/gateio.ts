@@ -1,9 +1,9 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { FetcherRequisitionMethods, IOrderbook, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
+import { FetcherRequisitionMethods, IOrderbook, ITicker } from '../utils/DTOs.js';
 
 interface GateIoTickerRes {
   currency_pair: string;

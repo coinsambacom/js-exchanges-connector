@@ -1,5 +1,5 @@
-import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
-import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
+import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs.js";
+import { Exchange, IExchangeBaseConstructorArgs } from "./exchange.js";
 
 function alternativeRandomInt(min: number, max: number) {
   const timestamp = Date.now();
@@ -11,8 +11,9 @@ function alternativeRandomInt(min: number, max: number) {
 
 const WEBSOCKET_TIMEOUT_MS = 5000;
 
-interface IAlphapointConstructorArgs<T>
-  extends IExchangeBaseConstructorArgs<T> {
+interface IAlphapointConstructorArgs<
+  T,
+> extends IExchangeBaseConstructorArgs<T> {
   websocketUrl: string;
 }
 
@@ -52,7 +53,7 @@ export class alphapoint<T> extends Exchange<T> {
   public websocketUrl?: string;
   private ws?: WebSocket;
   public wsReady?: boolean;
-  private wsPingInterval?: NodeJS.Timer;
+  private wsPingInterval?: NodeJS.Timeout;
   private resolveMap?: Map<number, (value: unknown) => void>;
   private wsBooks!: Map<number, AlphapointOrderbook>;
   private wsBooksCbs!: Map<number, ((book: IOrderbook) => void)[]>;

@@ -1,7 +1,8 @@
-import { expect } from "chai";
-import { quidax } from "../src/connectors/quidax";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { quidax } from "../src/connectors/quidax.js";
 
-import { expectPropertyTypes, testBook } from "./utils/helpers";
+import { expectPropertyTypes, testBook } from "./utils/helpers.js";
 
 const BASE = "BTC",
   QUOTE = "NGN";
@@ -17,7 +18,7 @@ describe("quidax", () => {
     it("should return an array of ITicker objects", async () => {
       const tickers = await exchange.getAllTickersByQuote(QUOTE);
 
-      expect(Array.isArray(tickers)).to.be.true;
+      assert.ok(Array.isArray(tickers));
 
       if (tickers.length > 0) {
         const ticker = tickers[0];

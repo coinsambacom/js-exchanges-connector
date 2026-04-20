@@ -1,5 +1,5 @@
-import { IOrderbook, ITicker } from "../utils/DTOs";
-import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
+import { IOrderbook, ITicker } from '../utils/DTOs.js';
+import { Exchange, IExchangeBaseConstructorArgs } from './exchange.js';
 
 interface IBinanceExchangeInfoRes {
   symbols: {

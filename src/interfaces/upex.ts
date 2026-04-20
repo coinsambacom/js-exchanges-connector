@@ -1,7 +1,7 @@
-import { IOrderbook, ITicker } from "../utils/DTOs";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { Exchange } from "./exchange";
-import { isNumber } from "../utils/utils";
+import { IOrderbook, ITicker } from '../utils/DTOs.js';
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
+import { Exchange } from './exchange.js';
+import { isNumber } from '../utils/utils.js';
 
 interface IUpexTickerRes {
   DATA: {

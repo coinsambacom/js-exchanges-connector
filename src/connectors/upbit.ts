@@ -1,5 +1,5 @@
-import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
-import { upbit_interface } from "../interfaces/upbit.interface";
+import { IExchangeImplementationConstructorArgs } from '../interfaces/exchange.js';
+import { upbit_interface } from '../interfaces/upbit.interface.js';
 
 export class upbit<T> extends upbit_interface<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

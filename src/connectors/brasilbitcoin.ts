@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { FetcherRequisitionMethods, IOrderbook, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { FetcherRequisitionMethods, IOrderbook, ITicker } from '../utils/DTOs.js';
 
 type BrasilBitcoinBaseRes = {
   success: boolean;

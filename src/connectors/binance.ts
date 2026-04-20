@@ -1,5 +1,5 @@
-import { bnb } from "../interfaces/bnb";
-import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
+import { bnb } from '../interfaces/bnb.js';
+import { IExchangeImplementationConstructorArgs } from '../interfaces/exchange.js';
 
 export class binance<T> extends bnb<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

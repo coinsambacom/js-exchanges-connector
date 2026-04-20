@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { ITicker } from '../utils/DTOs.js';
 
 interface INoxBitcoinTicker {
   ask: number;

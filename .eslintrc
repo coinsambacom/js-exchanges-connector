@@ -39,8 +39,8 @@
     ],
     "reportUnusedDisableDirectives": true,
     "env": {
-        "es6": true,
-        "browser": false,
+        "es2022": true,
+        "browser": true,
         "node": true
     }
 }

@@ -1,5 +1,5 @@
-import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
-import { peatio } from "../interfaces/peatio";
+import { IExchangeImplementationConstructorArgs } from '../interfaces/exchange.js';
+import { peatio } from '../interfaces/peatio.js';
 
 export class isbit<T> extends peatio<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

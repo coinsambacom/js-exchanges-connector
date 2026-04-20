@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { IOrderbook } from '../utils/DTOs.js';
 
 interface IDecryptoOrderbookOrder {
   precio: number;

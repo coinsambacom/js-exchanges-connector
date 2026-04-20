@@ -1,7 +1,8 @@
-import { expect } from "chai";
-import { isistrade } from "../src/connectors/isistrade";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { isistrade } from "../src/connectors/isistrade.js";
 
-import { expectPropertyTypes, testBook } from "./utils/helpers";
+import { expectPropertyTypes, testBook } from "./utils/helpers.js";
 
 const BASE = "BTC",
   QUOTE = "BRL";
@@ -17,7 +18,7 @@ describe.skip("isistrade", () => {
     it("should return an array of ITicker objects", async () => {
       const tickers = await exchange.getAllTickersByQuote("BRL");
 
-      expect(Array.isArray(tickers)).to.be.true;
+      assert.ok(Array.isArray(tickers));
 
       if (tickers.length > 0) {
         const ticker = tickers[0];

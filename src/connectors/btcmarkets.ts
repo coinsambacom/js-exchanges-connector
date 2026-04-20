@@ -1,13 +1,13 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
+} from '../interfaces/exchange.js';
 import {
   FetcherRequisitionMethods,
   IOrderbook,
   IOrderbookOrder,
   ITicker,
-} from "../utils/DTOs";
+} from '../utils/DTOs.js';
 
 type BtcMarketsMarketRes = {
   marketId: string;

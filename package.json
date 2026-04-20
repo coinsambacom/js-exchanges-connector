@@ -6,10 +6,16 @@
   "author": "Gustavo <gustavo@obex.pw>",
   "license": "MIT",
   "private": false,
-  "type": "commonjs",
+  "type": "module",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "keywords": [
     "exchanges",
     "cryptocurrency",
@@ -20,42 +26,29 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "yarn run --silent build",
+    "prepare": "pnpm run --silent build",
     "build": "tsc",
-    "pretest": "yarn run build",
-    "test": "mocha -r ts-node/register test/**.test.ts --timeout 10000",
+    "test": "node --experimental-strip-types --test 'test/**/*.test.ts'",
     "lint": "eslint .",
-    "checks": "yarn test && yarn run lint",
-    "refresh": "yarn run clean && yarn ci",
-    "clean": "git clean -fX .eslintcache dist/"
+    "checks": "pnpm test && pnpm run lint",
+    "refresh": "pnpm run clean && pnpm install",
+    "clear": "rm -rf node_modules dist"
   },
   "engines": {
-    "node": ">=v22.11.0"
+    "node": ">=24.14.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.6",
-    "@types/debug": "^4.1.7",
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "^5.10.2",
-    "@typescript-eslint/parser": "^5.10.2",
-    "chai": "4.3.10",
-    "dotenv": "^16.3.1",
-    "envalid": "^7.3.1",
-    "eslint": "^8.8.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-ava": "^13.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "mocha": "^10.2.0",
-    "prettier": "^2.5.1",
-    "ts-node-dev": "^2.0.0",
-    "tsc": "^2.0.4",
-    "typescript": "^5.1.6"
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.5.0"
   },
   "dependencies": {},
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@10.6.5"
 }

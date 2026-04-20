@@ -1,19 +1,28 @@
 {
-    "compilerOptions": {
-        "module": "CommonJS",
-        "target": "ES2019",
-        "declaration": true,
-        "outDir": "dist",
-        "rootDir": "src",
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "noErrorTruncation": true,
-        "forceConsistentCasingInFileNames": true,
-        "esModuleInterop": true,
-        "noImplicitAny": false,
-        "skipLibCheck": true
-    },
-    "include": [
-        "src/**/*.ts"
-    ]
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUncheckedIndexedAccess": false,
+    "noErrorTruncation": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts"]
 }

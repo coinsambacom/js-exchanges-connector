@@ -1,9 +1,9 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { ConnectorError, ERROR_TYPES } from "../utils/ConnectorError";
-import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { ConnectorError, ERROR_TYPES } from '../utils/ConnectorError.js';
+import { IOrderbook, IOrderbookOrder, ITicker } from '../utils/DTOs.js';
 
 interface OkxResponse<T> {
   code: string;

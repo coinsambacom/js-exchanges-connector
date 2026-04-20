@@ -1,6 +1,8 @@
-import { IExchange } from "../src/utils/DTOs";
+import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert';
+import { IExchange } from "../src/utils/DTOs.js";
 
-import { testAllTickers, testBook, testTicker } from "./utils/helpers";
+import { testAllTickers, testBook, testTicker } from './utils/helpers.js';
 
 const CONNECTOR = "btcmarkets",
   BASE = "BTC",

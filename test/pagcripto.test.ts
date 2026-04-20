@@ -1,7 +1,8 @@
-import { expect } from "chai";
-import { pagcripto } from "../src/connectors/pagcripto";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { pagcripto } from "../src/connectors/pagcripto.js";
 
-import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers";
+import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers.js";
 
 const BASE = "BTC",
   QUOTE = "BRL";
@@ -17,7 +18,7 @@ describe("pagcripto", () => {
     it("should return an array of ITicker objects", async () => {
       const tickers = await exchange.getAllTickersByQuote("BRL");
 
-      expect(Array.isArray(tickers)).to.be.true;
+      assert.ok(Array.isArray(tickers));
 
       if (tickers.length > 0) {
         const ticker = tickers[0];

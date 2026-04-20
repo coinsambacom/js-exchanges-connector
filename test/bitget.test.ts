@@ -1,6 +1,7 @@
-import { expect } from "chai";
-import { bitget } from "../src/connectors/bitget";
-import { expectPropertyTypes, testBook } from "./utils/helpers";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { bitget } from "../src/connectors/bitget.js";
+import { expectPropertyTypes, testBook } from "./utils/helpers.js";
 
 const BASE = "BTC",
   QUOTE = "BRL";
@@ -16,7 +17,7 @@ describe("bitget", () => {
     it("should return an array of ITicker objects", async () => {
       const tickers = await exchange.getAllTickers();
 
-      expect(Array.isArray(tickers)).to.be.true;
+      assert.ok(Array.isArray(tickers));
 
       if (tickers.length > 0) {
         const ticker = tickers[0];

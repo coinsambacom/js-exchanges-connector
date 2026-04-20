@@ -1,9 +1,9 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook, IOrderbookOrder, ITicker } from "../utils/DTOs";
-import { parseBRLNumberString } from "../utils/utils";
+} from '../interfaces/exchange.js';
+import { IOrderbook, IOrderbookOrder, ITicker } from '../utils/DTOs.js';
+import { parseBRLNumberString } from '../utils/utils.js';
 
 interface BaseRes<T> {
   success: boolean;

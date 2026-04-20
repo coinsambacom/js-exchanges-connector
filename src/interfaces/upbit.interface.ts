@@ -1,5 +1,5 @@
-import { FetcherRequisitionMethods, IOrderbook, ITicker } from "../utils/DTOs";
-import { Exchange, IExchangeBaseConstructorArgs } from "./exchange";
+import { FetcherRequisitionMethods, IOrderbook, ITicker } from '../utils/DTOs.js';
+import { Exchange, IExchangeBaseConstructorArgs } from './exchange.js';
 
 interface UpbitTickerRes {
   market: string;

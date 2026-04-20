@@ -1,5 +1,5 @@
-import { alphapoint } from "../interfaces/alphapoint";
-import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
+import { alphapoint } from '../interfaces/alphapoint.js';
+import { IExchangeImplementationConstructorArgs } from '../interfaces/exchange.js';
 
 export class flowbtc<T> extends alphapoint<T> {
   constructor(args?: IExchangeImplementationConstructorArgs<T>) {

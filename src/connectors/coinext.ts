@@ -1,6 +1,6 @@
-import { alphapoint } from "../interfaces/alphapoint";
-import { IExchangeImplementationConstructorArgs } from "../interfaces/exchange";
-import { ITicker } from "../utils/DTOs";
+import { alphapoint } from '../interfaces/alphapoint.js';
+import { IExchangeImplementationConstructorArgs } from '../interfaces/exchange.js';
+import { ITicker } from '../utils/DTOs.js';
 
 export class coinext<T> extends alphapoint<T> {
   public tickerUrl: string;

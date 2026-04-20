@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../utils/DTOs";
+} from "../interfaces/exchange.js";
+import { IOrderbook, ITicker } from "../utils/DTOs.js";
 
 interface IBitblueTickerRes {
   stats: {
@@ -56,11 +56,11 @@ export class bitblue<T = any> extends Exchange<T> {
     );
 
     return {
-      asks: res["order-book"].ask.map(({ price, order_amount }) => ({
+      asks: res.orderbook.ask.map(({ price, order_amount }: any) => ({
         price,
         amount: order_amount,
       })),
-      bids: res["order-book"].bid.map(({ price, order_amount }) => ({
+      bids: res.orderbook.bid.map(({ price, order_amount }: any) => ({
         price,
         amount: order_amount,
       })),

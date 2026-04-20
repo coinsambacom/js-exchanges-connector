@@ -1,8 +1,8 @@
 import {
   Exchange,
   IExchangeImplementationConstructorArgs,
-} from "../interfaces/exchange";
-import { IOrderbook, ITicker } from "../utils/DTOs";
+} from '../interfaces/exchange.js';
+import { IOrderbook, ITicker } from '../utils/DTOs.js';
 
 interface IBisqTickerRes {
   last: string;

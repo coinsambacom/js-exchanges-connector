@@ -1,8 +1,8 @@
-import { expect } from "chai";
-import { IOrderbook, ITicker } from "../../src/utils/DTOs";
+import assert from "node:assert";
+import { IOrderbook, ITicker, IOrderbookOrder } from "../../src/utils/DTOs.js";
 
 /**
- * Verifies the property types of an object using Jest assertions.
+ * Verifies the property types of an object using Node.js assertions.
  *
  * @param obj The object to be checked.
  * @param properties A list of object properties to be verified.
@@ -14,43 +14,35 @@ export function expectPropertyTypes(
   type: string,
 ) {
   for (const prop of properties) {
-    /**
-     * Checks if the property is present in the object using Jest's `expect(obj).toHaveProperty(prop)`.
-     */
-    expect(obj).to.have.property(String(prop));
-
-    /**
-     * Checks if the property type matches the expected type using Jest's `expect(typeof obj[prop]).toBe(type)`.
-     */
-    expect(typeof obj[prop]).to.equal(type);
+    assert.ok(prop in obj, `Object should have property: ${prop}`);
+    assert.strictEqual(
+      typeof obj[prop],
+      type,
+      `Property ${prop} should be type ${type}`,
+    );
   }
 }
 
-/**
- *
- * TODO update typescript, use another package builder and uncomment this function:
- */
-
-// export function expectPropertyTypes<T = ITicker | IOrderbookOrder>(
-//   obj: T,
-//   properties: (keyof T)[],
-//   type: string,
-// ) {
-//   for (const prop of properties) {
-//     /**
-//      * Checks if the property is present in the object using Jest's `expect(obj).toHaveProperty(prop)`.
-//      */
-//     expect(obj).to.have.property(String(prop));
-
-//     /**
-//      * Checks if the property type matches the expected type using Jest's `expect(typeof obj[prop]).toBe(type)`.
-//      */
-//     expect(typeof obj[prop]).to.equal(type);
-//   }
-// }
+export function expectPropertyTypesGeneric<T = ITicker | IOrderbookOrder>(
+  obj: T,
+  properties: (keyof T)[],
+  type: string,
+) {
+  for (const prop of properties) {
+    assert.ok(
+      prop in (obj as object),
+      `Object should have property: ${String(prop)}`,
+    );
+    assert.strictEqual(
+      typeof obj[prop],
+      type,
+      `Property ${String(prop)} should be type ${type}`,
+    );
+  }
+}
 
 export const testAllTickers = (tickers: ITicker[]) => {
-  expect(Array.isArray(tickers)).to.be.true;
+  assert.ok(Array.isArray(tickers), "Tickers should be an array");
 
   if (tickers.length > 0) {
     for (const ticker of tickers) {
@@ -65,10 +57,10 @@ export const testTicker = (ticker: ITicker) => {
 };
 
 export const testBook = (book: IOrderbook) => {
-  expect(book).to.have.property("asks");
-  expect(book).to.have.property("bids");
-  expect(Array.isArray(book.asks)).to.be.true;
-  expect(Array.isArray(book.bids)).to.be.true;
+  assert.ok("asks" in book, "Book should have asks property");
+  assert.ok("bids" in book, "Book should have bids property");
+  assert.ok(Array.isArray(book.asks), "Book.asks should be an array");
+  assert.ok(Array.isArray(book.bids), "Book.bids should be an array");
 
   if (book.asks.length > 0) {
     const ask = book.asks[0];

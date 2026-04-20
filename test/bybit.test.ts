@@ -1,7 +1,8 @@
-import { expect } from "chai";
-import { IExchange } from "../src/utils/DTOs";
+import { describe, it, beforeEach } from "node:test";
+import assert from "node:assert";
+import { IExchange } from "../src/utils/DTOs.js";
 
-import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers";
+import { expectPropertyTypes, testBook, testTicker } from "./utils/helpers.js";
 
 const CONNECTOR = "bybit",
   BASE = "BTC",
@@ -30,7 +31,7 @@ describe(CONNECTOR, () => {
     it("should return an array of ITicker objects", async () => {
       const tickers = await exchange.getAllTickersByQuote!(QUOTE);
 
-      expect(Array.isArray(tickers)).to.be.true;
+      assert.ok(Array.isArray(tickers));
 
       const ticker = tickers[0];
 
