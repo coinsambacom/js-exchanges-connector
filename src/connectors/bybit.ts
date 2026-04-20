@@ -235,22 +235,21 @@ export class bybit<T> extends Exchange<T> {
 
     const res = await this.fetch<BaseRes<BalanceRes>>(
       this.signer({
-        url: `${this.baseUrl}/v5/account/wallet-balance?accountType=SPOT`,
+        url: `${this.baseUrl}/v5/account/wallet-balance?accountType=UNIFIED`,
         method: FetcherRequisitionMethods.GET,
       }),
     );
 
     const balance: IBalance = {};
 
-    if (res && res.result && res.result.list && res.result.list.length > 0) {
+    if (res?.result?.list?.[0]?.coin) {
       // Access the coin array from the first account in the list
       const coinList = res.result.list[0].coin;
 
-      if (coinList) {
-        for (const item of coinList) {
-          // Use walletBalance as the primary balance value
-          balance[item.coin] = Number(item.walletBalance);
-        }
+      for (const item of coinList) {
+        // Use walletBalance as the primary balance value
+        // Note: walletBalance includes spot borrow amount according to docs
+        balance[item.coin] = Number(item.walletBalance);
       }
     }
 
@@ -335,12 +334,23 @@ export class bybit<T> extends Exchange<T> {
 
     const symbol = `${base}${quote}`;
 
-    const res = await this.fetch<BaseRes<{ list: OrderRes[] }>>(
+    // Try to get order from active orders first
+    let res = await this.fetch<BaseRes<{ list: OrderRes[] }>>(
       this.signer({
-        url: `${this.baseUrl}/v5/order/history?category=spot&symbol=${symbol}&orderId=${id}`,
+        url: `${this.baseUrl}/v5/order/realtime?category=spot&symbol=${symbol}&orderId=${id}`,
         method: FetcherRequisitionMethods.GET,
       }),
     );
+
+    // If not found in active orders, try history
+    if (!res.result || !res.result.list || res.result.list.length === 0) {
+      res = await this.fetch<BaseRes<{ list: OrderRes[] }>>(
+        this.signer({
+          url: `${this.baseUrl}/v5/order/history?category=spot&symbol=${symbol}&orderId=${id}`,
+          method: FetcherRequisitionMethods.GET,
+        }),
+      );
+    }
 
     if (!res.result || !res.result.list || res.result.list.length === 0) {
       throw new ConnectorError(
@@ -350,6 +360,9 @@ export class bybit<T> extends Exchange<T> {
     }
 
     const order = res.result.list[0];
+    if (!order) {
+      throw new Error("Order not found");
+    }
 
     let status: OrderStatus;
     switch (order.orderStatus.toUpperCase()) {
@@ -361,12 +374,13 @@ export class bybit<T> extends Exchange<T> {
         break;
       case "CANCELLED":
       case "REJECTED":
+      case "DEACTIVATED":
         status = OrderStatus.CANCELED;
         break;
       case "NEW":
       case "ACTIVE":
       default:
-        status = OrderStatus.OPEN;
+        status = OrderStatus.EMPTY;
         break;
     }
 
